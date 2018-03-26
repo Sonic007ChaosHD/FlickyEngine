@@ -1295,12 +1295,12 @@ if (Allow_YMovement) {
           if( scr_character_collision_left_edge(x, y, Angle) == false
           ||(scr_character_collision_right_edge(x,y,  Angle) == false)){
              if(Action != ActionRolling &amp;&amp; PeeloutFlag != 1){
-                YSpeed = -sin(degtorad(RelativeAngle))*floor(XSpeed);
+                YSpeed = -sin(degtorad(RelativeAngle))*XSpeed*1.25;
                 if(Angle &gt;= 60 &amp;&amp; Angle &lt;= 300 &amp;&amp; Angle != 180){
                    LaunchedTimer = 3;                 
                 }                  
              }else{
-                YSpeed = -sin(degtorad(RelativeAngle))*floor(XSpeed);     
+                YSpeed = -sin(degtorad(RelativeAngle))*XSpeed*1.25;     
                 if(Angle &gt;= 60 &amp;&amp; Angle &lt;= 300 &amp;&amp; Angle != 180){
                    LaunchedTimer = 3;
                 }          
@@ -1721,12 +1721,14 @@ if (Allow_YMovement) {
     // After Effect:
        if(!Underwater){
           if(CharacterState = CharacterHyper &amp;&amp; current_time div 40){
-             Effect = (instance_create(xprevious, yprevious, obj_aftereffect)){
-                       Effect.Parent             = id;
-                       Effect.sprite_index       = AnimationSprite;
-                       Effect.AnimationFrame     = AnimationFrame;
-                       Effect.AnimationDirection = AnimationDirection;
-                       Effect.AnimationAngle     = AnimationAngle;
+             if(instance_number(obj_aftereffect) &lt; 3){
+                Effect = (instance_create(xprevious, yprevious, obj_aftereffect)){
+                          Effect.Parent             = id;
+                          Effect.sprite_index       = AnimationSprite;
+                          Effect.AnimationFrame     = AnimationFrame;
+                          Effect.AnimationDirection = AnimationDirection;
+                          Effect.AnimationAngle     = AnimationAngle;
+                }
              }
           }
        }
@@ -1942,6 +1944,29 @@ if (Allow_YMovement) {
          draw_sprite_ext(spr_spindash_dust, current_time div 40, floor(x-AnimationDirection*7), floor(y+13), AnimationDirection, 1, 0, c_white, 1);         
       }
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="112">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>room_goto_next();
 </string>
           </argument>
         </arguments>
