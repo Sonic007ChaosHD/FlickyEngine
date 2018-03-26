@@ -141,16 +141,20 @@
              }
           }       
        }
-       if(x &lt; view_xview+sprite_width/2){
-          XSpeed = 2;
-       }  
-       if(x &gt; view_xview+view_wview-sprite_width/2){
-          XSpeed = -2;
-       }              
-       x += XSpeed;       
+       if(SpecialFlag != 0){
+          if(x &lt; view_xview+sprite_width/2){
+             XSpeed = 2;
+          }  
+          if(x &gt; view_xview+view_wview-sprite_width/2){
+             XSpeed = -2;
+          }              
+          x += XSpeed; 
+          }     
 
     // Update Camera position (for dropping)
-       Camera.y = y-80;
+       if(SpecialFlag != 0){    
+          Camera.y = y-80;
+       }          
 </string>
           </argument>
         </arguments>

@@ -79,13 +79,14 @@
             <kind>1</kind>
             <string>/// Collect Chaos emerald.
     
-    if(Collected = false){
-       Collected = true;    
-       global.Emeralds++;
-       PlaySound(snd_object_emerald, global.SFXVolume, 1, 1);
-       instance_destroy();       
+    if(other.Action != ActionDie){
+       if(Collected = false){
+          Collected = true;    
+          global.Emeralds++;
+          PlaySound(snd_object_emerald, global.SFXVolume, 1, 1);
+          instance_destroy();       
+       }
     }
-
 
 </string>
           </argument>
