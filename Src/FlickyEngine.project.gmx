@@ -248,7 +248,9 @@
         <sprites name="Harmful">
           <sprites name="STH 1">
             <sprite>sprites\spr_npc_sth1_motobug</sprite>
+            <sprite>sprites\spr_npc_sth1_crabmeat</sprite>
             <sprite>sprites\spr_npc_sth1_chopper</sprite>
+            <sprite>sprites\spr_npc_sth1_splats</sprite>
           </sprites>
           <sprites name="STH 3">
             <sprite>sprites\spr_npc_sth3_rhinobot</sprite>
@@ -279,6 +281,7 @@
           <sprites name="Sensors">
             <sprite>sprites\spr_npc_sensor_pixel</sprite>
             <sprite>sprites\spr_npc_sensor_line</sprite>
+            <sprite>sprites\spr_npc_sensor_wall</sprite>
           </sprites>
         </sprites>
         <sprites name="Gimmicks">
@@ -879,6 +882,8 @@
           </objects>
           <objects name="Badniks">
             <objects name="STH1">
+              <object>objects\obj_npc_sth1_motobug</object>
+              <object>objects\obj_npc_sth1_splats</object>
               <object>objects\obj_npc_sth1_chopper</object>
             </objects>
             <objects name="STH3">
@@ -888,6 +893,7 @@
                 <object>objects\obj_npc_sth3_bloominator_spike</object>
               </objects>
             </objects>
+            <object>objects\obj_badnik_wall</object>
           </objects>
           <objects name="Bosses">
             <objects name="STH3">
