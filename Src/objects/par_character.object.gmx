@@ -1295,17 +1295,17 @@ if (Allow_YMovement) {
           if( scr_character_collision_left_edge(x, y, Angle) == false
           ||(scr_character_collision_right_edge(x,y,  Angle) == false)){
              if(Action != ActionRolling &amp;&amp; PeeloutFlag != 1){
-                YSpeed = -sin(degtorad(RelativeAngle))*GSpeed*1.2;
+                YSpeed = -sin(degtorad(RelativeAngle))*floor(XSpeed);
                 if(Angle &gt;= 60 &amp;&amp; Angle &lt;= 300 &amp;&amp; Angle != 180){
                    LaunchedTimer = 3;                 
                 }                  
              }else{
-                YSpeed = -sin(degtorad(RelativeAngle))*GSpeed;     
+                YSpeed = -sin(degtorad(RelativeAngle))*floor(XSpeed);     
                 if(Angle &gt;= 60 &amp;&amp; Angle &lt;= 300 &amp;&amp; Angle != 180){
                    LaunchedTimer = 3;
                 }          
              }
-                XSpeed =  cos(degtorad(RelativeAngle))*XSpeed;
+                XSpeed = cos(degtorad(RelativeAngle))*XSpeed;
                 Ground = false;                 
              }    
        }

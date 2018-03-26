@@ -27,8 +27,10 @@
             <kind>1</kind>
             <string>/// Variables.
 
-    XSpd = -1;
-    image_speed = .3;
+    XSpd        =      -1;
+    YSpd        =       0;
+    YGrv        = 0.21875;
+    image_speed =      .3;
 </string>
           </argument>
         </arguments>
@@ -53,6 +55,7 @@
             <kind>1</kind>
             <string>/// Movement.
 
+ // Change direction/Wall Collision.
     if(place_meeting(x + XSpd, y, par_collision_solid)){ 
        while(!place_meeting(x + sign(XSpd), y, par_collision_solid)){ 
              x += sign(XSpd); 
@@ -66,9 +69,11 @@
        } 
        image_xscale *= -1;
        XSpd         *= -1;
-    }      
+    }     
     x += XSpd;       
     image_xscale = XSpd;
+   
+   
 </string>
           </argument>
         </arguments>

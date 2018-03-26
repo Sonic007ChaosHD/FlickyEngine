@@ -14,7 +14,7 @@
                   Launched      =  1;                                  
                   Ground        =  false;              
                   Angle         =  0;                    
-                  YSpeed        =  -XSpeed*sin(degtorad(RelativeAngle));
+                  YSpeed        =  -sin(degtorad(RelativeAngle))*floor(XSpeed);
                   XSpeed        =  0;                                                                                  
                   LaunchedTimer =  3;                
                }else if(XSpeed < 1 && Angle = 0){
@@ -29,7 +29,7 @@
                   Launched      =  1;                                  
                   Ground        =  false;              
                   Angle         =  0;                    
-                  YSpeed        =  -XSpeed*sin(degtorad(RelativeAngle));
+                  YSpeed        =  -sin(degtorad(RelativeAngle))*floor(XSpeed);
                   XSpeed        =  0;                                                                                  
                   LaunchedTimer =  3;                
                }else if(XSpeed > -1 && Angle = 0){

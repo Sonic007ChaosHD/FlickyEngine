@@ -165,7 +165,7 @@
           <argument>
             <kind>1</kind>
             <string>/// Destroy and give Character air.
-    if(BubblePop = true &amp;&amp; other.Shield != ShieldBubble &amp;&amp; other.Action != ActionDie){
+    if(BubblePop = true &amp;&amp; other.Shield != ShieldBubble &amp;&amp; other.Action != ActionDie &amp;&amp; other.CharacterState != CharacterHyper){
        other.DrownTimer = 1800;
        other.Action     = ActionBreath;
        PlaySound(snd_character_air, global.SFXVolume, 1, 1);     

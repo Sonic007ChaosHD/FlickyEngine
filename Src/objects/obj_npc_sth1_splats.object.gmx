@@ -55,7 +55,7 @@
             <kind>1</kind>
             <string>/// Movement.
 
-/// Change direction.
+/// Change direction/Wall Collision.
     if(place_meeting(x + XSpd, y, par_collision_solid)){ 
        while(!place_meeting(x + sign(XSpd), y, par_collision_solid)){ 
              x += sign(XSpd); 

@@ -1813,7 +1813,6 @@
     <instance objName="obj_lava_fall" x="8640" y="1760" name="inst_06480DD2" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="par_character" x="160" y="592" name="inst_104C25C9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_npc_sth1_motobug" x="1712" y="656" name="inst_6F53C389" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_badnik_wall" x="1536" y="640" name="inst_6EBDC096" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_badnik_wall" x="1776" y="640" name="inst_001BA12B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
