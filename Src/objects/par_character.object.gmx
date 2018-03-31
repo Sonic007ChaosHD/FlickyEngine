@@ -369,7 +369,7 @@
           x      = room_width - 7 - _SOffset;
        }                       
 
-     
+   
     // Keep the character within the camera's boundaries.
        var _C;
        _C = instance_nearest(x, y, obj_camera);       
@@ -393,7 +393,7 @@
           }          
        }
        */
-       if(_C != noone){
+/*         if(_C != noone){
           if(_C.Camera_BindX == 1){
              if(x &lt;= view_xview - 7 + _SOffset &amp;&amp; XSpeed &lt; 0.0){
                 XSpeed = 0;

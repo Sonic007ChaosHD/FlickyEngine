@@ -772,6 +772,7 @@
       <objects name="Controllers">
         <object>objects\par_controller</object>
         <object>objects\obj_camera</object>
+        <object>objects\object220</object>
         <object>objects\obj_audio_manager</object>
         <object>objects\obj_level_controller</object>
         <object>objects\obj_global_manager</object>
