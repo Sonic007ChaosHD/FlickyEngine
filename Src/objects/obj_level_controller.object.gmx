@@ -28,7 +28,7 @@
             <string>/// Create parts of the Level.
 
     // Camera:
-       instance_create(0, 0, obj_camera);
+       instance_create(0, 0, obj_camera);       
       
     // Titel Card:
        instance_create(0, 0, obj_title_card_controller);

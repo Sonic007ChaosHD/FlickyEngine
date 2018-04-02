@@ -54,15 +54,23 @@
     if(place_meeting(x, y + YSpd, obj_bonus_gumball_bumper)){
        while not(place_meeting(x, y + sign(YSpd), obj_bonus_gumball_bumper)){
                  y += sign(YSpd)
-                 obj_bonus_gumball_rod.  y += sign(YSpd)
-                 obj_bonus_gumball_plate.y += sign(YSpd)     
+                 if(instance_exists(obj_bonus_gumball_rod)){
+                    obj_bonus_gumball_rod.  y += sign(YSpd)
+                 }
+                 if(instance_exists(obj_bonus_gumball_plate)){
+                    obj_bonus_gumball_plate.y += sign(YSpd)    
+                 } 
        }
        YSpd   = 0; 
     }    
 
     y    += YSpd;   
-    obj_bonus_gumball_rod.  y += YSpd;    
-    obj_bonus_gumball_plate.y += YSpd;        
+    if(instance_exists(obj_bonus_gumball_rod)){
+       obj_bonus_gumball_rod.  y += YSpd;    
+    }
+    if(instance_exists(obj_bonus_gumball_plate)){    
+       obj_bonus_gumball_plate.y += YSpd;     
+    }   
     YSpd += YGrv;    
 
 

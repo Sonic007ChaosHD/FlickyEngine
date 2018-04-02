@@ -32,22 +32,26 @@
                   else
                   if(XSpeed > -XSpeed_Top)
                      XSpeed -= _Accel;
-               }
+               }else
                if(KeyRight == true){
                   if(XSpeed < 0)
                      XSpeed += _Decel;
                   else
                   if(XSpeed < XSpeed_Top)
                      XSpeed += _Accel;
-               }
-               
-               // Friction / Deceleration when no key is pressed:
+               }else { XSpeed -= min(abs(XSpeed), _Fric)*sign(XSpeed); }
+               /* Friction / Deceleration when no key is pressed:
                   if(!KeyRight && !KeyLeft){
                       XSpeed = max(abs(XSpeed) - _Fric, 0) * sign(XSpeed);
-                  }             
+                  } */            
                                
             }else{         
                
+               // Air Cap:
+                  if(YSpeed > 16){ 
+                     YSpeed = 16
+                  }
+                  
                // Air Acceleration:
                   if(KeyRight){
                      // When you're flying with Miles:
@@ -96,12 +100,13 @@
             XSpeed =  cos(degtorad(RelativeAngle))*XSpeed;
             Ground = false;
          }else{
-               InputAlarm     = 42;
+               InputAlarm     = 40;
                if(AlarmDirection = 0){
                   AlarmDirection = AnimationDirection;
                }
          }
       } 
+      
 
    // Get new Angle:
       if(Ground &&  scr_character_collision_left_edge(x, y, Angle)

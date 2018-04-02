@@ -71,7 +71,7 @@
                      YSpeed = 0;
                                     
                   // Camera Lag:
-                     obj_camera.Camera_Lag = 140;
+                     obj_camera.Cam_Lag = 140;
                      
                   // Enable the Attack flag:
                      ShieldAttack = 1;

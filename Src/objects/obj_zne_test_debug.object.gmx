@@ -28,8 +28,8 @@
             <string>/// Draw Rectangles.
     with(all){
     
-         if(!(object_get_parent(object_index) == par_collision_solid or object_get_parent(object_index) == par_collision_platform)){
-        
+         if(!(object_get_parent(object_index) == par_collision_solid or object_get_parent(object_index) == par_collision_platform)){      
+         
          draw_set_alpha(0.5)
          if(object_get_name(object_index) == "par_character"){
             if(Layer == 0){

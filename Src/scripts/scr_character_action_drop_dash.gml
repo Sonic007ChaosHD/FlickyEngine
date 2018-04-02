@@ -10,6 +10,8 @@
          Action        = ActionRolling;          
          DropDashFlag  = 0;
          DropDashTimer = 15;
+         obj_camera.Cam_Lag = 140; 
+                           
          if((!KeyLeft && !KeyRight) or (KeyRight && KeyLeft)){
             XSpeed        = AnimationDirection*DropDashSpeed;
          }else{

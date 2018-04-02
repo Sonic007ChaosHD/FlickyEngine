@@ -53,7 +53,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Reset state:
+            <string>/// Reset state.
     BumperState = 0;
 </string>
           </argument>
@@ -85,8 +85,7 @@
        image_index = 1;
        if(alarm[0] = -1){
           alarm[0] = 5;
-          PlaySound(snd_object_bumper, global.SFXVolume, 1, 1);
-          
+          PlaySound(snd_object_bumper, global.SFXVolume, 1, 1);          
           // Give Score:
              if(ScoreGiven != 10){
                 ScoreGiven++

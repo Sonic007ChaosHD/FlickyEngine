@@ -773,7 +773,7 @@
     <instance objName="obj_ring" x="3040" y="992" name="inst_2488C9E9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_ring" x="3040" y="960" name="inst_357E1988" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="objGHZBG" x="32" y="16" name="inst_719D978F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="par_character" x="144" y="688" name="inst_7B60DB06" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="par_character" x="144" y="672" name="inst_7B60DB06" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_monitor_flame_shield" x="480" y="592" name="inst_39144184" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_monitor_speedshoe" x="3424" y="1472" name="inst_0B8C09FF" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_zne_test_1_pla" x="8000" y="2864" name="inst_F9F713DF" locked="0" code="" scaleX="0.25" scaleY="0.25" colour="4286578816" rotation="0"/>

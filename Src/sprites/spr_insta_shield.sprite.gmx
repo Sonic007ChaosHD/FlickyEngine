@@ -25,5 +25,6 @@
     <frame index="2">images\spr_insta_shield_2.png</frame>
     <frame index="3">images\spr_insta_shield_3.png</frame>
     <frame index="4">images\spr_insta_shield_4.png</frame>
+    <frame index="5">images\spr_insta_shield_5.png</frame>
   </frames>
 </sprite>

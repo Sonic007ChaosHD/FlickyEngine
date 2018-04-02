@@ -30,7 +30,7 @@
     Shield_State  = "default"; // State of the shield. ("default" or "bounce")   
     BounceAnimate = 0;         // Whether or not the bounce should be animated.
     Parent        = 0;         // Checks who's the parent of this object.
-    FixedPosition = 0;         // To Center the shield.
+    ShieldOffset  = 0;         // Y Offset.
     image_speed   = .3;        // How fast the animation plays.    
 
 
@@ -60,14 +60,14 @@
             <string>/// Set the X/Y Position, Depth and sprite.
 
  // Position:
-    if(Parent.Action != ActionJump &amp;&amp; Parent.Action != ActionRolling){
-       x = floor(Parent.x);
-       y = floor(Parent.y);
-       FixedPosition = 0;
+    x = floor(Parent.x);
+    y = floor(Parent.y+ShieldOffset);  
+
+ // Offset:
+    if(Parent.Animation != "ROLL"){
+       ShieldOffset = 0;
     }else{
-       x = floor(Parent.x);
-       y = floor(Parent.y);  
-       FixedPosition = 4; 
+       ShieldOffset = 4;
     }
       
  // Depth:   
@@ -120,7 +120,7 @@
             <kind>1</kind>
             <string>/// Draw the shield.
     if(Parent.Invincibility &lt; 1.5){
-       draw_sprite_ext(sprite_index, -1, floor(Parent.x), floor(Parent.y+FixedPosition), 1, 1, Parent.AnimationAngle, c_white, Parent.Alpha);
+       draw_sprite_ext(sprite_index, -1, floor(Parent.x), floor(Parent.y+ShieldOffset), 1, 1, Parent.AnimationAngle, c_white, Parent.Alpha);
     }
 </string>
           </argument>

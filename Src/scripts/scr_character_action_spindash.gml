@@ -13,7 +13,7 @@
                    XSpeed = SpindashAccumulator*AnimationDirection;
                    
                 // Camera Lag:
-                   obj_camera.Camera_Lag = 140;
+                   obj_camera.Cam_Lag = 140;
                 
                 // Stop the charging sound and play the dashing sound:
                    if(!audio_is_playing(snd_character_spindash_release)){

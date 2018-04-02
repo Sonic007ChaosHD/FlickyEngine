@@ -2,7 +2,7 @@
 // Script to execute the Characters hurt state.
 
    // Only run if the following is true
-      if(Action != ActionHurt || Action != ActionDie || Invincibility = 0){
+      if(Action != ActionHurt || Action != ActionDie || Invincibility = 0 || !instance_exists(obj_insta_shield)){
 
    // Init. Object that hurt us:
       var HurtHandler;

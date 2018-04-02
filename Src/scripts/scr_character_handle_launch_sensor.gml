@@ -12,9 +12,10 @@
             if(Sensor.Direction == 1){
                if(XSpeed >= 1 && Angle != 0){
                   Launched      =  1;                                  
-                  Ground        =  false;              
+                  Ground        =  false;                          
+                  GSpeed        = XSpeed;             
+                  YSpeed        = -(dsin(RelativeAngle) * GSpeed+1)                           
                   Angle         =  0;                    
-                  YSpeed        =  -sin(degtorad(RelativeAngle))*XSpeed*1.25;
                   XSpeed        =  0;                                                                                  
                   LaunchedTimer =  3;                
                }else if(XSpeed < 1 && Angle = 0){
@@ -28,8 +29,9 @@
                if(XSpeed <= -1 && Angle != 0){
                   Launched      =  1;                                  
                   Ground        =  false;              
-                  Angle         =  0;                    
-                  YSpeed        =  -sin(degtorad(RelativeAngle))*XSpeed*1.25;
+                  GSpeed        = XSpeed;             
+                  YSpeed        = -(dsin(RelativeAngle) * GSpeed+1)                           
+                  Angle         =  0;
                   XSpeed        =  0;                                                                                  
                   LaunchedTimer =  3;                
                }else if(XSpeed > -1 && Angle = 0){

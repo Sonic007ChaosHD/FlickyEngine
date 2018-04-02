@@ -26,15 +26,17 @@
             YSpeed = JumpRelease;
          }            
          if(Ground == true && !scr_character_collision_top(x, y-6, Angle, spr_mask_big) && KeyAction_Pressed &&
-             Action != ActionCrouch && Action != ActionSpindash && Action != ActionLookup && Action != ActionPeelout && LockTunnel == 0){
+            Action != ActionCrouch && Action != ActionSpindash && Action != ActionLookup && Action != ActionPeelout && LockTunnel == 0){
                                                        
              // Set X and Y Speed:
-                YSpeed = -(sin(degtorad(Angle)) * XSpeed) + (cos(degtorad(Angle)) * JumpStrength);
-                XSpeed =  (cos(degtorad(Angle)) * XSpeed) + (sin(degtorad(Angle)) * JumpStrength);                 
-        
+                GSpeed = XSpeed;             
+                XSpeed =  (dcos(RelativeAngle) * GSpeed) - (dsin(RelativeAngle) * -JumpStrength);
+                YSpeed = -(dsin(RelativeAngle) * GSpeed) - (dcos(RelativeAngle) * -JumpStrength);   
+                        
              // Make sure to disable that we're grounded:
-                Angle  =  0;             
-                Ground =  false;     
+                Ground        = false;                
+                Angle         = 0;      
+                RelativeAngle = 0;          
                                            
              // If we're rolling, enable the jump lock (which prevents us to change the direction and speed:
                 if(Action = ActionRolling){
@@ -51,7 +53,7 @@
                 PlaySound(snd_character_jump, global.SFXVolume, -1, true);  
                           
              // Set the rendering speed of the animation
-                RenderingSpeed = 0.25+abs(GSpeed)/10;                
+                RenderingSpeed = 1/max(5-abs(XSpeed), 1);//0.25+abs(GSpeed)/10;                
          }
          
          }

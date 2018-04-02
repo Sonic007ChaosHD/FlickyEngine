@@ -303,7 +303,13 @@
              Shield              = global.BonusShield;
              global.BonusShield  = 0;
           }  
-             global.Ring100Check_Deactivate = false;               
+             global.Ring100Check_Deactivate = false;         
+             
+          // Update Camera position:
+             obj_camera.x      = x;
+             obj_camera.y      = y;     
+             obj_camera.Cam_XX = x;
+             obj_camera.Cam_XX = y;                              
        }
     }
 
@@ -1055,8 +1061,10 @@
     }
     
  // Death fade fix:
-    if(obj_audio_manager.DeadFade == true &amp;&amp; Action != ActionDie){
-       DeadFade = -1;
+    if(instance_exists(obj_audio_manager)){
+       if(obj_audio_manager.DeadFade == true &amp;&amp; Action != ActionDie){
+          DeadFade = -1;
+       }
     }
 
     
@@ -1199,7 +1207,7 @@ if (Allow_YMovement) {
             scr_character_handle_collapsing_tiles();
             scr_character_handle_springs();
             scr_character_handle_casino_gimmicks();   
-           scr_character_handle_bosses();                     
+            scr_character_handle_bosses();                     
             scr_character_handle_platforms();
             scr_character_handle_enemies()        
             scr_character_handle_monitors("Top");            
@@ -1218,7 +1226,7 @@ if (Allow_YMovement) {
                      scr_character_angle(global.GravityAngle);
                  }
 
-                 XSpeed -= sin(degtorad(Angle))*YSpeed;
+                 XSpeed -= sin(degtorad(Angle))*(YSpeed+ConversionFact);
                  YSpeed = 0;
                  Ground = true;
                                                
@@ -1295,12 +1303,14 @@ if (Allow_YMovement) {
           if( scr_character_collision_left_edge(x, y, Angle) == false
           ||(scr_character_collision_right_edge(x,y,  Angle) == false)){
              if(Action != ActionRolling &amp;&amp; PeeloutFlag != 1){
-                YSpeed = -sin(degtorad(RelativeAngle))*XSpeed*1.25;
+                GSpeed        = XSpeed;             
+                YSpeed        = -(dsin(RelativeAngle) * GSpeed+1)                           
                 if(Angle &gt;= 60 &amp;&amp; Angle &lt;= 300 &amp;&amp; Angle != 180){
                    LaunchedTimer = 3;                 
                 }                  
              }else{
-                YSpeed = -sin(degtorad(RelativeAngle))*XSpeed*1.25;     
+                GSpeed        = XSpeed;             
+                YSpeed        = -(dsin(RelativeAngle) * GSpeed+1)   
                 if(Angle &gt;= 60 &amp;&amp; Angle &lt;= 300 &amp;&amp; Angle != 180){
                    LaunchedTimer = 3;
                 }          
@@ -1368,7 +1378,7 @@ if (Allow_YMovement) {
    // Air Drag:
       if(!Ground &amp;&amp; (Action != ActionHurt) ){
          if(YSpeed &lt; 0 &amp;&amp; YSpeed &gt;= -4){
-            XSpeed -= floor(XSpeed / 0.125) / 256;
+            XSpeed -= ((XSpeed / 0.125) / 256);
          }
       }           
                                              
@@ -1441,7 +1451,7 @@ if (Allow_YMovement) {
               y += sign(YSpeed);
        }
        Ground = true;   
-    }      
+    }         
                      
   // Jump:
      scr_character_action_jump();  

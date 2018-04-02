@@ -25,56 +25,62 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Variables.
- // Camera system by: Noah Copeland and Aleks.
+            <string>/// Set up Variables.
 
- // Screen Resolution:
+  
+ // Width/Height:
     _W = global.ScreenWidth;
     _H = global.ScreenHeight;
     
- // Setup view:
-    view_object  [0] = id;
-    view_hborder [0] = _W/2;
-    view_vborder [0] = _H/2;
-    
-    
- // Create rectangle around the subject that the subject must exceed before the camera will move.
+ // Set view:
+    view_object [0] = id;
+    view_hborder[0] = _W/2;
+    view_vborder[0] = _H/2;
+
+ // Create a rectangle around the subject that the subject must exceed before the camera will move. Like the Genesis games!
     Cam_LeftBorder   = x-8;
     Cam_RightBorder  = x+8;
     Cam_TopBorder    = y-32;
     Cam_BottomBorder = y+32;
+
+
+ // Additional
+    Cam_Subject    = par_character; // who is the camera following? (most often it's the player)
+    Cam_CameraLock = false;         // whether the cam is locked from moving
+
     
- // Additional Variables:
-    Cam_Subject      = par_character; // - Who is the camera following? (Often the player)
-    Cam_SubjectSpeed = 6;             // - Speed at wich to change target/subject.
-    Cam_Lock         = false;         // - Whether the camera is locked from moving.
-    
- // Limits, you can't go outside these boundaries.
+ // Limits. You can can't go outside these boundaries 
     Cam_LeftLimit   = 0;
     Cam_RightLimit  = room_width;
     Cam_TopLimit    = 0;
     Cam_BottomLimit = room_height;
- 
- // Binding/Lag variables.
-    Cam_BindX = 0;
-    Cam_BindY = 0;
-    Cam_Lag   = 0;
+
+ // Camera Binding:   
+    Cam_BindX = false;
+    Cam_MinX = 0;
+    Cam_MaxX = room_width;
     
- // Define Camera position. We use temp. variables called Cam_XX and Cam_YY to help with the shifting while looking up/down.
+ // Camera Lag:
+    Cam_Lag = 0;
+
+ // Define Camera Position. We used temp variables xx and yy to help with Shifting while looking up/down etc
     Cam_XX = x;
     Cam_YY = y;
-    
- // Shifting variables:
-    Cam_ShiftX     = 0;
-    Cam_ShiftY     = 0;
-    Cam_ShiftSpeed = 2;
- 
- // Special Functions.
-    Cam_ShakeScreen   = false;
-    Cam_ShakeDuration = 0;   
-    Cam_ShakeForce    = 0;
-    Cam_ShakeSound    = 0;
 
+ // Shifting variables:
+    Cam_ShiftX     = 0; // Camera Shift X Value.
+    Cam_ShiftY     = 0; // Camera Shift Y Value.
+    Cam_ShiftSpeed = 2; // Shifting speed.
+    
+ // Speed at wich to change target/subject
+    Cam_ChangeSpeed = 6.5;
+
+ // Special functions.
+    Camera_ShakeScreen   = false;              // If enabled, the screen will shake as long as _ShakeDuration is above 0.
+    Camera_ShakeDuration = 0;                  // How many frames the Shaking lasts.
+    Camera_ShakeForce    = 0;                  // The force of the Shake, 2 to 3 is a good number, everything above 3 is a strong shake.
+    Camera_ShakeSound    = snd_object_crumble; // If not set to noone, the game will loop this sound until the shake is over.
+    Camera_DebugDisplay  = false;              // Displays Debug Graphics.         
 
 </string>
           </argument>
@@ -98,31 +104,29 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Shift/Pan the Camera.
- // This event should only run if we follow the character.
- 
-    if(Cam_Subject == par_character){
-    
-       // Shift up:
-          if(Cam_Subject.Action == ActionLookup &amp;&amp; Cam_Subject.TimerUp &gt;= 120)
-             Cam_ShiftY = max(-104, Cam_ShiftY-Cam_ShiftSpeed);
-          else
-       // Shift down:          
-          if(Cam_Subject.Action == ActionCrouch &amp;&amp; Cam_Subject.TimerDown &gt;= 120)
-             Cam_ShiftY = min(104, Cam_ShiftY+Cam_ShiftSpeed);
-          else
-             Cam_ShiftY = max(0, abs(Cam_ShiftY)-Cam_ShiftSpeed)*sign(Cam_ShiftY);
-          
+            <string>/// Shift the Camera Up or Down.
+
+    // Only run this if we follow the Character:
+       if(Cam_Subject == par_character){
        
-       // Pan the camera horizontally if the character is using the peelout:
-          if((Cam_Subject.Action == ActionPeelout &amp;&amp; Cam_Subject.PeeloutTimer &gt; 6) || Cam_Subject.PeeloutFlag == 1){
-             var PanDirection = sign(Cam_Subject.XSpeed + Cam_Subject.AnimationDirection);
-                 Cam_ShiftX   = clamp((abs(Cam_ShiftX) + Cam_ShiftSpeed) * PanDirection, -64, 64);  
-          }else{
-                 Cam_ShiftX   = max(0, abs(Cam_ShiftX)-Cam_ShiftSpeed)sign(Cam_ShiftX);
-          }
-       
-    }
+          // Looking up:
+          if(Cam_Subject.Action == ActionLookup &amp;&amp; Cam_Subject.TimerUp &gt;= 120)        
+              Cam_ShiftY = max(-104, Cam_ShiftY-2);
+          // Looking Down:
+          else if(Cam_Subject.Action == ActionCrouch &amp;&amp; Cam_Subject.TimerDown &gt;= 120)       
+              Cam_ShiftY = min(104, Cam_ShiftY+2);                  
+          else
+              Cam_ShiftY = max(0, abs(Cam_ShiftY)-2)*sign(Cam_ShiftY);      
+
+          // Pan the camera horizintally if the character is using a peelout move.
+             if((Cam_Subject.Action == ActionPeelout &amp;&amp; Cam_Subject.PeeloutTimer &gt; 6) || Cam_Subject.PeeloutFlag == 1){
+                var _dir = sign(Cam_Subject.XSpeed + Cam_Subject.AnimationDirection);
+                Cam_ShiftX = clamp((abs(Cam_ShiftX) + Cam_ShiftSpeed) * _dir, -64, 64);
+             }else{
+                Cam_ShiftX = max(0, abs(Cam_ShiftX)-2)*sign(Cam_ShiftX); 
+             }
+                           
+       }
 
 </string>
           </argument>
@@ -147,15 +151,15 @@
             <string>///Main Camera Control
 
 //Update borders
-Cam_LeftBorder   = Cam_XX-8;
-Cam_RightBorder  = Cam_XX+8;
+Cam_LeftBorder   = (Cam_XX-8) - (Cam_Lag);
+Cam_RightBorder  = (Cam_XX+8) + (Cam_Lag);
 Cam_TopBorder    = Cam_YY-32;
 Cam_BottomBorder = Cam_YY+32;
 
 
 //set up some local variables to make for neat-looking code
-var vw = (view_wview[0])/2;
-var vh = (view_hview[0])/2;
+var VW = (view_wview[0])/2;
+var VH = (view_hview[0])/2;
 
 
 //Move the Camera
@@ -163,13 +167,13 @@ if Cam_Subject = par_character
 {
     //1. HORIZTONAL MOVEMENT
     //if Player has exceed the right border, move the camera by the amount exceeded
-    if (Cam_Subject.x &gt; Cam_RightBorder &amp;&amp; Cam_Subject.x &lt;= Cam_RightLimit-vw)
+    if (Cam_Subject.x &gt; Cam_RightBorder &amp;&amp; Cam_Subject.x &lt;= Cam_RightLimit-VW)
     {
         Cam_XX += min(abs(Cam_Subject.x-Cam_RightBorder),16);
     }
     
     //if Player has exceed the left border, move the camera by the amount exceeded
-    if (Cam_Subject.x &lt; Cam_LeftBorder &amp;&amp; Cam_Subject.x &gt;= Cam_LeftLimit+vw)
+    if (Cam_Subject.x &lt; Cam_LeftBorder &amp;&amp; Cam_Subject.x &gt;= Cam_LeftLimit+VW)
     {
         Cam_XX -= min(abs(Cam_LeftBorder-Cam_Subject.x),16);
     }
@@ -179,13 +183,13 @@ if Cam_Subject = par_character
     if (Cam_Subject.Ground == false &amp;&amp; Cam_Subject.Action != ActionDie)
     {
         //if Player has exceed the bottom border, move the camera by the amount exceeded
-        if (Cam_Subject.y &gt; Cam_BottomBorder &amp;&amp; Cam_Subject.y &lt; Cam_BottomLimit-vh)
+        if (Cam_Subject.y &gt; Cam_BottomBorder &amp;&amp; Cam_Subject.y &lt; Cam_BottomLimit-VH)
         {
             Cam_YY += Cam_Subject.y-Cam_BottomBorder;
         }
         
         //if Player has exceed the top border, move the camera by the amount exceeded
-        if (Cam_Subject.y &lt; Cam_TopBorder &amp;&amp; Cam_Subject.y &gt; Cam_TopLimit+vh)
+        if (Cam_Subject.y &lt; Cam_TopBorder &amp;&amp; Cam_Subject.y &gt; Cam_TopLimit+VH)
         {
             Cam_YY -= Cam_TopBorder-Cam_Subject.y;
         }
@@ -200,11 +204,11 @@ if Cam_Subject = par_character
             //this creates the camera lag when you land after a jump
             if abs(Cam_Subject.y-Cam_Subject.yprevious) &lt;= 6 //if sonic has only moved six of less pixels from the previous frame. The reason we use yprevious instead of YSpeed is because we have to account for slopes, in which Sonic technically moving vertically, despite his YSpeed being zero.
             {
-                if (Cam_Subject.y &gt; Cam_YY &amp;&amp; Cam_Subject.y &lt; Cam_BottomLimit-vh)
+                if (Cam_Subject.y &gt; Cam_YY &amp;&amp; Cam_Subject.y &lt; Cam_BottomLimit-VH)
                 Cam_YY += min(abs(Cam_Subject.y-Cam_YY),6);
                 
                 
-                if (Cam_Subject.y &lt; Cam_YY &amp;&amp;  Cam_Subject.y &gt; Cam_TopLimit+vh)
+                if (Cam_Subject.y &lt; Cam_YY &amp;&amp; Cam_Subject.y &gt; Cam_TopLimit+VH)
                 Cam_YY -= min(abs(Cam_YY-Cam_Subject.y),6);
             }
             
@@ -212,11 +216,11 @@ if Cam_Subject = par_character
             //...if Sonic is moving vertically faster than 16 px, he will "outrun" the camera. this is denoted by the min function
             if abs(Cam_Subject.y-Cam_Subject.yprevious) &gt; 6
             {
-                if (Cam_Subject.y &gt; Cam_YY &amp;&amp; Cam_Subject.y &lt; Cam_BottomLimit-vh)
+                if (Cam_Subject.y &gt; Cam_YY &amp;&amp; Cam_Subject.y &lt; Cam_BottomLimit-VH)
                 Cam_YY += min(abs(Cam_Subject.y-Cam_YY),16);
                 
                 
-                if (Cam_Subject.y &lt; Cam_YY &amp;&amp;  Cam_Subject.y &gt; Cam_TopLimit+vh)
+                if (Cam_Subject.y &lt; Cam_YY &amp;&amp; Cam_Subject.y &gt; Cam_TopLimit+VH)
                 Cam_YY -= min(abs(Cam_YY-Cam_Subject.y),16);
             }
         }
@@ -237,12 +241,12 @@ if (Cam_Subject != noone &amp;&amp; Cam_Subject != par_character)
 if Cam_Subject.x != Cam_XX
 {
 
-if (Cam_Subject.x &gt; Cam_XX &amp;&amp;  Cam_XX &lt;= Cam_RightLimit-vw)
-    Cam_XX += min(abs(Cam_Subject.x-Cam_XX),6);
+if (Cam_Subject.x &gt; Cam_XX &amp;&amp; Cam_XX &lt;= Cam_RightLimit-VW)
+    Cam_XX += min(abs(Cam_Subject.x-Cam_XX),Cam_ChangeSpeed);
 
 
-if (Cam_Subject.x &lt; Cam_XX &amp;&amp;  Cam_XX &gt;= Cam_LeftLimit+vw)
-    Cam_XX -= min(abs(Cam_XX-Cam_Subject.x),6);
+if (Cam_Subject.x &lt; Cam_XX &amp;&amp; Cam_XX &gt;= Cam_LeftLimit+VW)
+    Cam_XX -= min(abs(Cam_XX-Cam_Subject.x),Cam_ChangeSpeed);
 }
 
 
@@ -251,16 +255,23 @@ if (Cam_Subject.x &lt; Cam_XX &amp;&amp;  Cam_XX &gt;= Cam_LeftLimit+vw)
 if Cam_Subject.y != Cam_YY
 {
 
-if (Cam_Subject.y &gt; Cam_YY &amp;&amp; Cam_YY &lt; Cam_BottomLimit-vh)
-    Cam_YY += min(abs(Cam_Subject.y-Cam_YY),6);
+if (Cam_Subject.y &gt; Cam_YY &amp;&amp; Cam_YY &lt; Cam_BottomLimit-VH)
+    Cam_YY += min(abs(Cam_Subject.y-Cam_YY),Cam_ChangeSpeed);
 
 
-if (Cam_Subject.y &lt; Cam_YY &amp;&amp;  Cam_YY &gt; Cam_TopLimit+vh)
-    Cam_YY -= min(abs(Cam_YY-Cam_Subject.y),6);
+if (Cam_Subject.y &lt; Cam_YY &amp;&amp; Cam_YY &gt; Cam_TopLimit+VH)
+    Cam_YY -= min(abs(Cam_YY-Cam_Subject.y),Cam_ChangeSpeed);
 }
 
 
 }
+
+
+///Update position
+x = Cam_XX + Cam_ShiftX;
+y = Cam_YY + Cam_ShiftY;
+
+
 
 
 
@@ -269,7 +280,7 @@ if (Cam_Subject.y &lt; Cam_YY &amp;&amp;  Cam_YY &gt; Cam_TopLimit+vh)
         </arguments>
       </action>
     </event>
-    <event eventtype="3" enumb="1">
+    <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -286,9 +297,67 @@ if (Cam_Subject.y &lt; Cam_YY &amp;&amp;  Cam_YY &gt; Cam_TopLimit+vh)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Update position.
-    x = Cam_XX + Cam_ShiftX;
-    y = Cam_YY + Cam_ShiftY;
+            <string>/// Camera lag timer.
+    if(Cam_Lag &gt; 0){
+       Cam_Lag -= 3;
+    }else{
+       Cam_Lag = 0;
+    }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Set position.
+
+    x      = par_character.x;
+    y      = par_character.y;
+    Cam_XX = par_character.x;
+    Cam_YY = par_character.y;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="67">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(Cam_Subject == par_character){
+   Cam_Subject = instance_nearest(x, y, par_collision_swing);
+}else{
+   Cam_Subject = par_character;
+}
 </string>
           </argument>
         </arguments>
