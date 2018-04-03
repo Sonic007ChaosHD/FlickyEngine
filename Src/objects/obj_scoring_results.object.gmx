@@ -96,14 +96,44 @@
     alarm[3] = fps * 5;
  
  // Positions / Going out:
-    GoingOut =    0;
-    GoOff    =  320;
-    GoOff_2  = -320;
-    alarm[4] =   30;
+    GoingOut      =    0;
+    GoOff         =  320;
+    GoOff_2       = -320;
+    alarm[4]      =   30;
+    
+ // Disappear (For Act 2)
+    Act2Disappear = false;
+    for(i=0; i&lt;5; i++){
+        Act2_X[i] = 0;
+    }
     
  // Misc.
     SpecialFlag = 0;
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="6">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Destroy.
+    instance_destroy();
 </string>
           </argument>
         </arguments>
@@ -147,11 +177,11 @@
              global.GameTime = 0;
              global.DoTime   = 1;
           }
+          Act2Disappear = true;          
           global.ZoneAct++          
           TCard = instance_create(0, 0, obj_title_card_controller)
           TCard.SpecialFlag        = true;
           obj_camera.Cam_LeftLimit = view_xview; 
-          instance_destroy();
        }
     }
 
@@ -274,7 +304,7 @@
        BonusTime    -= 10;
        BonusTotal   += 10;
        global.Score += 10;
-       alarm[1]      =  1;
+       alarm[1]      = .1;
     }else{
        BonusTime = 0;
        alarm[1]  = -1;
@@ -308,7 +338,7 @@
        BonusRings   -= 10;
        BonusTotal   += 10;
        global.Score += 10;
-       alarm[0]      = 1;
+       alarm[0]      = .1;
     }
 
 </string>
@@ -386,6 +416,43 @@
       CanSkip      =  0;
       global.Score = BonusTotal;      
    }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Disappear for Act 2.
+
+    if(Act2Disappear = true){
+    
+       if(GoOff &gt; -320){
+          GoOff -= 20
+       }
+
+       if(GoOff_2 &lt; 320){
+          GoOff_2 += 20
+       }
+           
+       if(alarm[6] == -1){
+          alarm[6] = 120;
+       }
+       
+    }
 </string>
           </argument>
         </arguments>
