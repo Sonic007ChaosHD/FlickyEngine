@@ -362,18 +362,22 @@
             <string>/// Keep the character within the level's boundaries.
 
    // Create the Sprite offset:
-      var _SOffset;
-          _SOffset = sprite_get_width(spr_mask_main) div 2;
-           
-    // Check the Horizontal speed and whether not we collide with the horizontal borders:
-       if(x &lt;= _SOffset &amp;&amp; XSpeed &lt; 0.0){  
-          XSpeed = 0;
-          x      = _SOffset;
-       }else
-       if(x &gt;= room_width - 7 - _SOffset &amp;&amp; XSpeed &gt; 0.0){   
-          XSpeed = 0;
-          x      = room_width - 7 - _SOffset;
-       }                       
+      var _SOffset = sprite_get_width(spr_mask_main) div 2;
+      
+   // Find Camera:    
+      var _Cam     = obj_camera;
+                    
+   // Check the Horizontal speed and whether not we collide with the horizontal borders:
+      if(instance_exists(_Cam)){
+         if(x &lt;= (_Cam.Cam_LeftLimit)+_SOffset &amp;&amp; XSpeed &lt; 0.0){  
+            XSpeed = 0;
+            x     = (_Cam.Cam_LeftLimit)+_SOffset;
+         }else
+         if(x &gt;= (_Cam.Cam_RightLimit)-_SOffset &amp;&amp; XSpeed &gt; 0.0){   
+            XSpeed = 0;
+            x      = (_Cam.Cam_RightLimit)-_SOffset
+         }                       
+      }
 
    
     // Keep the character within the camera's boundaries.

@@ -187,9 +187,8 @@
                    global.DoTime = 1;
                    alarm[0]      = 60;
                    if(SpecialFlag == true){
-                      if(obj_camera.Camera_Target != par_character){
-                         obj_camera.Camera_Target  = par_character;
-                         obj_camera.Camera_BindX   = false;
+                      if(obj_camera.Cam_Subject != par_character){
+                         obj_camera.Cam_Subject  = par_character;
                       }
                    }
                 }             

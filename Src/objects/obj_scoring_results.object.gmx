@@ -149,8 +149,8 @@
           }
           global.ZoneAct++          
           TCard = instance_create(0, 0, obj_title_card_controller)
-          TCard.SpecialFlag    = true;
-          obj_camera.ActBorder = view_xview; 
+          TCard.SpecialFlag        = true;
+          obj_camera.Cam_LeftLimit = view_xview; 
           instance_destroy();
        }
     }

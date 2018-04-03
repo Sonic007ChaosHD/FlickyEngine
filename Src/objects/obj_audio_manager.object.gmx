@@ -438,10 +438,7 @@
           <argument>
             <kind>1</kind>
             <string>/// Play the proper Zone Theme.
-
-    // Flicky Ruins:
-       ZoneSetTheme(rm_flicky_ruins, Ruin_Theme, 0, -1, -1);      
-    
+     
     // Test Zone:
        ZoneSetTheme(rm_test_zone, Test_Theme, 0, -1, -1);
 

@@ -141,7 +141,7 @@
              }
           }       
        }
-       if(SpecialFlag != 0){
+       if(SpecialFlag != 0 &amp;&amp; Drop != false){
           if(x &lt; view_xview+sprite_width/2){
              XSpeed = 2;
           }  
@@ -181,10 +181,8 @@
     if(SpinActivated == false &amp;&amp; Drop == false){
        SpinActivated = true;
        PlaySound(snd_object_signpost, global.SFXVolume, 1, 1);
-       if(obj_camera.Camera_Target == par_character){
-          obj_camera.Camera_Target = Camera;
-          obj_camera.Camera_Type   = "FOLLOW";
-          obj_camera.Camera_BindX  = true;
+       if(obj_camera.Cam_Subject == par_character){
+          obj_camera.Cam_Subject = Camera;
        }
        global.DoTime = 0;
        

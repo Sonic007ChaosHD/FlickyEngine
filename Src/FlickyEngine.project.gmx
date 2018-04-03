@@ -694,10 +694,6 @@
         <script>scripts\scr_tween_quad_out.gml</script>
         <script>scripts\scr_tween_quad_inout.gml</script>
       </scripts>
-      <scripts name="Camera">
-        <script>scripts\scr_camera_reset_values.gml</script>
-        <script>scripts\scr_camera_set_target.gml</script>
-      </scripts>
       <script>scripts\find.gml</script>
       <script>scripts\modulo.gml</script>
       <script>scripts\gamepad_get_device.gml</script>
@@ -714,60 +710,6 @@
     <shader type="GLSLES">shaders\shd_pal_swapper.shader</shader>
   </shaders>
   <objects name="objects">
-    <objects name="Flicky Ruins">
-      <objects name="Tiles">
-        <object>objects\obj_flicky_ruins_tile00</object>
-        <object>objects\obj_flicky_ruins_tile00_nocol</object>
-        <object>objects\obj_flicky_ruins_tile00_platform</object>
-        <object>objects\obj_flicky_ruins_tile01</object>
-        <object>objects\obj_flicky_ruins_tile01_platform</object>
-        <object>objects\obj_flicky_ruins_tile01_platform_2</object>
-        <object>objects\obj_flicky_ruins_tile02</object>
-        <object>objects\obj_flicky_ruins_tile03</object>
-        <object>objects\obj_flicky_ruins_tile04</object>
-        <object>objects\obj_flicky_ruins_tile05</object>
-        <object>objects\obj_flicky_ruins_tile06</object>
-        <object>objects\obj_flicky_ruins_tile07</object>
-        <object>objects\obj_flicky_ruins_tile08</object>
-        <object>objects\obj_flicky_ruins_tile09</object>
-        <object>objects\obj_flicky_ruins_tile10</object>
-        <object>objects\obj_flicky_ruins_tile11</object>
-        <object>objects\obj_flicky_ruins_tile12</object>
-        <object>objects\obj_flicky_ruins_tile13</object>
-        <object>objects\obj_flicky_ruins_tile14</object>
-        <object>objects\obj_flicky_ruins_tile15</object>
-        <object>objects\obj_flicky_ruins_tile16</object>
-        <object>objects\obj_flicky_ruins_loop01</object>
-        <object>objects\obj_flicky_ruins_loop02</object>
-        <object>objects\obj_flicky_ruins_loop03</object>
-      </objects>
-      <objects name="BG Pieces">
-        <object>objects\obj_flicky_ruins_waterfall_fg</object>
-        <object>objects\obj_flicky_ruins_waterfall_bg</object>
-      </objects>
-      <objects name="Breakable">
-        <object>objects\obj_flicky_ruins_breakable01</object>
-        <object>objects\obj_flicky_ruins_breakable01_pieces</object>
-      </objects>
-      <objects name="Gimmicks">
-        <object>objects\obj_flicky_ruins_swing_6</object>
-        <object>objects\obj_flicky_ruins_swing_12</object>
-        <object>objects\obj_flicky_ruins_bridge</object>
-        <object>objects\obj_flicky_ruins_door</object>
-        <object>objects\obj_flicky_ruins_camera_lock</object>
-        <objects name="Pushable">
-          <object>objects\obj_flicky_ruins_push_gravity</object>
-          <object>objects\obj_flicky_ruins_push_stop</object>
-          <object>objects\obj_flicky_ruins_pushblock</object>
-        </objects>
-      </objects>
-      <objects name="Boss">
-        <object>objects\obj_flicky_ruins_knuckes_spawner</object>
-        <object>objects\obj_flicky_ruins_boss_area</object>
-        <object>objects\obj_flicky_ruins_broken_tile</object>
-      </objects>
-      <object>objects\obj_flicky_ruins_bg</object>
-    </objects>
     <objects name="Gameplay">
       <objects name="Controllers">
         <object>objects\par_controller</object>
@@ -1081,7 +1023,6 @@
       <room>rooms\rm_flicky_intro</room>
     </rooms>
     <rooms name="Zones">
-      <room>rooms\rm_flicky_ruins</room>
       <room>rooms\rm_test_zone</room>
     </rooms>
     <rooms name="Bonus">

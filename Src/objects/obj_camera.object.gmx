@@ -353,10 +353,10 @@ y = Cam_YY + Cam_ShiftY;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(Cam_Subject == par_character){
-   Cam_Subject = instance_nearest(x, y, par_collision_swing);
+            <string>if(Cam_Subject = par_character){
+   show_message("YE")
 }else{
-   Cam_Subject = par_character;
+   show_message("NE")
 }
 </string>
           </argument>
