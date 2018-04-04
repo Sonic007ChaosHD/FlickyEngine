@@ -51,6 +51,11 @@
                  Animation = "ROLL";
               }
            
+           // Goal: (Finish)
+              if(GoalState = 2 && Animation = "IDLE"){
+                 GoalState = 0;
+              }
+           
         }else{
           
            // Jump Animation:

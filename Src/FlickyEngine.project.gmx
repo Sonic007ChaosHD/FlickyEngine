@@ -104,6 +104,7 @@
           <sprite>sprites\spr_sonic_edge_balance</sprite>
           <sprite>sprites\spr_sonic_breath</sprite>
           <sprite>sprites\spr_sonic_goal</sprite>
+          <sprite>sprites\spr_sonic_goal_finish</sprite>
           <sprite>sprites\spr_sonic_hurt</sprite>
           <sprite>sprites\spr_sonic_die</sprite>
           <sprite>sprites\spr_sonic_peelout</sprite>
@@ -341,8 +342,15 @@
           <sprite>sprites\spr_title_card_acts</sprite>
         </sprites>
         <sprites name="Results">
-          <sprite>sprites\spr_results_passed</sprite>
-          <sprite>sprites\spr_results_tally</sprite>
+          <sprite>sprites\spr_results_name</sprite>
+          <sprite>sprites\spr_results_through</sprite>
+          <sprite>sprites\spr_results_time</sprite>
+          <sprite>sprites\spr_results_rings</sprite>
+          <sprite>sprites\spr_results_total</sprite>
+          <sprites name="old">
+            <sprite>sprites\spr_results_passed</sprite>
+            <sprite>sprites\spr_results_tally</sprite>
+          </sprites>
         </sprites>
         <sprites name="Fonts">
           <sprite>sprites\spr_font_letters</sprite>

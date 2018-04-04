@@ -602,14 +602,14 @@
        draw_set_font(global.Font_HUD){
                      draw_set_color(c_white){
                                     draw_set_halign(fa_right);
-                                    draw_text(view_xview[view_current]+112, view_yview[view_current]+9, global.Score);                                                          
+                                    draw_text(view_xview[view_current]+111, view_yview[view_current]+9, global.Score);                                                          
                                     draw_set_halign(fa_left);
                                     if( ((global.GameTime div 8) mod 2 &amp;&amp; global.GameTime &gt; 540000) or global.GameTime &lt; 540000 or global.DoTime = 0){      
-                                    draw_text(view_xview[view_current]+56, view_yview[view_current]+25, 
+                                    draw_text(view_xview[view_current]+55, view_yview[view_current]+25, 
                                               string(floor(global.GameTime/60000))+" "+scr_string_number_format(floor(global.GameTime/1000) mod 60,2));
                                     }          
                                     draw_set_halign(fa_right);
-                                    draw_text(view_xview[view_current]+88, view_yview[view_current]+41, global.Rings);
+                                    draw_text(view_xview[view_current]+87, view_yview[view_current]+41, global.Rings);
                                     draw_set_halign(-1);
                      }
        } 

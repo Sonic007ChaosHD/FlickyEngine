@@ -228,7 +228,18 @@
         AnimationRepeatTimes = -1;
         AnimationLinkedTo    = "NONE";
      }
-       
+    
+  // Goal (Finish) Animation            
+     if(Animation = "GOAL_FINISH"){
+        AnimationSprite      = spr_sonic_goal_finish;         
+        AnimationStart       = 0;
+        AnimationEnd         = 4;
+        AnimationLoop        = 1;
+        AnimationSpeed       = 0.10;
+        AnimationRepeat      = 0;
+        AnimationRepeatTimes = 0;
+        AnimationLinkedTo    = "IDLE";
+     }       
   // Breath Animation            
      if(Animation = "BREATH"){
         AnimationSprite      = spr_sonic_breath ;         
