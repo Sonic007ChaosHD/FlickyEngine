@@ -64,7 +64,7 @@
       global.ScreenWidth  = 320; // The Screen's width.
       global.ScreenHeight = 224; // The Screen's height.     
       global.Shaders      = 1;   // Whether or not we can use shaders.
-      global.AngleMode    = 8; // The Angle rotation mode the character uses. 360 and 8 can be used. (A value above/below 8/360 will render a error.)
+      global.AngleMode    = 360; // The Angle rotation mode the character uses. 360 and 8 can be used. (A value above/below 8/360 will render a error.)
       
    // Sound Variables:
       global.BGMVolume    = 1;    // Sets/Gets the volume of the background music.

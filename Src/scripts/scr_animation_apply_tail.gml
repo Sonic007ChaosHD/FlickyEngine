@@ -14,11 +14,23 @@
               case "EDGEWOBBLE_1":
               case "EDGEWOBBLE_2":{
                     TailSprite    = spr_miles_tail_1;
-                    TailX      = 0;
+                    if(Animation == "EDGEWOBBLE_1" || Animation == "EDGEWOBBLE_2"){
+                       TailX      = AnimationDirection*8
+                    }else{
+                       TailX         = 0;
+                    }
                     TailY         = 0;
                     TailDirection = AnimationDirection; 
                     TailSpeed     = 0.14;
                     break;
+              }
+              case "WALK":{
+                    TailSprite    = spr_miles_tail_2;
+                    TailX         = AnimationDirection*5;
+                    TailY         = 4;
+                    TailDirection = AnimationDirection; 
+                    TailSpeed     = 0.24; 
+                    break;                  
               }
               case "ROLL":
               case "SPINDASH":{
@@ -71,5 +83,5 @@
      TailSprite    = noone;
      TailX         = 0;
      TailY         = 0;
-     TailDirection = AnimationDirection;       
+     TailDirection = AnimationDirection;
     }  

@@ -52,7 +52,7 @@
       YSpeed_Max     = 16;       // Fastest the player can move/fall vertically.
       YAcceleration  = 0.21875;  // The force of gravity applied to the character while ion the air.
       YAccel_Common  = 0.21875;  // Common/Default force of acceleration. In case we have to reset it quickly.
-      ConversionFact = 0.8;      // Speed conversion when landing on ground.
+      ConversionFact = 1;        // Speed conversion when landing on ground.
       AirLimit       = true;     // Whether or not we limit the Vertical Speed.
       AirTimer       = 0;        // Checks how long we're in the air.
       Allow_YMovement = true;    // Whether or not we allow the Vertical movement.
@@ -474,6 +474,7 @@
       // Modify the Walking/Jogging animation:
       if(Animation == "WALK" &amp;&amp; Ground){
          AnimationSpeed = min(0.30, max(0.10+abs(XSpeed)/25));
+              TailSpeed = min(0.30, max(0.10+abs(XSpeed)/25));       
       }
    
       // Modify the Running animation:
@@ -556,11 +557,12 @@
    
    // Only run this if we're using the 360 rotation.
       if(global.AngleMode == 360){
-         if(Ground &amp;&amp; (AnimationDirection == 1 &amp;&amp; Angle &gt;= 45 &amp;&amp; Angle &lt;= 300) or (AnimationDirection == -1 &amp;&amp; Angle &gt;= 45 &amp;&amp; Angle &lt;= 310) &amp;&amp; !scr_character_collision_bottom_object(x,y, Angle, spr_mask_main, par_collision_solid_no_angle) &amp;&amp; !scr_character_collision_bottom_object(x, y, Angle, spr_mask_main, par_collision_platform_no_angle)){
-            /*if(abs(Angle-AnimationAngle)&lt;45)*/ AnimationAngle = Angle; //scr_character_rotate_towards(Angle, AnimationAngle, abs(XSpeed));
-            //else                             AnimationAngle = Angle;
+         if(Ground &amp;&amp; (AnimationDirection == 1 &amp;&amp; Angle &gt;= 45 &amp;&amp; Angle &lt;= 300) or (AnimationDirection == -1 &amp;&amp; Angle &gt;= 45 &amp;&amp; Angle &lt;= 310) &amp;&amp; !scr_character_collision_bottom_object(x,y, Angle, spr_mask_main, par_collision_solid_no_angle) &amp;&amp; !scr_character_collision_bottom_object(x, y, Angle, spr_mask_main, par_collision_platform_no_angle)){            
+            AnimationAngle = scr_character_rotate_towards(Angle, AnimationAngle, floor(abs(XSpeed)));//Angle; 
+            TailAngle      = Angle;
          }else{
             AnimationAngle = scr_character_rotate_towards(0, AnimationAngle, 6);
+            TailAngle      = scr_character_rotate_towards(0, TailAngle, 45);  
          }
        }
 
@@ -1230,7 +1232,12 @@ if (Allow_YMovement) {
                      scr_character_angle(global.GravityAngle);
                  }
 
-                 XSpeed -= sin(degtorad(Angle))*(YSpeed+ConversionFact);
+                 if(abs(XSpeed) &lt;= abs(YSpeed) &amp;&amp; RelativeAngle &gt;= 22.5 &amp;&amp; RelativeAngle &lt;= 337.5){
+                    XSpeed = -YSpeed*sign(sin(degtorad(RelativeAngle)));
+                    if(RelativeAngle &lt; 45 || RelativeAngle &gt; 315) { XSpeed *= 0.5 }
+                 }
+  
+                 //XSpeed -= sin(degtorad(Angle))*(YSpeed+ConversionFact);
                  YSpeed = 0;
                  Ground = true;
                                                
@@ -1254,7 +1261,8 @@ if (Allow_YMovement) {
                 // Check if possible to land using that angle
                 if (scr_character_collision_left_edge(x, y, Angle) &amp;&amp; scr_character_collision_right_edge(x, y, Angle)) {
                     scr_character_angle(scr_character_calculate_angle(x, y, Angle));
-                                        
+
+                                                                 
                     // Check if the landed angle isn't a flat top
                     if (RelativeAngle &gt; 160 &amp;&amp; RelativeAngle &lt; 200) {
                         scr_character_angle(global.GravityAngle);
@@ -1263,7 +1271,8 @@ if (Allow_YMovement) {
                     }
 
                     // Calculate new movement values
-                    XSpeed -= sin(degtorad(Angle))*(YSpeed);                 
+                    XSpeed = (XSpeed*cos(degtorad(RelativeAngle)))+(YSpeed*-sin(degtorad(RelativeAngle)));
+                    //XSpeed -= sin(degtorad(Angle))*(YSpeed);                 
                     Ground = true;          
                               
                 } else {
@@ -1271,7 +1280,7 @@ if (Allow_YMovement) {
                     YSpeed       = 0;
                     if (not Ground) {
                         break; // no need to continue looping
-                    }
+                    }  
                 }
                 
             }
@@ -1958,29 +1967,6 @@ if (Allow_YMovement) {
          draw_sprite_ext(spr_spindash_dust, current_time div 40, floor(x-AnimationDirection*7), floor(y+13), AnimationDirection, 1, 0, c_white, 1);         
       }
 
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="9" enumb="112">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>room_goto_next();
 </string>
           </argument>
         </arguments>
