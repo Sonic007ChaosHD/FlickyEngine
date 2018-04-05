@@ -26,8 +26,8 @@
           <argument>
             <kind>1</kind>
             <string>/// Create and define most common character values.
-      I = 0;
-   // Set the ChracterID:
+
+   // Set the Chracter ID:
       CharacterID    = CharacterSonic;  // Who we're playing as.
       CharacterState = CharacterNormal; // State of our Character, either Normal (Default), Super or Hyper.
       
@@ -62,19 +62,19 @@
       YSample        = 13;       // Pixel limit to divide vertical movement; ignored if 0 or less
 
    // Terain interaction:
-      Ground             = false;    // Checks if the character has/is grounded.
-      PlatformCheck      = false;    // Checks if the character has landed on a platform.
-      PlatformCheckTimer = 30;       // Used to reset the Platform check. Prevents that the character looses collision.
-      OnSwing            = noone;    // Checks if the character is on a swinging platform.
-      OnMoving           = noone;    // Checks if the character is on a moving platform.
-      OnCollapse         = noone;    // Checks if the character is on a collapsing tile.
-      AllowStuck         = noone;    // If true, this will prevent the "Stuck in terrain" code.
-      Angle              = 0;        // Angle of the terrain.
-      AngleRound         = 0;        // Rounded angle.
-      RelativeAngle      = 0;        // Current angle relative to the gravity angle.
-      AngleHold          = 0;        // Used for smoothing angle values.
-      AnimationAngle     = 0;        // Used to rotate the characters sprite.
-      Layer              = 0;        // Characters collision layer. Used for loops and special paths.
+      Ground              = false;    // Checks if the character has/is grounded.
+      PlatformCheck       = false;    // Checks if the character has landed on a platform.
+      PlatformCheckTimer  = 30;       // Used to reset the Platform check. Prevents that the character looses collision.
+      OnSwing             = noone;    // Checks if the character is on a swinging platform.
+      OnMoving            = noone;    // Checks if the character is on a moving platform.
+      OnCollapse          = noone;    // Checks if the character is on a collapsing tile.
+      AllowStuck          = noone;    // If true, this will prevent the "Stuck in terrain" code.
+      Angle               = 0;        // Angle of the terrain.
+      AngleRound          = 0;        // Rounded angle.
+      RelativeAngle       = 0;        // Current angle relative to the gravity angle.    
+      AngleHold           = 0;        // Used for smoothing angle values.
+      AnimationAngle      = 0;        // Used to rotate the characters sprite.
+      Layer               = 0;        // Characters collision layer. Used for loops and special paths.
 
    // Control Flags: 
       InputAlarm     = 0;        // Used for locking input temporarly when loosing speed on step slopes.
@@ -565,6 +565,8 @@
             TailAngle      = scr_character_rotate_towards(0, TailAngle, 45);  
          }
        }
+       
+       
 
    // Otherwise, only use 8 directions for the rotation:
       if(global.AngleMode == 8){ 
@@ -1967,6 +1969,9 @@ if (Allow_YMovement) {
          draw_sprite_ext(spr_spindash_dust, current_time div 40, floor(x-AnimationDirection*7), floor(y+13), AnimationDirection, 1, 0, c_white, 1);         
       }
 
+      draw_set_font(-1)
+      draw_set_color(c_red)
+      draw_text(x, y-10, string(PreviousAngle) + " - " + string(Angle))
 </string>
           </argument>
         </arguments>

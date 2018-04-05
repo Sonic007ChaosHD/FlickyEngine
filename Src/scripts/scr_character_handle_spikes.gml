@@ -5,7 +5,7 @@
       Harmful_Spike_Up = scr_character_collision_bottom_object(x, y, 0, spr_mask_big, obj_spike_up);
    
    // Get Hit by the Spike:
-      if(Harmful_Spike_Up != noone){
+      if(Harmful_Spike_Up != noone && Ground){
          if(Action != ActionHurt && Invincibility == 0 && Action != ActionTransform){
             scr_character_action_hit(Harmful_Spike_Up, true);
          }
