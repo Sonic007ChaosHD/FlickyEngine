@@ -513,7 +513,6 @@
         </sprites>
       </sprites>
     </sprites>
-    <sprite>sprites\spr_test_course</sprite>
   </sprites>
   <backgrounds name="background">
     <backgrounds name="No Way">
@@ -1032,7 +1031,6 @@
       </objects>
       <object>objects\obj_flicky_credits</object>
     </objects>
-    <object>objects\obj_test_course</object>
   </objects>
   <rooms name="rooms">
     <rooms name="Splash">

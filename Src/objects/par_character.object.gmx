@@ -1273,8 +1273,8 @@ if (Allow_YMovement) {
                     }
 
                     // Calculate new movement values
-                    XSpeed = (XSpeed*cos(degtorad(RelativeAngle)))+(YSpeed*-sin(degtorad(RelativeAngle)));
-                    //XSpeed -= sin(degtorad(Angle))*(YSpeed);                 
+                    //XSpeed = (XSpeed*cos(degtorad(RelativeAngle)))+(YSpeed*-sin(degtorad(RelativeAngle)));
+                    XSpeed -= sin(degtorad(Angle))*(YSpeed);                 
                     Ground = true;          
                               
                 } else {
