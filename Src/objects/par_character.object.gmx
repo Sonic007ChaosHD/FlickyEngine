@@ -558,7 +558,7 @@
    // Only run this if we're using the 360 rotation.
       if(global.AngleMode == 360){
          if(Ground &amp;&amp; (AnimationDirection == 1 &amp;&amp; Angle &gt;= 45 &amp;&amp; Angle &lt;= 300) or (AnimationDirection == -1 &amp;&amp; Angle &gt;= 45 &amp;&amp; Angle &lt;= 310) &amp;&amp; !scr_character_collision_bottom_object(x,y, Angle, spr_mask_main, par_collision_solid_no_angle) &amp;&amp; !scr_character_collision_bottom_object(x, y, Angle, spr_mask_main, par_collision_platform_no_angle)){            
-            AnimationAngle = scr_character_rotate_towards(Angle, AnimationAngle, floor(abs(XSpeed)));//Angle; 
+            AnimationAngle = RelativeAngle; 
             TailAngle      = Angle;
          }else{
             AnimationAngle = scr_character_rotate_towards(0, AnimationAngle, 6);
