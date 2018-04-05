@@ -1969,9 +1969,6 @@ if (Allow_YMovement) {
          draw_sprite_ext(spr_spindash_dust, current_time div 40, floor(x-AnimationDirection*7), floor(y+13), AnimationDirection, 1, 0, c_white, 1);         
       }
 
-      draw_set_font(-1)
-      draw_set_color(c_red)
-      draw_text(x, y-10, string(PreviousAngle) + " - " + string(Angle))
 </string>
           </argument>
         </arguments>
