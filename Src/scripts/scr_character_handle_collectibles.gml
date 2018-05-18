@@ -5,7 +5,7 @@
     // Rings --------------------------------------------------------------- /
     
        Ring = scr_character_collision_object(x, y, obj_ring);
-       if(Ring && Action != ActionHurt){
+       if(Ring && Action != ActionHurt && (InvTimer < 50)){
         
           // Collect the Ring:
              with(Ring) { IsCollected = true; instance_destroy() }

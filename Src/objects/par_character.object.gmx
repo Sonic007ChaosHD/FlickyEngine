@@ -30,6 +30,7 @@
    // Set the Chracter ID:
       CharacterID    = CharacterSonic;  // Who we're playing as.
       CharacterState = CharacterNormal; // State of our Character, either Normal (Default), Super or Hyper.
+      CharacterType  = IsPlayable;      // Is Playable or AI?
       
    // Horizontal Speed Values:
       XSpeed          = 0;        // The current horizontal speed.
@@ -697,69 +698,165 @@
             <string>///Get the input keys.
 // If you want to modify any of this. Do so in scr_game_init()
 
-    // Only Run this IF we allow movement:
-       if(LockControl == 0){
+    // Only Run this IF we allow movement and we're the player.:
+       if(global.Character_1 = id){
+       
+          if(LockControl == 0){
         
-          // Keys:
-             KeyUp               = keyboard_check(global.Key_UP)     || (gamepad_axis_value(0, gp_axislv) &lt;  0) || (gamepad_axis_value(4, gp_axislv) &lt;  0);
-             KeyDown             = keyboard_check(global.Key_DOWN)   || (gamepad_axis_value(0, gp_axislv) &gt;  0) || (gamepad_axis_value(4, gp_axislv) &gt;  0);
-             KeyRight            = keyboard_check(global.Key_RIGHT)  || (gamepad_axis_value(0, gp_axislh) &gt;  0) || (gamepad_axis_value(4, gp_axislh) &gt;  0);
-             KeyLeft             = keyboard_check(global.Key_LEFT)   || (gamepad_axis_value(0, gp_axislh) &lt;  0) || (gamepad_axis_value(4, gp_axislh) &lt;  0);
-             KeyAction           = keyboard_check(global.Key_ACTION);
-             KeySpecial          = keyboard_check(global.Key_SPECIAL);
-             KeyEnter            = keyboard_check(global.Key_ENTER);
+             // Keys:
+                KeyUp               = keyboard_check(global.Key_UP)     || (gamepad_axis_value(0, gp_axislv) &lt;  0) || (gamepad_axis_value(4, gp_axislv) &lt;  0);
+                KeyDown             = keyboard_check(global.Key_DOWN)   || (gamepad_axis_value(0, gp_axislv) &gt;  0) || (gamepad_axis_value(4, gp_axislv) &gt;  0);
+                KeyRight            = keyboard_check(global.Key_RIGHT)  || (gamepad_axis_value(0, gp_axislh) &gt;  0) || (gamepad_axis_value(4, gp_axislh) &gt;  0);
+                KeyLeft             = keyboard_check(global.Key_LEFT)   || (gamepad_axis_value(0, gp_axislh) &lt;  0) || (gamepad_axis_value(4, gp_axislh) &lt;  0);
+                KeyAction           = keyboard_check(global.Key_ACTION);
+                KeySpecial          = keyboard_check(global.Key_SPECIAL);
+                KeyEnter            = keyboard_check(global.Key_ENTER);
        
-          // Key presses:
-             KeyUp_Pressed       = keyboard_check_pressed(global.Key_UP);
-             KeyDown_Pressed     = keyboard_check_pressed(global.Key_DOWN);
-             KeyRight_Pressed    = keyboard_check_pressed(global.Key_RIGHT);
-             KeyLeft_Pressed     = keyboard_check_pressed(global.Key_LEFT);
-             KeyAction_Pressed   = keyboard_check_pressed(global.Key_ACTION);
-             KeySpecial_Pressed  = keyboard_check_pressed(global.Key_SPECIAL);
-             KeyEnter_Pressed    = keyboard_check_pressed(global.Key_ENTER);      
+             // Key presses:
+                KeyUp_Pressed       = keyboard_check_pressed(global.Key_UP);
+                KeyDown_Pressed     = keyboard_check_pressed(global.Key_DOWN);
+                KeyRight_Pressed    = keyboard_check_pressed(global.Key_RIGHT);
+                KeyLeft_Pressed     = keyboard_check_pressed(global.Key_LEFT);
+                KeyAction_Pressed   = keyboard_check_pressed(global.Key_ACTION);
+                KeySpecial_Pressed  = keyboard_check_pressed(global.Key_SPECIAL);
+                KeyEnter_Pressed    = keyboard_check_pressed(global.Key_ENTER);      
        
-          // Key releases:
-             KeyUp_Released      = keyboard_check_released(global.Key_UP);
-             KeyDown_Released    = keyboard_check_released(global.Key_DOWN);
-             KeyRight_Released   = keyboard_check_released(global.Key_RIGHT);
-             KeyLeft_Released    = keyboard_check_released(global.Key_LEFT);
-             KeyAction_Released  = keyboard_check_released(global.Key_ACTION);
-             KeySpecial_Released = keyboard_check_released(global.Key_SPECIAL);
-             KeyEnter_Released   = keyboard_check_released(global.Key_ENTER);             
+             // Key releases:
+                KeyUp_Released      = keyboard_check_released(global.Key_UP);
+                KeyDown_Released    = keyboard_check_released(global.Key_DOWN);
+                KeyRight_Released   = keyboard_check_released(global.Key_RIGHT);
+                KeyLeft_Released    = keyboard_check_released(global.Key_LEFT);
+                KeyAction_Released  = keyboard_check_released(global.Key_ACTION);
+                KeySpecial_Released = keyboard_check_released(global.Key_SPECIAL);
+                KeyEnter_Released   = keyboard_check_released(global.Key_ENTER);             
        
-          // Stop left &amp; right at the same time:
-             if(KeyRight &amp;&amp; KeyLeft){
-                KeyRight = false;
-                KeyLeft  = false;
-             }    
+             // Stop left &amp; right at the same time:
+                if(KeyRight &amp;&amp; KeyLeft){
+                   KeyRight = false;
+                   KeyLeft  = false;
+                }    
              
-          // Input Alarm:
-             if(InputAlarm){
-                if(AlarmDirection = 1){
-                   KeyRight = false
-                }
-                if(AlarmDirection = -1){
-                   KeyLeft  = false
-                }                
-             }   
+             // Input Alarm:
+                if(InputAlarm){
+                   if(AlarmDirection = 1){
+                      KeyRight = false
+                   }
+                   if(AlarmDirection = -1){
+                      KeyLeft  = false
+                   }                
+                }   
 
-          // Input Lock:
-             if(InputLock_L){
-                KeyLeft = false;
-             }
-             if(InputLock_R){
-                KeyRight = false;
-             }      
+             // Input Lock:
+                if(InputLock_L){
+                   KeyLeft = false;
+                }
+                if(InputLock_R){
+                   KeyRight = false;
+                }      
        
-          // Holding Jump:
-             if(KeyAction){
-                if(global.Key_ACTION_HeldTimer != 10){
-                   global.Key_ACTION_HeldTimer++
+             // Holding Jump:
+                if(KeyAction){
+                   if(global.Key_ACTION_HeldTimer != 10){
+                      global.Key_ACTION_HeldTimer++
+                   }
+                }else{
+                   global.Key_ACTION_HeldTimer = 0;
+                }
+          }
+       
+       }
+       
+    // CPU Movement:
+       if(global.Character_2 = id){
+       
+          MainCharacter = global.Character_1;
+       
+        if((x &lt; MainCharacter.x-5 ||(MainCharacter.y &lt; y-50 &amp;&amp; MainCharacter.Ground == true &amp;&amp; MainCharacter.XSpeed &gt; 0))
+            &amp;&amp; (MainCharacter.y &gt;= y-50 || MainCharacter.Ground == false || MainCharacter.XSpeed &gt;= 0)){
+            KeyRight = true;
+            KeyLeft  = false;
+        }else{
+            KeyRight = false;
+            if(XSpeed == 0 &amp;&amp; YSpeed == 0 &amp;&amp; Action = ActionNormal){
+               AnimationDirection = 1;
+            }            
+        }
+        if((x &gt; MainCharacter.x+5 ||(MainCharacter.y &lt; y-50 &amp;&amp; MainCharacter.Ground == true &amp;&amp; MainCharacter.XSpeed &lt; 0))
+            &amp;&amp; (MainCharacter.y &gt;= y-50 || MainCharacter.Ground == false || MainCharacter.XSpeed &lt;= 0)){
+            KeyRight = false;
+            KeyLeft  = true;
+        }else{
+            KeyLeft  = false;
+            if(XSpeed == 0 &amp;&amp; YSpeed == 0 &amp;&amp; Action = ActionNormal){
+               AnimationDirection = -1;
+            }
+        }
+        
+          // Jump:
+             if(Ground == true &amp;&amp; (MainCharacter.y &lt; y-50 &amp;&amp; MainCharacter.Ground == false)){
+                if(Action != ActionJump){
+                   scr_character_action_jump();
                 }
              }else{
-                global.Key_ACTION_HeldTimer = 0;
+                KeyAction_Pressed = false;                
+             }      
+
+                    
+          // Move to the Left:
+             //if(x &gt; MainPlayer.x+15 || MainPlayer.Ground == true){
+             //   KeyLeft = true;
+             //}else{
+             //   KeyLeft = false;
+             //}             
+             
+          
+         /*    
+          // Move to the right:
+             if((x &lt; MainPlayer.x-10  || (MainPlayer.y &lt; y-50 &amp;&amp; MainPlayer.Ground &amp;&amp; MainPlayer.XSpeed &gt; 0))
+             &amp;&amp; (MainPlayer.y &gt;= y-50 || MainPlayer.Ground == false || MainPlayer.XSpeed &gt;= 0)){             
+                 KeyRight = true;
+             }else{
+                 KeyRight = true;
              }
-       }
+             
+          // Move to the left:
+             if((x &gt; MainPlayer.x+10  || (MainPlayer.y &lt; y-50 &amp;&amp; MainPlayer.Ground &amp;&amp; MainPlayer.XSpeed &lt; 0))
+             &amp;&amp; (MainPlayer.y &gt;= y-50 || MainPlayer.Ground == false || MainPlayer.XSpeed &lt;= 0)){             
+                 KeyLeft = true;
+             }else{
+                 KeyLeft = false;
+             }     
+                          
+          // Jump:
+             if(Ground == true &amp;&amp; (MainPlayer.y &lt; y-50 &amp;&amp; MainPlayer.Ground == false)){
+                KeyAction_Pressed = true;
+             }else{
+                KeyAction_Pressed = false;                
+             }      
+             
+             if(Action = ActionJump){
+                KeyAction = true
+             }*/
+                   
+          // Jump when pushing a object but the main character is not.   
+          /*   if(Ground == true &amp;&amp; XSpeed == 0 &amp;&amp; Action = ActionPush &amp;&amp; (MainPlayer.y &lt;= y-10 || MainPlayer.y &gt;= y+10) &amp;&amp; Pushing_Timer &gt;= Pushing_Timer_Max){
+                KeyAction_Pressed = true;
+             } */      
+       
+       }       
+       
+       
+       /*
+               if((x &lt; MainCharacter.x-10 ||(MainCharacter.y &lt; y-50 &amp;&amp; MainCharacter.ground == true &amp;&amp; MainCharacter.speed_x &gt; 0))
+            &amp;&amp; (MainCharacter.y &gt;= y-50 || MainCharacter.ground == false || MainCharacter.speed_x &gt;= 0))
+            key_right = true;
+        else
+            key_right = false;
+        if((x &gt; MainCharacter.x+10 ||(MainCharacter.y &lt; y-50 &amp;&amp; MainCharacter.ground == true &amp;&amp; MainCharacter.speed_x &lt; 0))
+            &amp;&amp; (MainCharacter.y &gt;= y-50 || MainCharacter.ground == false || MainCharacter.speed_x &lt;= 0))
+            key_left = true;
+        else
+            key_left = false;
 </string>
           </argument>
         </arguments>
@@ -1013,7 +1110,11 @@
           }          
           DeathTimer    = 120;
           depth         = -999995;  
-          obj_audio_manager.DeadFade = true;          
+          if(instance_exists(obj_audio_manager)){
+             with(obj_audio_manager){
+                  DeadFade = true;
+             }
+          }       
           if(global.BonusStage == false){          
              global.Lives -= 1;
              global.DoTime = 0;
@@ -1468,6 +1569,7 @@ if (Allow_YMovement) {
     }         
                      
   // Jump:
+     scr_character_action_homing()
      scr_character_action_jump();  
      
   // Look up:     
@@ -1696,8 +1798,9 @@ if (Allow_YMovement) {
  
  // Back to normal Sonic Palette:
     if(CharacterID = CharacterSonic &amp;&amp; CharacterState = CharacterNormal &amp;&amp; TransformEnded == 1){
-       if(PalettePosition &gt; 10){
-          TransformEnded  = 0;
+       if(PalettePosition &gt;= 10){
+          TransformEnded   = 0;
+          PalettePosition  = 0;
        }else{
           PalettePosition += 0.50;
        }
@@ -1744,7 +1847,7 @@ if (Allow_YMovement) {
 
     // After Effect:
        if(!Underwater){
-          if(CharacterState = CharacterHyper &amp;&amp; current_time div 40){
+          if((CharacterState = CharacterHyper &amp;&amp; current_time div 40) || HomingUsed = true &amp;&amp; current_time div 40 ){
              if(instance_number(obj_aftereffect) &lt; 3){
                 Effect = (instance_create(xprevious, yprevious, obj_aftereffect)){
                           Effect.Parent             = id;
@@ -1839,13 +1942,19 @@ if (Allow_YMovement) {
                        instance_destroy(DrownCounter);
                     }
                  }
-                 if(CheckSound(obj_audio_manager.Jingle_Drowning) == true){
-                    if(Invincibility &lt; 1.5){
-                       LoopSound(obj_audio_manager.ZoneBGM, global.BGMVolume, 1);   
-                       global.BGMVolume = global.MaxBGMV;
-                    }                      
-                    StopSound(obj_audio_manager.Jingle_Drowning);                 
-                 }                                                    
+                 if(instance_exists(obj_audio_manager)){               
+                    var Jingle;
+                        Jingle = obj_audio_manager.Jingle_Drowning;
+                    var ZnBGM;
+                        ZnBGM  = obj_audio_manager.ZoneBGM;
+                    if(CheckSound(Jingle) == true){
+                       if(Invincibility &lt; 1.5){
+                          LoopSound(ZnBGM, global.BGMVolume, 1);   
+                          global.BGMVolume = global.MaxBGMV;
+                       }                      
+                       StopSound(Jingle);                 
+                    } 
+                 }                                                   
               }else if(Action = ActionBreath &amp;&amp; Ground){
                  Action       = ActionNormal;
                  BubbleTimer  = 0;
@@ -1877,7 +1986,9 @@ if (Allow_YMovement) {
                  instance_destroy(DrownCounter);
               }
            }
-           StopSound(obj_audio_manager.Jingle_Drowning);           
+           var Jingle;
+               Jingle = obj_audio_manager.Jingle_Drowning;           
+               StopSound(Jingle);           
         }  
 
         }
@@ -1895,9 +2006,13 @@ if (Allow_YMovement) {
                   
      // Prevent music from not restarting:
         if(GoalState != 1 &amp;&amp; !instance_exists(obj_scoring_results)){
-           if(CheckSound(obj_audio_manager.Jingle_Drowning) == false &amp;&amp; CheckSound(obj_audio_manager.ZoneBGM) == false){
+           var Jingle;
+               Jingle = obj_audio_manager.Jingle_Drowning;   
+           var ZnBGM;
+               ZnBGM  = obj_audio_manager.ZoneBGM;                          
+           if(CheckSound(Jingle) == false &amp;&amp; CheckSound(ZnBGM) == false){
               if((Action = ActionBreath or Underwater == false) &amp;&amp; Action != ActionDie &amp;&amp; DrownTimer &gt; 0 &amp;&amp; Invincibility &lt; 1.5){
-                 LoopSound(obj_audio_manager.ZoneBGM, global.BGMVolume, 1);
+                 LoopSound(ZnBGM, global.BGMVolume, 1);
                  global.BGMVolume = global.MaxBGMV;
               }
            }
@@ -1931,13 +2046,13 @@ if (Allow_YMovement) {
    // Palette: (Only if we allow Shaders)
       if(global.Shaders != 0){
          if(CharacterID = CharacterSonic &amp;&amp; CharacterState = CharacterSuper){
-            pal_swap_set(spr_sonic_super_palette, PalettePosition, false);
+            pal_swap_set(spr_sonic_super_palette, floor(PalettePosition), false);
          }
          if(CharacterID = CharacterSonic &amp;&amp; CharacterState = CharacterHyper){
-            pal_swap_set(spr_sonic_hyper_palette, PalettePosition, false);
+            pal_swap_set(spr_sonic_hyper_palette, floor(PalettePosition), false);
          }    
          if(CharacterID = CharacterSonic &amp;&amp; CharacterState = CharacterNormal &amp;&amp; TransformEnded == 1){
-            pal_swap_set(spr_sonic_to_normal_palette, PalettePosition, false);
+            pal_swap_set(spr_sonic_to_normal_palette, floor(PalettePosition), false);
          }                           
       }
       
@@ -1968,8 +2083,6 @@ if (Allow_YMovement) {
          draw_sprite_ext(spr_spindash_dust, current_time div 40, floor(x-AnimationDirection*7), floor(y+13), AnimationDirection, 1, 0, c_white, 1);         
       }
 
-      draw_set_font(-1)
-      draw_text(x, y, PalettePosition)
 </string>
           </argument>
         </arguments>

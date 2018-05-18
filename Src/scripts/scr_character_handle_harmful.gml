@@ -24,11 +24,8 @@
             }
          }else{
             if(Invincibility < 1.5){
-               //AngleToChar         = degtorad(round(scr_character_wrap_angle(point_direction(x, y, ShieldChild.x, ShieldChild.y)-90)/22.5)*24);
-               //Harmful_Main.hspeed = sin(scr_character_wrap_angle(AngleToChar))*4;
-               //Harmful_Main.vspeed = cos(scr_character_wrap_angle(AngleToChar))*4;   
-               var NewSpeed  = sqrt(sqr(Harmful_Main.hspeed) + sqr(Harmful_Main.vspeed));
-               var NewAngle = point_direction(id.x, id.y, Harmful_Main.x, Harmful_Main.y);
+               var NewSpeed =         sqrt(sqr(Harmful_Main.hspeed) + sqr(Harmful_Main.vspeed));
+               var NewAngle =         point_direction(id.x, id.y, Harmful_Main.x, Harmful_Main.y);
                Harmful_Main.hspeed =  dcos(NewAngle) * NewSpeed;
                Harmful_Main.vspeed = -dsin(NewAngle) * NewSpeed;
             }            

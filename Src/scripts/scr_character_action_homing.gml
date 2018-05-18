@@ -6,9 +6,7 @@
           HomingTable  = ds_list_create()
           // List all objects that can be targeted.
              ds_list_add(HomingTable, par_enemy);
-             ds_list_add(HomingTable, obj_monitor);
-             ds_list_add(HomingTable, par_spring);
-             ds_list_add(HomingTable, par_spring_diagonal);          
+             ds_list_add(HomingTable, obj_monitor);       
        }
         
     // Create Target while Jumping.       
@@ -18,7 +16,7 @@
           
                 for(i=0; i!=ds_list_size(HomingTable); i++){
                     TableContent = ds_list_find_value(HomingTable, i)
-                    if(distance_to_object(TableContent) < 128){
+                    if(distance_to_object(TableContent) < 140){
                        if(instance_number(obj_homing_target) < 1){
                           LockOn        = instance_create(TableContent.x, TableContent.y, obj_homing_target)
                           LockOn.Scale  = 0;
@@ -34,6 +32,7 @@
           if(instance_exists(obj_homing_target)){
              with(obj_homing_target){
                   instance_destroy();
+                  HomingUsed = false;
              }
            }     
              

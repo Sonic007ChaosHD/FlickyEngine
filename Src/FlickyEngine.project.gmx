@@ -112,6 +112,7 @@
           <sprite>sprites\spr_sonic_drop_dash</sprite>
           <sprite>sprites\spr_sonic_transform</sprite>
           <sprite>sprites\spr_sonic_hang</sprite>
+          <sprite>sprites\spr_sonic_tpose</sprite>
           <sprites name="Super">
             <sprite>sprites\spr_ssonic_idle</sprite>
             <sprite>sprites\spr_ssonic_lookup</sprite>
@@ -514,6 +515,14 @@
           <sprite>sprites\spr_flicky_ruins_door</sprite>
           <sprite>sprites\spr_flicky_ruins_watersplash</sprite>
         </sprites>
+      </sprites>
+      <sprites name="Android">
+        <sprite>sprites\spr_android_dpad</sprite>
+        <sprite>sprites\spr_android_dpad_mask_up</sprite>
+        <sprite>sprites\spr_android_dpad_mask_left</sprite>
+        <sprite>sprites\spr_android_dpad_mask_right</sprite>
+        <sprite>sprites\spr_android_dpad_mask_down</sprite>
+        <sprite>sprites\spr_android_buttons</sprite>
       </sprites>
     </sprites>
   </sprites>
@@ -1039,6 +1048,15 @@
       </objects>
       <object>objects\obj_flicky_credits</object>
     </objects>
+    <objects name="Android">
+      <object>objects\obj_android_dpad</object>
+      <object>objects\obj_android_dpad_up</object>
+      <object>objects\obj_android_dpad_right</object>
+      <object>objects\obj_android_dpad_down</object>
+      <object>objects\obj_android_dpad_left</object>
+      <object>objects\obj_android_button_a</object>
+      <object>objects\obj_android_button_b</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <rooms name="Splash">
@@ -1053,8 +1071,8 @@
     <room>rooms\rm_flicky_credits</room>
     <room>rooms\rm_flicky_menu</room>
   </rooms>
-  <constants number="33">
-    <constant name="GameTitle">"Blur Engine"</constant>
+  <constants number="35">
+    <constant name="GameTitle">"Flicky Engine"</constant>
     <constant name="ActionNormal">0</constant>
     <constant name="ActionJump">1</constant>
     <constant name="ActionCrouch">2</constant>
@@ -1087,6 +1105,8 @@
     <constant name="CharacterNormal">1</constant>
     <constant name="CharacterSuper">2</constant>
     <constant name="CharacterHyper">3</constant>
+    <constant name="IsPlayable">1</constant>
+    <constant name="IsCPU">2</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>

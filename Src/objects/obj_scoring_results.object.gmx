@@ -471,7 +471,9 @@
              CanDo = 2;
           }
           if(GoingOut = 0 &amp;&amp; CanDo == 2){
-             if(CheckSound(obj_audio_manager.Jingle_ActClear) == false){
+             var JingleClear;
+                 JingleClear = obj_audio_manager.Jingle_ActClear;
+             if(CheckSound(JingleClear) == false){
                 GoingOut = 1
                 if(SpecialFlag == 0){
                    alarm[4] = 100;
@@ -483,6 +485,7 @@
        }
     }
 
+    
 </string>
           </argument>
         </arguments>
