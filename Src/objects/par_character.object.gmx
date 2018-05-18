@@ -1569,7 +1569,6 @@ if (Allow_YMovement) {
     }         
                      
   // Jump:
-     scr_character_action_homing()
      scr_character_action_jump();  
      
   // Look up:     
