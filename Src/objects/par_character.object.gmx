@@ -699,7 +699,7 @@
 // If you want to modify any of this. Do so in scr_game_init()
 
     // Only Run this IF we allow movement and we're the player.:
-       if(global.Character_1 = id){
+       //if(global.Character_1 = id){
        
           if(LockControl == 0){
         
@@ -764,10 +764,10 @@
                 }
           }
        
-       }
+      // }
        
     // CPU Movement:
-       if(global.Character_2 = id){
+/*       if(global.Character_2 = id){
        
           MainCharacter = global.Character_1;
        
@@ -843,7 +843,7 @@
                 KeyAction_Pressed = true;
              } */      
        
-       }       
+//       }       
        
        
        /*
