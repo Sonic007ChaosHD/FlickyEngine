@@ -1273,9 +1273,8 @@ if (Allow_YMovement) {
                     }
 
                     // Calculate new movement values
-                    //XSpeed = (XSpeed*cos(degtorad(RelativeAngle)))+(YSpeed*-sin(degtorad(RelativeAngle)));
-                    XSpeed -= sin(degtorad(Angle))*(YSpeed);                 
-                    Ground = true;          
+                       XSpeed -= sin(degtorad(Angle))*(YSpeed);                 
+                       Ground = true;          
                               
                 } else {
                     scr_character_angle(global.GravityAngle);
@@ -1969,6 +1968,8 @@ if (Allow_YMovement) {
          draw_sprite_ext(spr_spindash_dust, current_time div 40, floor(x-AnimationDirection*7), floor(y+13), AnimationDirection, 1, 0, c_white, 1);         
       }
 
+      draw_set_font(-1)
+      draw_text(x, y, PalettePosition)
 </string>
           </argument>
         </arguments>

@@ -285,44 +285,6 @@
             <sprite>sprites\spr_npc_sensor_wall</sprite>
           </sprites>
         </sprites>
-        <sprites name="Gimmicks">
-          <sprites name="Bridges">
-            <sprite>sprites\spr_aaz_bridge</sprite>
-          </sprites>
-          <sprites name="Moving">
-            <sprite>sprites\spr_moving_handle_up</sprite>
-            <sprite>sprites\spr_moving_handle_down</sprite>
-            <sprite>sprites\spr_moving_handle_right</sprite>
-            <sprite>sprites\spr_moving_handle_left</sprite>
-          </sprites>
-          <sprites name="Swinging">
-            <sprite>sprites\spr_marble_chain_top</sprite>
-            <sprite>sprites\spr_marble_chain</sprite>
-            <sprite>sprites\spr_marble_platform</sprite>
-          </sprites>
-          <sprites name="Casino">
-            <sprite>sprites\spr_casino_bumper</sprite>
-          </sprites>
-          <sprites name="Dasher">
-            <sprite>sprites\spr_chemical_dasher</sprite>
-          </sprites>
-          <sprites name="Collapses">
-            <sprite>sprites\spr_sky_collapse</sprite>
-            <sprite>sprites\spr_sky_collapse_tiles</sprite>
-          </sprites>
-          <sprites name="Switches">
-            <sprite>sprites\spr_sth3_switch</sprite>
-          </sprites>
-          <sprites name="Corkscrews">
-            <sprite>sprites\spr_corkscrew</sprite>
-          </sprites>
-          <sprites name="Pushable">
-            <sprite>sprites\spr_push_gravity_sensor</sprite>
-          </sprites>
-          <sprites name="Emeralds">
-            <sprite>sprites\spr_chaos_emeralds</sprite>
-          </sprites>
-        </sprites>
       </sprites>
       <sprites name="Water">
         <sprite>sprites\spr_water_surface</sprite>
@@ -393,6 +355,65 @@
           <sprite>sprites\spr_znt_test_collapse_piece</sprite>
         </sprites>
       </sprites>
+      <sprites name="Gimmicks">
+        <sprites name="Bridges">
+          <sprite>sprites\spr_aaz_bridge</sprite>
+        </sprites>
+        <sprites name="Moving">
+          <sprite>sprites\spr_moving_handle_up</sprite>
+          <sprite>sprites\spr_moving_handle_down</sprite>
+          <sprite>sprites\spr_moving_handle_right</sprite>
+          <sprite>sprites\spr_moving_handle_left</sprite>
+        </sprites>
+        <sprites name="Swinging">
+          <sprite>sprites\spr_marble_chain_top</sprite>
+          <sprite>sprites\spr_marble_chain</sprite>
+          <sprite>sprites\spr_marble_platform</sprite>
+        </sprites>
+        <sprites name="Casino">
+          <sprite>sprites\spr_casino_bumper</sprite>
+        </sprites>
+        <sprites name="Dasher">
+          <sprite>sprites\spr_chemical_dasher</sprite>
+        </sprites>
+        <sprites name="Collapses">
+          <sprite>sprites\spr_sky_collapse</sprite>
+          <sprite>sprites\spr_sky_collapse_tiles</sprite>
+        </sprites>
+        <sprites name="Switches">
+          <sprite>sprites\spr_sth3_switch</sprite>
+        </sprites>
+        <sprites name="Corkscrews">
+          <sprite>sprites\spr_corkscrew</sprite>
+        </sprites>
+        <sprites name="Pushable">
+          <sprite>sprites\spr_push_gravity_sensor</sprite>
+        </sprites>
+        <sprites name="Emeralds">
+          <sprite>sprites\spr_chaos_emeralds</sprite>
+        </sprites>
+        <sprites name="Weather">
+          <sprite>sprites\spr_weather_snow</sprite>
+        </sprites>
+      </sprites>
+      <sprites name="Bonus Stages">
+        <sprites name="Gumball">
+          <sprite>sprites\spr_bonus_gumball</sprite>
+          <sprites name="Machine/Tiles">
+            <sprite>sprites\spr_bonus_gumball_machine</sprite>
+            <sprite>sprites\spr_bonus_gumball_tiles</sprite>
+            <sprite>sprites\spr_bonus_gumball_bumper</sprite>
+            <sprite>sprites\spr_bonus_gumball_rod</sprite>
+            <sprite>sprites\spr_bonus_gumball_plate</sprite>
+            <sprite>sprites\spr_bonus_gumball_collapse</sprite>
+            <sprite>sprites\spr_bonus_gumball_collapse_pieces</sprite>
+          </sprites>
+          <sprites name="Background Parts">
+            <sprite>sprites\spr_bonus_gumball_background</sprite>
+            <sprite>sprites\spr_bonus_gumball_parallax</sprite>
+          </sprites>
+        </sprites>
+      </sprites>
       <sprites name="Effects">
         <sprites name="Sparkles">
           <sprite>sprites\spr_ring_sparkle</sprite>
@@ -419,24 +440,6 @@
         <sprites name="Background">
           <sprites name="Green Hill Zone">
             <sprite>sprites\spr_ghz_waterfall_palette</sprite>
-          </sprites>
-        </sprites>
-      </sprites>
-      <sprites name="Bonus Stages">
-        <sprites name="Gumball">
-          <sprite>sprites\spr_bonus_gumball</sprite>
-          <sprites name="Machine/Tiles">
-            <sprite>sprites\spr_bonus_gumball_machine</sprite>
-            <sprite>sprites\spr_bonus_gumball_tiles</sprite>
-            <sprite>sprites\spr_bonus_gumball_bumper</sprite>
-            <sprite>sprites\spr_bonus_gumball_rod</sprite>
-            <sprite>sprites\spr_bonus_gumball_plate</sprite>
-            <sprite>sprites\spr_bonus_gumball_collapse</sprite>
-            <sprite>sprites\spr_bonus_gumball_collapse_pieces</sprite>
-          </sprites>
-          <sprites name="Background Parts">
-            <sprite>sprites\spr_bonus_gumball_background</sprite>
-            <sprite>sprites\spr_bonus_gumball_parallax</sprite>
           </sprites>
         </sprites>
       </sprites>
@@ -719,6 +722,11 @@
       <script>scripts\scr_approach.gml</script>
       <script>scripts\scr_safe_division.gml</script>
       <script>scripts\room_goto_bonus.gml</script>
+    </scripts>
+    <scripts name="Particles">
+      <scripts name="Weather">
+        <script>scripts\scr_weather_particle_snow.gml</script>
+      </scripts>
     </scripts>
   </scripts>
   <shaders name="shaders">
@@ -1046,7 +1054,7 @@
     <room>rooms\rm_flicky_menu</room>
   </rooms>
   <constants number="33">
-    <constant name="GameTitle">"Flicky Engine"</constant>
+    <constant name="GameTitle">"Blur Engine"</constant>
     <constant name="ActionNormal">0</constant>
     <constant name="ActionJump">1</constant>
     <constant name="ActionCrouch">2</constant>
