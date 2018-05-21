@@ -6,7 +6,8 @@
    
    // Get Hit by a enemy:
       if(Harmful_Enemy != noone){
-         if(instance_exists(obj_insta_shield) != 1 && ShieldAttack != 1 && Action != ActionJump && Action != ActionRolling && Action != ActionSpindash && Action != ActionHurt && Invincibility == 0 && Action != ActionTransform){
+         if(instance_exists(obj_insta_shield) != 1 && ShieldAttack != 1 && ( (Action != ActionJump && CharacterID != CharacterAmy) || (AmyRollJump != true && CharacterID = CharacterAmy) ) 
+         && Action != ActionRolling && Action != ActionSpindash && Action != ActionHurt && Invincibility == 0 && Action != ActionTransform && AmyHammerAttack == 0){
             if not (Action == ActionFly && YSpeed < 0){ 
                scr_character_action_hit(Harmful_Enemy, false);
             }

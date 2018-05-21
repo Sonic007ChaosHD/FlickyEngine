@@ -40,6 +40,7 @@
              }          
              
       }else{
+       AmyHammerAttack = 0;
        Action = ActionDie;
       }
       

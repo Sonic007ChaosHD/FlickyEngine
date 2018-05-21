@@ -28,7 +28,7 @@
             <string>/// Create and define most common character values.
 
    // Set the Chracter ID:
-      CharacterID    = CharacterSonic;  // Who we're playing as.
+      CharacterID    = CharacterAmy;  // Who we're playing as.
       CharacterState = CharacterNormal; // State of our Character, either Normal (Default), Super or Hyper.
       CharacterType  = IsPlayable;      // Is Playable or AI?
       
@@ -192,6 +192,12 @@
       FlySoundControl     = 0;      
       FlyFallControl      = 0
 
+   // (Amy only) - Hammer and dif. Jumps.
+      AmyHammerAttack    = 0;    // Sets the Hammer attack for Amy. (0 = No attack, 1 = Standing Attack, 2 = Running Attack, 3 = Air Attack)
+      AmyRollJump        = 0;    // Used to change Amy's animation.
+      AmyHammerJump      = 0;    // Used when doing a hammer jump.
+      AmyDashDirection   = 0;    // Used when doing a hammer dash.
+   
    // Transforming
       AllowTransformation = 1;    // Checks if we can transform.
       TransformEnded      = 0;    // Checks if a transformation has ended. 
@@ -474,44 +480,83 @@
    
       // Modify the Walking/Jogging animation:
       if(Animation == "WALK" &amp;&amp; Ground){
-         AnimationSpeed = min(0.30, max(0.10+abs(XSpeed)/25));
-              TailSpeed = min(0.30, max(0.10+abs(XSpeed)/25));       
+         if(CharacterID != CharacterAmy){
+            AnimationSpeed = min(0.30, max(0.05+abs(XSpeed)/25));
+                 TailSpeed = min(0.30, max(0.05+abs(XSpeed)/25));  
+         }else{
+            AnimationSpeed = min(0.20, max(0.05+abs(XSpeed)/25));
+            TailSpeed      = min(0.20, max(0.05+abs(XSpeed)/25));            
+         }    
       }
    
       // Modify the Running animation:
       if(Ground){
          if(Animation == "RUN"){
-            if((CharacterState != CharacterSuper &amp;&amp; CharacterState != CharacterHyper)){
-               AnimationSpeed = 0.25+abs(XSpeed)/25
+            if(CharacterID != CharacterAmy){            
+               if((CharacterState != CharacterSuper &amp;&amp; CharacterState != CharacterHyper)){
+                  AnimationSpeed = 0.20+abs(XSpeed)/25
+               }else{
+                  AnimationSpeed = 0.20; // Super Sonic "Flying" Frame speed.
+               }
+               TailSpeed = 0.25+abs(XSpeed)/25;
             }else{
-               AnimationSpeed = 0.25; // Super Sonic "Flying" Frame speed.
+               if(Action != ActionSpindash){
+                  AnimationSpeed = 0.10+abs(XSpeed)/20;
+               }else{
+                  AnimationSpeed = (SpindashAccumulator)*.030
+               } 
             }
-            TailSpeed = 0.25+abs(XSpeed)/25;
          }
       }
-   
-      // Modify the Rolling animation:
-      if(CharacterID != CharacterTails){
-         if(Action = ActionRolling &amp;&amp; Ground){
-            AnimationSpeed = 0.25+abs(XSpeed)/12;
-            RenderingSpeed = AnimationSpeed;
-         }else
-         if(Action = ActionRolling &amp;&amp; !Ground){
-            AnimationSpeed = RenderingSpeed;         
-         }
-      }else{
-            AnimationSpeed = 0.25
-      }
-   
+         
+      // Modify the Rolling animation:    
+         if(CharacterID != CharacterTails){
+            if(Action = ActionRolling &amp;&amp; Ground){
+               AnimationSpeed = 0.25+abs(XSpeed)/12;
+               RenderingSpeed = AnimationSpeed;
+            }else
+            if(Action = ActionRolling &amp;&amp; !Ground){
+               AnimationSpeed = RenderingSpeed;         
+            }
+         }else{
+               AnimationSpeed = 0.25
+         }               
+      
+         
       // Modify the Jumping animation:
-      if(CharacterID != CharacterTails){      
-         if(Action = ActionJump &amp;&amp; DropDashFlag != 2){
-            // We set the rendering speed that we use here
-            // in scr_character_action_jump()
-            AnimationSpeed = RenderingSpeed;         
+      if(CharacterID != CharacterAmy){
+         if(CharacterID != CharacterTails){      
+            if(Action = ActionJump &amp;&amp; DropDashFlag != 2){
+               // We set the rendering speed that we use here
+               // in scr_character_action_jump()
+               AnimationSpeed = RenderingSpeed;         
+            }
+         }else{
+               AnimationSpeed = 0.25;
          }
-      }else{
-            AnimationSpeed = 0.25;
+      }
+      
+      // Amy Jump/Roll Animation:
+      if(CharacterID = CharacterAmy){
+         if(Action = ActionJump &amp;&amp; AmyRollJump = false || Animation = "JUMP"){
+            if(YSpeed &gt; 0 &amp;&amp; AnimationFrame &lt; 2){
+               AnimationFrame += 0.25;
+            }else if(YSpeed &gt; 0 &amp;&amp; AnimationFrame &gt;= 2 ){
+                     AnimationFrame = 2;
+            }
+            if(YSpeed &lt;= 0){
+               AnimationFrame = 0;
+            }           
+         }else if(Action = ActionJump &amp;&amp; AmyRollJump = true){
+                  AnimationSpeed = RenderingSpeed; 
+         }           
+      }      
+      
+      // Amy hammer spin:
+      if(CharacterID == CharacterAmy){
+         if(AmyHammerAttack = 2){
+            AnimationSpeed = min(0.30, max(0.10+abs(XSpeed)/25));
+         }
       }
       
       // Limit the Jumping/Rolling animation speed:
@@ -897,7 +942,7 @@
        }       
     }
 
- // Sonic Physics:
+ // Sonic and Tails Physics:
     if((CharacterID == CharacterSonic || CharacterID == CharacterTails) &amp;&amp; CharacterState = CharacterNormal){
     
        if(PhysicMode == "Normal"){
@@ -1076,7 +1121,112 @@
                                                                                               
        }      
         
-    }    
+    }   
+    
+ // Amy Rose Physics:
+    if((CharacterID == CharacterAmy) &amp;&amp; CharacterState = CharacterNormal){
+    
+       if(PhysicMode == "Normal"){
+       
+          // Horizontal Values:
+             if(HasSpeedShoes == false){
+                XSpeed_Top    = 5.8;
+             }else{
+                XSpeed_Top    = 11.8;
+             }
+             
+             XSpeed_Max     = 13.25;
+             
+             if(HasSpeedShoes == false){
+                XAcceleration = 0.046875;
+             }else{
+                XAcceleration = 0.09375;
+             }
+             
+             XDeceleration  = 0.5;              
+             XSlopeFactor   = 0.5;
+             
+             if(HasSpeedShoes == false){
+                AirAccel      = 0.09375;
+             }else{
+                AirAccel      = 0.1875;
+             }             
+             
+           
+          // Vertical Values:          
+             YSpeed_Max     = 16; 
+             
+             if(Action != ActionFly &amp;&amp; Action != ActionFlydrop){
+                if(Action = ActionHurt){
+                   YAcceleration = 0.1875;
+                }else{
+                   YAcceleration = YAccel_Common;
+                }
+             }
+             ConversionFact = 0.8;
+             
+          // Jumping Values:
+             JumpStrength   = -6.5;
+             JumpRelease    = -4;
+             
+          // Rolling Values:   
+             RollDec = 0.3;      
+             
+             if(HasSpeedShoes == false){
+                RollDecLight  = 0.0234375; 
+             }else{
+                RollDecLight  = 0.046875;
+             }
+                          
+             RollDecStrong             = 0.125;   
+             Rolling_Deceleration_Up   = 0.078125; 
+             Rolling_Deceleration_Down = 0.3125;        
+      
+          // Spindash:
+             SpindashAccumMax    =  10;  
+             SpindashAccumMin    =  6;                         
+                             
+       }
+       
+       if(PhysicMode == "Underwater"){
+        
+          // Horizontal Values:
+             XSpeed_Top     = 2.8;
+             XSpeed_Max     = 13.25;
+             XAcceleration  = 0.0234375;
+             XDeceleration  = 0.5;                 
+             XSlopeFactor   = 0.25;
+             AirAccel       = 0.09375*0.5;
+             
+          // Vertical Values:          
+             YSpeed_Max     = 16; 
+             if(Action != ActionFly &amp;&amp; Action != ActionFlydrop){             
+                if(Action = ActionHurt){
+                   YAcceleration = 0.1875*0.5;
+                }else{
+                   YAcceleration = 0.0625;
+                }     
+             }       
+             ConversionFact = 0.8;
+             
+          // Jumping Values:
+             JumpStrength   = -3.5;
+             JumpRelease    = -2;
+             
+          // Rolling Values:   
+             RollDec                   = 0.3;       
+             RollDecLight              = 0.0234375; 
+             RollDecStrong             = 0.125;   
+             Rolling_Deceleration_Up   = 0.078125; 
+             Rolling_Deceleration_Down = 0.3125;        
+      
+          // Spindash:
+             SpindashAccumMax    =  10;  
+             SpindashAccumMin    =  6;                         
+                                                                                              
+       }      
+        
+    }     
 
 </string>
           </argument>
@@ -1537,7 +1687,9 @@ if (Allow_YMovement) {
      scr_character_action_shield();
             
   // Transforming (Has to be triggered before the jump script.)
-     scr_character_action_transform();
+     if(CharacterID != CharacterAmy){
+        scr_character_action_transform();
+     }
        
   // Insta Shield (Has to be triggered before the jump script.)
      if(CharacterID == CharacterSonic){
@@ -1559,6 +1711,12 @@ if (Allow_YMovement) {
         scr_character_action_fly();
      }
        
+       
+  // Amy Hammer attacks 
+     if(CharacterID == CharacterAmy){
+        scr_character_action_hammer();
+     }     
+      
    // Collapsing tiles have to be handled differently to prevent that the Character gets stuck or gets pushed away.
    // This is why the following code exists here. Anywhere else, we'll just get stuck and won't be able to Jump.
     if(place_meeting(x, y + YSpeed, par_collision_collapse_tiles)){
@@ -1578,7 +1736,7 @@ if (Allow_YMovement) {
      scr_character_action_crouch();      
      
   // Spindash:   
-     scr_character_action_spindash();    
+     scr_character_action_spindash();   
            
   // Push:
      scr_character_action_push();  
@@ -1593,7 +1751,6 @@ if (Allow_YMovement) {
   // Skidding:
      scr_character_action_skid();
      
-
      }
   
   
@@ -1846,7 +2003,8 @@ if (Allow_YMovement) {
 
     // After Effect:
        if(!Underwater){
-          if((CharacterState = CharacterHyper &amp;&amp; current_time div 40) || HomingUsed = true &amp;&amp; current_time div 40 ){
+          if((CharacterState = CharacterHyper &amp;&amp; current_time div 40) || (HomingUsed = true &amp;&amp; current_time div 40) | (CharacterID == CharacterAmy 
+          &amp;&amp; (AmyHammerAttack = 2 || AmyHammerAttack = 3) &amp;&amp; current_time div 40)){
              if(instance_number(obj_aftereffect) &lt; 3){
                 Effect = (instance_create(xprevious, yprevious, obj_aftereffect)){
                           Effect.Parent             = id;
@@ -2067,7 +2225,7 @@ if (Allow_YMovement) {
             if(TailSprite != noone){
                draw_sprite_ext(TailSprite, floor(TailFrame), floor(x+TailX), floor(y+TailY), TailDirection, 1, TailAngle, c_white, Alpha);
             }     
-            draw_sprite_ext(AnimationSprite, floor(AnimationFrame), floor(x+AnimationOffsetX), floor(y+AnimationOffsetY), AnimationDirection, 1, AnimationAngle, c_white, Alpha);   
+            draw_sprite_ext(AnimationSprite, floor(AnimationFrame), floor(x+AnimationOffsetX), floor(y+AnimationOffsetY), AnimationDirection, 1, AnimationAngle, c_white, Alpha);
       }
       
    // When we modified the palette, make sure to reset it:

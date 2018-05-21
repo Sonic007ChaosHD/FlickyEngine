@@ -2,8 +2,8 @@
 //  Script to handle enemies:
 
     // Destroy a enemy:
-       if(Action = ActionJump || Action = ActionRolling || Action = ActionSpindash || (Invincibility > 1 && YSpeed > 0.0)
-       ||(CharacterState != CharacterNormal) || (Shield != ShieldDefault && ShieldAttack) || Animation = "ROLL" || HomingUsed == true) 
+       if((Action = ActionJump && CharacterID != CharacterAmy) || (Action = ActionJump && CharacterID == CharacterAmy && AmyRollJump = true) || Action = ActionRolling || (Action = ActionSpindash && CharacterID != CharacterAmy) || (Invincibility > 1 && YSpeed > 0.0)
+       ||(CharacterState != CharacterNormal) || (Shield != ShieldDefault && ShieldAttack) || Animation = "ROLL" || HomingUsed == true || AmyHammerAttack != 0 ) 
        or (Action == ActionFly && YSpeed < 0){ 
           
           EnemyHandle = scr_character_collision_object(x, y, par_enemy);
@@ -39,7 +39,6 @@
                 }
                 
           }                              
-       }
-       
+       }       
 
        

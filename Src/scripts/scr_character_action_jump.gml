@@ -16,11 +16,11 @@
 
       // Set a check variable we need for the next step. Otherwise we'd perform a full jump underwater even if we release the jump button.
          var JSCheck;
-             if(CharacterID == CharacterSonic or CharacterID == CharacterTails){
+             if(CharacterID == CharacterSonic or CharacterID == CharacterTails or CharacterID = CharacterAmy){
                 if(PhysicMode == "Normal")     { JSCheck = -4 }
                 if(PhysicMode == "Underwater") { JSCheck = -3 }                
              }
-      
+                   
       // If we slightly tap the Jump button, limit the Jumping strength.
          if(Action == ActionJump && JumpHeightMod == true && YSpeed < JSCheck && KeyAction == false){
             YSpeed = JumpRelease;
@@ -40,7 +40,11 @@
                                            
              // If we're rolling, enable the jump lock (which prevents us to change the direction and speed:
                 if(Action = ActionRolling){
-                   JumpLock = true;
+                   if(CharacterID != CharacterAmy){
+                      JumpLock    = true;
+                   }else{
+                      AmyRollJump = true;
+                   }
                 }else{
                    JumpLock = false;
                 }              
@@ -50,7 +54,11 @@
               
              // Enable the shield usage while playing the jump sound.       
                 ShieldUsable = true;
-                PlaySound(snd_character_jump, global.SFXVolume, -1, true);  
+                if(CharacterID != CharacterAmy){
+                   PlaySound(snd_character_jump, global.SFXVolume, -1, true);  
+                }else{
+                   PlaySound(snd_character_jump, global.SFXVolume, 1.10, true); 
+                }
                           
              // Set the rendering speed of the animation
                 RenderingSpeed = 1/max(5-abs(XSpeed), 1);//0.25+abs(GSpeed)/10;                

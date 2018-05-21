@@ -18,7 +18,7 @@
         AnimationSprite      = spr_sonic_idle;     
         AnimationStart       = 0;
         AnimationEnd         = 4;
-        AnimationLoop        = 3;
+        AnimationLoop        = 3;  
         AnimationSpeed       = 0.10;
         AnimationRepeat      = 1;
         AnimationRepeatTimes = -1;

@@ -65,4 +65,7 @@
       
      // Disable the jump lock: (after we performed a spindash or rolled)   
         if(Action != ActionJump) { JumpLock = false }
-      
+        
+     // Disable roll jump and hammer jump check for amy:
+        if(Action != ActionJump) { AmyRollJump = false }
+

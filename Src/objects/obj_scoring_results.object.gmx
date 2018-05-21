@@ -579,7 +579,7 @@
             <string>/// Draw Results.
 
  // "Character" Got:
-    draw_sprite(spr_results_name, 0, view_xview+42+ResultGFX_Position[0], view_yview+56);
+    draw_sprite(spr_results_name, 3, view_xview+42+ResultGFX_Position[0], view_yview+56);
 
  // Through:
     draw_sprite(spr_results_through, 0, view_xview+99+ResultGFX_Position[1], view_yview+76);

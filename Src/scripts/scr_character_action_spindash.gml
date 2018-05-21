@@ -7,7 +7,11 @@
             if(!KeyDown && Ground){
             
                 // Start Rolling:
-                   Action = ActionRolling;
+                   if(CharacterID != CharacterAmy){
+                      Action = ActionRolling;
+                   }else{
+                      Action = ActionNormal;
+                   }
                    
                 // Set the horizontal speed to the accumulator speed.
                    XSpeed = SpindashAccumulator*AnimationDirection;
@@ -37,7 +41,9 @@
                   PlaySound(snd_character_spindash_charge, global.SFXVolume, 1+SpindashPitch, 1); 
                   
                // Reset the animation:
-                  AnimationFrame = AnimationLoop; 
+                  if(CharacterID != CharacterAmy){
+                     AnimationFrame = AnimationLoop; 
+                  }
             
             }else{
             
@@ -108,6 +114,7 @@
      
         // Change the action state to jumping:
            Action        = ActionJump;      
+           AmyRollJump   = true;
            JumpHeightMod = false;           
            
      }

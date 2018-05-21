@@ -166,12 +166,33 @@
         <sprites name="Knuckles the Enchilada">
           <sprite>sprites\spr_knuckles_idle</sprite>
         </sprites>
+        <sprites name="Amy Rose">
+          <sprite>sprites\spr_amy_idle</sprite>
+          <sprite>sprites\spr_amy_lookup</sprite>
+          <sprite>sprites\spr_amy_walk</sprite>
+          <sprite>sprites\spr_amy_run</sprite>
+          <sprite>sprites\spr_amy_push</sprite>
+          <sprite>sprites\spr_amy_skid</sprite>
+          <sprite>sprites\spr_amy_crouch</sprite>
+          <sprite>sprites\spr_amy_jump</sprite>
+          <sprite>sprites\spr_amy_roll</sprite>
+          <sprite>sprites\spr_amy_spring</sprite>
+          <sprite>sprites\spr_amy_hammer_punch</sprite>
+          <sprite>sprites\spr_amy_hammer_air_punch</sprite>
+          <sprite>sprites\spr_amy_hammer_spin</sprite>
+          <sprite>sprites\spr_amy_edge_balance</sprite>
+          <sprite>sprites\spr_amy_breath</sprite>
+          <sprite>sprites\spr_amy_goal</sprite>
+          <sprite>sprites\spr_amy_hurt</sprite>
+          <sprite>sprites\spr_amy_die</sprite>
+        </sprites>
         <sprites name="Effects">
           <sprite>sprites\spr_spindash_dust</sprite>
           <sprite>sprites\spr_skid_dust</sprite>
           <sprite>sprites\spr_insta_shield</sprite>
           <sprite>sprites\spr_ultradash_dust</sprite>
           <sprite>sprites\spr_homing_target</sprite>
+          <sprite>sprites\spr_amy_hearts</sprite>
         </sprites>
         <sprites name="Masks">
           <sprite>sprites\spr_mask_block</sprite>
@@ -642,6 +663,9 @@
         <scripts name="Tails">
           <script>scripts\scr_character_action_fly.gml</script>
         </scripts>
+        <scripts name="Amy">
+          <script>scripts\scr_character_action_hammer.gml</script>
+        </scripts>
       </scripts>
       <scripts name="Handle">
         <scripts name="Default">
@@ -675,6 +699,7 @@
           <script>scripts\scr_animation_data_sonic.gml</script>
           <script>scripts\scr_animation_data_supersonic.gml</script>
           <script>scripts\scr_animation_data_tails.gml</script>
+          <script>scripts\scr_animation_data_amy.gml</script>
         </scripts>
       </scripts>
     </scripts>
@@ -905,6 +930,7 @@
           <object>objects\obj_effect_dummy</object>
           <object>objects\obj_effect_score</object>
           <objects name="Character">
+            <object>objects\obj_amy_heart</object>
             <object>objects\obj_skid_dust</object>
             <object>objects\obj_invincibility_sparkle</object>
             <object>objects\obj_hyper_sparkle</object>
@@ -1061,6 +1087,7 @@
   <rooms name="rooms">
     <rooms name="Splash">
       <room>rooms\rm_flicky_intro</room>
+      <room>rooms\rm_flicky_init</room>
     </rooms>
     <rooms name="Zones">
       <room>rooms\rm_test_zone</room>
@@ -1071,7 +1098,7 @@
     <room>rooms\rm_flicky_credits</room>
     <room>rooms\rm_flicky_menu</room>
   </rooms>
-  <constants number="35">
+  <constants number="36">
     <constant name="GameTitle">"Flicky Engine"</constant>
     <constant name="ActionNormal">0</constant>
     <constant name="ActionJump">1</constant>
@@ -1102,6 +1129,7 @@
     <constant name="CharacterSonic">1</constant>
     <constant name="CharacterTails">2</constant>
     <constant name="CharacterKnuckles">3</constant>
+    <constant name="CharacterAmy">4</constant>
     <constant name="CharacterNormal">1</constant>
     <constant name="CharacterSuper">2</constant>
     <constant name="CharacterHyper">3</constant>
