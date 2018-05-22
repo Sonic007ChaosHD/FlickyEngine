@@ -28,7 +28,7 @@
             <string>/// Create and define most common character values.
 
    // Set the Chracter ID:
-      CharacterID    = CharacterAmy;  // Who we're playing as.
+      CharacterID    = CharacterSonic;  // Who we're playing as.
       CharacterState = CharacterNormal; // State of our Character, either Normal (Default), Super or Hyper.
       CharacterType  = IsPlayable;      // Is Playable or AI?
       
