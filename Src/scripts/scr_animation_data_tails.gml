@@ -13,17 +13,29 @@
         AnimationLinkedTo    = "NONE";   
      } 
         
-  // Idle Animation (Foot tapping)      
+  // Idle Animation (Blink)      
      if(Animation = "IDLE_2"){
         AnimationSprite      = spr_miles_idle;     
         AnimationStart       = 0;
-        AnimationEnd         = 4;
-        AnimationLoop        = 3;
-        AnimationSpeed       = 0.1;
+        AnimationEnd         = 3;
+        AnimationLoop        = 0;
+        AnimationSpeed       = 0.05;
+        AnimationRepeat      = 0;
+        AnimationRepeatTimes = 0;
+        AnimationLinkedTo    = "IDLE";       
+     }  
+     
+  // Idle Animation (Yawn)      
+     if(Animation = "IDLE_3"){
+        AnimationSprite      = spr_miles_idle;     
+        AnimationStart       = 4;
+        AnimationEnd         = 7;
+        AnimationLoop        = 6;
+        AnimationSpeed       = 0.05;
         AnimationRepeat      = 1;
         AnimationRepeatTimes = -1;
         AnimationLinkedTo    = "NONE";       
-     }  
+     }       
         
   // Lookup Animation   
      if(Animation = "LOOK_UP"){

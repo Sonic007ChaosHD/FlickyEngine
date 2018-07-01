@@ -28,6 +28,7 @@
             <string>/// Variables.
     image_speed = 0.25;
     time        = 0;
+    accframe    = 0;
 </string>
           </argument>
         </arguments>
@@ -50,11 +51,15 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(instance_exists(obj_fade_bonus) == false){
+            <string>/// Get into special stage.
+if(instance_exists(obj_fade_bonus) == false &amp;&amp; accframe = 10){
    instance_create(par_character.x, par_character.y, obj_fade_bonus)
    global.PreviousRoom = room;
 }
 
+if(accframe &lt; 10){
+   accframe ++
+}
 </string>
           </argument>
         </arguments>
@@ -77,7 +82,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var _roll = 80;  //how much ring is tilted toward camera
+            <string>/// Draw Sparkles.
+
+var _roll = 80;  //how much ring is tilted toward camera
 var _pitch = sin(time*0.12)*15;  //rocking back and forth
 var _x0 = dcos(_pitch);
 var _x1 = dsin(_pitch)*dcos(_roll);

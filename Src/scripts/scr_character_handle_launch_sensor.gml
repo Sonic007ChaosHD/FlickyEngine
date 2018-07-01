@@ -10,7 +10,7 @@
      
          // Launch up:
             if(Sensor.Direction == 1){
-               if(XSpeed >= 1 && Angle != 0){
+               if(XSpeed >= 1 && FloorMode = 1){
                   Launched      =  1;                                  
                   Ground        =  false;                          
                   GSpeed        = XSpeed;             
@@ -18,7 +18,7 @@
                   Angle         =  0;                    
                   XSpeed        =  0;                                                                                  
                   LaunchedTimer =  3;                
-               }else if(XSpeed < 1 && Angle = 0){
+               }else if(XSpeed < 1 && FloorMode != 1){
                         YSpeed = -.5;
                         Ground = false;
                         Angle  = 0;
@@ -26,7 +26,7 @@
             }
            
             if(Sensor.Direction == -1){
-               if(XSpeed <= -1 && Angle != 0){
+               if(XSpeed <= -1 && FloorMode = 3){
                   Launched      =  1;                                  
                   Ground        =  false;              
                   GSpeed        = XSpeed;             
@@ -34,7 +34,7 @@
                   Angle         =  0;
                   XSpeed        =  0;                                                                                  
                   LaunchedTimer =  3;                
-               }else if(XSpeed > -1 && Angle = 0){
+               }else if(XSpeed > -1 && FloorMode != 3){
                         YSpeed = -.5;
                         Ground = false;
                         Angle  = 0;

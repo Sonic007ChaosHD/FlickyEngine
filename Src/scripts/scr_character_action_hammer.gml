@@ -118,36 +118,7 @@
                            } 
                         PlaySound(snd_object_bump, global.SFXVolume, 1.2, true);                                                     
                      }                                          
-                  }/*else{
-                     Ground          = false;
-                     AmyHammerAttack = 0;                 
-                     Animation       = "HAMMER_AIR";           
-                     PlaySound(snd_character_jump, global.SFXVolume, 1.2, 1);  
-                     if(PhysicMode != "Underwater"){         
-                        if(KeySpecial){
-                           YSpeed = -8
-                        }else{
-                           YSpeed = -5;
-                        }     
-                     }else{
-                        if(KeySpecial){
-                           YSpeed = -5
-                        }else{
-                           YSpeed = -3;
-                        }  
-                     } 
-                     // Create Hearts:
-                        for(i = 0; i < 4; i++){
-                            Heart = instance_create(floor(x+AnimationDirection*18), floor(y), obj_amy_heart);
-                            switch(i){
-                                   case 0: { Heart.Direction =   0; break; }
-                                   case 1: { Heart.Direction = 180; break; }
-                                   case 2: { Heart.Direction = 225; break; }
-                                   case 3: { Heart.Direction = 315; break; }                                                                                                
-                            }
-                        } 
-                     PlaySound(snd_object_bump, global.SFXVolume, 1.2, true);                                                     
-                  }*/
+                  }
             }
             
          // Stop Spinning:

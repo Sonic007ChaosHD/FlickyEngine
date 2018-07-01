@@ -466,14 +466,6 @@
         </sprites>
       </sprites>
     </sprites>
-    <sprites name="Title and Menus">
-      <sprites name="Title">
-        <sprite>sprites\spr_title_screen</sprite>
-      </sprites>
-      <sprites name="Menu">
-        <sprite>sprites\spr_menu_stripes</sprite>
-      </sprites>
-    </sprites>
     <sprites name="Editor">
       <sprites name="Icons">
         <sprite>sprites\spr_icon_character</sprite>
@@ -757,11 +749,6 @@
       <script>scripts\scr_safe_division.gml</script>
       <script>scripts\room_goto_bonus.gml</script>
     </scripts>
-    <scripts name="Particles">
-      <scripts name="Weather">
-        <script>scripts\scr_weather_particle_snow.gml</script>
-      </scripts>
-    </scripts>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shd_pal_swapper.shader</shader>
@@ -985,9 +972,6 @@
         <objects name="Switches">
           <object>objects\obj_sth3_switch</object>
         </objects>
-        <objects name="Backgrounds">
-          <object>objects\obj_cd_clouds</object>
-        </objects>
         <objects name="Emeralds">
           <object>objects\obj_chaos_emeralds</object>
         </objects>
@@ -1058,14 +1042,6 @@
         <object>objects\obj_fade_to_normal</object>
       </objects>
     </objects>
-    <objects name="Title Screen - Menu">
-      <objects name="Title">
-        <object>objects\obj_title_screen</object>
-      </objects>
-      <objects name="Menu">
-        <object>objects\obj_menu</object>
-      </objects>
-    </objects>
     <objects name="Flicky Intro/Credits">
       <objects name="Logo &amp; Setup">
         <object>objects\obj_flicky_logo</object>
@@ -1096,7 +1072,6 @@
       <room>rooms\rm_bonus_gumball</room>
     </rooms>
     <room>rooms\rm_flicky_credits</room>
-    <room>rooms\rm_flicky_menu</room>
   </rooms>
   <constants number="36">
     <constant name="GameTitle">"Flicky Engine"</constant>

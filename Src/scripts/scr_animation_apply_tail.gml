@@ -15,9 +15,9 @@
               case "EDGEWOBBLE_2":{
                     TailSprite    = spr_miles_tail_1;
                     if(Animation == "EDGEWOBBLE_1" || Animation == "EDGEWOBBLE_2"){
-                       TailX      = AnimationDirection*8
+                       TailX      = 0;
                     }else{
-                       TailX         = 0;
+                       TailX      = 0;
                     }
                     TailY         = 0;
                     TailDirection = AnimationDirection; 
@@ -26,26 +26,31 @@
               }
               case "WALK":{
                     TailSprite    = spr_miles_tail_2;
-                    TailX         = AnimationDirection*5;
-                    TailY         = 4;
-                    TailDirection = AnimationDirection; 
+                    if(AnimationAngle == 0){
+                       TailX         = AnimationDirection*6;
+                       TailY         = 4;
+                       TailDirection = AnimationDirection; 
+                    }else{
+                       TailX         = AnimationDirection*-6;
+                       TailY         = 0;
+                       TailDirection = AnimationDirection;                     
+                    }
                     TailSpeed     = 0.24; 
                     break;                  
               }
-              case "ROLL":
+              case "ROLL":{
+                    TailSprite    = spr_miles_tail_2;
+                    TailAngle     = 0;
+                    TailX         = 0;
+                    TailY         = 0;
+                    TailDirection = sign(XSpeed);               
+                   break;
+              }
               case "SPINDASH":{
                     TailSprite = spr_miles_tail_2;
                     TailAngle  = 0;
-                    
-                    if(Action != ActionSpindash){
-                       TailX      = 0;
-                       TailY      = 0;
-                       TailSpeed  = 0.24;                       
-                    }else{
-                       TailY      = 6;
-                       TailX      = AnimationDirection*4; 
-                       TailSpeed  = 0.48;
-                    }
+                    TailX      = 0;
+                    TailY      = 0;
                     
                     if(Action == ActionJump){
                        TailDirection = 1;

@@ -134,6 +134,7 @@
       ShieldBackup   = 0;        // Used when in super/hyper form and getting a shield.
       ShieldUsable   = 0;        // Whether or not we can use a shield.
       ShieldAttack   = 0;        // Checks if we're attacking using a shield.
+      FloorMode      = 0;        // Returns the floor mode.
        
    // Rendering:
       FramesCount     = 0;       // Used for various animations. Like count frames when no input is given and the character is doing nothing.
@@ -1564,7 +1565,7 @@ if (Allow_YMovement) {
 }
      
     // Fall off the ground if the edges aren't colliding         
-       if(Ground &amp;&amp; Angle != global.GravityAngle &amp;&amp; LockTunnel = 0){
+       if(Ground &amp;&amp; ( FloorMode = 1 || FloorMode = 3 ) /*Angle != global.GravityAngle*/ &amp;&amp; LockTunnel = 0){
           if( scr_character_collision_left_edge(x, y, Angle) == false
           ||(scr_character_collision_right_edge(x,y,  Angle) == false)){
              if(Action != ActionRolling &amp;&amp; PeeloutFlag != 1){
@@ -1646,7 +1647,9 @@ if (Allow_YMovement) {
             XSpeed -= ((XSpeed / 0.125) / 256);
          }
       }           
-                                             
+                  
+   // Floor Mode
+      FloorMode = round(Angle/90) % 4;  
     }
 
              
@@ -2240,6 +2243,8 @@ if (Allow_YMovement) {
          draw_sprite_ext(spr_spindash_dust, current_time div 40, floor(x-AnimationDirection*7), floor(y+13), AnimationDirection, 1, 0, c_white, 1);         
       }
 
+      draw_set_font(-1)
+      draw_text(x, y, FloorMode)
 </string>
           </argument>
         </arguments>

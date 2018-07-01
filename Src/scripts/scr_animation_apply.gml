@@ -3,15 +3,30 @@
 
   // Frame counter, simply count frames when an animation is being played. Really useful for a lot of things!
   
-     switch(Animation){
-            case "IDLE":     { if(FramesCount < 288) {FramesCount += 1}; break; }
-            case "IDLE_2":   { FramesCount = 288;  break; }
-            case "LOOK_UP":  { if(FramesCount < 120) {FramesCount += 1}; break; }    
-            case "CROUCH":   { if(FramesCount < 120) {FramesCount += 1}; break; }                     
-            case "SKID":     { FramesCount +=  1;  break; }
-            case "SKIDTURN": { FramesCount +=  1;  break; }
-            default:         { FramesCount =   0;  break; }
+     if(CharacterID == CharacterSonic || CharacterID = CharacterAmy){
+        switch(Animation){
+               case "IDLE":     { if(FramesCount < 288) {FramesCount += 1}; break; }
+               case "IDLE_2":   { FramesCount = 288;  break; }
+               case "LOOK_UP":  { if(FramesCount < 120) {FramesCount += 1}; break; }    
+               case "CROUCH":   { if(FramesCount < 120) {FramesCount += 1}; break; }                     
+               case "SKID":     { FramesCount +=  1;  break; }
+               case "SKIDTURN": { FramesCount +=  1;  break; }
+               default:         { FramesCount =   0;  break; }
+        }
+     }else{
+        switch(Animation){
+               case "IDLE":   
+               case "IDLE_2":   { if(FramesCount < 360) {FramesCount += 1}; if(modulo(FramesCount, 120)) { Animation = "IDLE_2" } break; }
+               case "IDLE_3":   { FramesCount = 360;  break; }
+               case "LOOK_UP":  { if(FramesCount < 120) {FramesCount += 1}; break; }    
+               case "CROUCH":   { if(FramesCount < 120) {FramesCount += 1}; break; }                     
+               case "SKID":     { FramesCount +=  1;  break; }
+               case "SKIDTURN": { FramesCount +=  1;  break; }
+               default:         { FramesCount =   0;  break; }
+        }     
      }
+     
+     
                 
   /*** Sonic the Hedgehog and Tails:  ***/
   if((CharacterID == CharacterSonic || CharacterID == CharacterTails) && CharacterState = CharacterNormal){
@@ -20,13 +35,27 @@
         if(Action = ActionNormal && Ground){
           
            // Idle Animation:
-              if(XSpeed == 0 && Animation != "IDLE" && FramesCount != 288){
-                 Animation = "IDLE";
+              if(CharacterID != CharacterTails){           
+                 if(XSpeed == 0 && Animation != "IDLE" && FramesCount != 288){
+                    Animation = "IDLE";
+                 }
+              }else{
+                 if(XSpeed == 0 && Animation != "IDLE" && FramesCount != 360){
+                    if(Animation != "IDLE_2"){
+                       Animation = "IDLE";
+                    }
+                 }               
               }
                    
            // Idle Animation 2:
-              if(XSpeed == 0 && Animation != "IDLE_2" && FramesCount >= 288){
-                 Animation = "IDLE_2";
+              if(CharacterID != CharacterTails){
+                 if(XSpeed == 0 && Animation != "IDLE_2" && FramesCount >= 288){
+                    Animation = "IDLE_2";
+                 }
+              }else{
+                 if(XSpeed == 0 && Animation != "IDLE_3" && FramesCount >= 360){
+                    Animation = "IDLE_3"
+                 }
               }
                         
            // Jog Animation:

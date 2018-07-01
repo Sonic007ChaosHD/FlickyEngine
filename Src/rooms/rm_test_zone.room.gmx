@@ -11,7 +11,7 @@
   <colour>12632256</colour>
   <showcolour>-1</showcolour>
   <code>// Set Zone Informations:
-   global.ZoneName = "TESTING";
+   global.ZoneName = "TEST ZONE";
    global.ZoneAct  = 1;
 
 // Set the Water Height:
