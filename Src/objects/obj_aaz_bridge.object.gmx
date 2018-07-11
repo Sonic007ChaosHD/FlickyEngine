@@ -25,20 +25,20 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Bridge Configuration:
+            <string>/// Bridge Configuration.
+ // By TPOT.
 
-    // Bridge settings
+ // Bridge settings
     NumberOfLogs    = 12;
     MaxiumTension   = 12;
     LogSprite       = spr_aaz_bridge;
     Initializated   = false;
     
-    // Bridge status variables
+ // Bridge status variables
     BridgeWidth     = 0;
     BridgeMidWidth  = 0;
-
     
-    // Bridge lists
+ // Bridge lists
     BridgeLogs                 = ds_list_create();
     BridgeTensions             = ds_list_create();
     BridgeTensionsInterpolated = ds_list_create();
@@ -64,18 +64,23 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>    // Activate all logs, this way we'll make sure we don't try to 
-    // destroy a deactivated object.
-    instance_activate_object(obj_bridge_parent);
-    
-    // Destroy bridge logs
-    for (CurrentLog=0; CurrentLog &lt; NumberOfLogs;CurrentLog ++)
-        with(ds_list_find_value(BridgeLogs, CurrentLog)) instance_destroy();
+            <string>/// Activate all logs and destroy them.
 
-    // Destroy lists
+ // Activate logs:
+    instance_activate_object(par_bridge)
+    
+ // Destroy bride logs.
+    for(CurrentLog=0; CurrentLog &lt; NumberOflogs; CurrentLog++){
+        with(ds_list_find_value(BridgeLogs, CurrentLog)){
+             instance_destroy();
+        }
+    }
+    
+ // Destroy lists.
     ds_list_destroy(BridgeLogs);
     ds_list_destroy(BridgeTensions);
     ds_list_destroy(BridgeTensionsInterpolated);
+
 </string>
           </argument>
         </arguments>
@@ -219,11 +224,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Interpolate logs:
-    for (CurrentLog = 0; CurrentLog &lt; NumberOfLogs; CurrentLog++;){
-        ds_list_replace(BridgeTensionsInterpolated, CurrentLog,
-            scr_interpolate_values(ds_list_find_value(BridgeTensionsInterpolated, CurrentLog),
-            ds_list_find_value(BridgeTensions, CurrentLog), 0.2));
+            <string>/// Interpolate logs.
+    for(CurrentLog = 0; CurrentLog &lt; NumberOfLogs; CurrentLog++;){
+        ds_list_replace(BridgeTensionsInterpolated, CurrentLog, scr_interpolate_values(ds_list_find_value(BridgeTensionsInterpolated, CurrentLog), ds_list_find_value(BridgeTensions, CurrentLog), 0.2));
     }
 </string>
           </argument>

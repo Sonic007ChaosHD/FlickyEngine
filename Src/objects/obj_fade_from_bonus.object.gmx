@@ -58,10 +58,11 @@
           <argument>
             <kind>1</kind>
             <string>/// Go to the previous room.
-    global.BonusRings = global.Rings;
-    global.BonusStage = false;    
+    global.BonusRings   = global.Rings;
+    global.BonusStage   = false;        
     room_goto(global.PreviousRoom);
     global.PreviousRoom = noone;
+   
 
 
 

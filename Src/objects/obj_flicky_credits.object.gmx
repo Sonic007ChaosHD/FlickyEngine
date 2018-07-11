@@ -33,11 +33,11 @@
 //  Set Text.
     String_Number      = 0;
     END                = 15;
-    Credit_String[0]   = "FLICKY ENGINE##DEVELOPED BY F4LK##2016 - 2017##ANB##2018";
+    Credit_String[0]   = "FLICKY ENGINE##CREATED BY F4LK##2016 - 2017##ANB AND FRIENDS##2018";
     Credit_String[1]   = "BASED ON THE##360 MOVEMENT ENGINE##BY DAMIZEAN##GMATE BY F4LK"; 
     Credit_String[2]   = "ASSISTANCE AND##ACCURACY##TRUEPOWEROFTEAMWORK##MR POTATOBADGER##MR LANGE";      
     Credit_String[3]   = "ASSISTANCE AND##ACCURACY##AEROGP - VECTORSATYR##THEVALEEV##HOBBERS";    
-    Credit_String[4]   = "ASSISTANCE AND##ACCURACY##NOAH COPELAND##SONIC RETRO GUIDE"; 
+    Credit_String[4]   = "ASSISTANCE AND##ACCURACY##NOAH COPELAND##POLAR STAR##SONIC RETRO GUIDE"; 
     Credit_String[5]   = "SOME SCRIPTS WERE##PROVIDED BY##TPOT##AEROGP";    
     Credit_String[6]   = "SPRITES##SEGA##THE SPRITERS RESOURCE##AY JAY";
     Credit_String[7]   = "MUSIC AND SOUNDS##SEGA##MICHAEL STAPLE##SONIC 3 COMPLETE##MR LANGE";             
@@ -149,6 +149,31 @@
        }
     }
     
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Skip.
+  
+    if(keyboard_check(global.Key_ENTER)){
+       alarm[1] = 1;
+    }
 </string>
           </argument>
         </arguments>

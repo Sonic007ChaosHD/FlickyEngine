@@ -9,7 +9,7 @@
                ini_write_real("Flicky Main", "ScreenShaders", global.Shaders);       
                ini_write_real("Flicky Main",   "VolumeMusic", global.BGMVolume);  
                ini_write_real("Flicky Main",   "VolumeSound", global.SFXVolume);  
-                                           
+                                                                         
             // Keyboard Settings:
                ini_write_real("Flicky Keyboard",      "Up", global.Key_UP);     
                ini_write_real("Flicky Keyboard",    "Down", global.Key_DOWN);

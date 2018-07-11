@@ -3,7 +3,7 @@
   <spriteName>spr_water_surface</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-999997</depth>
+  <depth>-999996</depth>
   <persistent>0</persistent>
   <parentName>par_controller</parentName>
   <maskName>&lt;undefined&gt;</maskName>

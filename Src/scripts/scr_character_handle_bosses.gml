@@ -12,16 +12,16 @@
           if(FireBreather.Boss_State != 'Defeated'){
           
           // Bounce:
-             if(Action = ActionJump || Action = ActionRolling || (Action = ActionFly && YSpeed < 0)){
+             if(Action = ActionJump || Action = ActionRolling || (Action = ActionFly && YSpeed < 0) || Action = ActionGlide){
                 Action       = ActionRolling;
                 ShieldUsable = false;
                     
              AngleToBoss = degtorad(round(scr_character_wrap_angle(point_direction(x, y, FireBreather.x, FireBreather.y)-90)/22.5)*24);        
              if(Underwater == false){
-                XSpeed        = sin(scr_character_wrap_angle(AngleToBoss-global.GravityAngle))*3;
+                XSpeed        = sin(scr_character_wrap_angle(AngleToBoss-global.GravityAngle))*4;
                 YSpeed        = cos(scr_character_wrap_angle(AngleToBoss-global.GravityAngle))*3;  
              }else{
-                XSpeed        = sin(scr_character_wrap_angle(AngleToBoss-global.GravityAngle))*1.5;
+                XSpeed        = sin(scr_character_wrap_angle(AngleToBoss-global.GravityAngle))*2;
                 YSpeed        = cos(scr_character_wrap_angle(AngleToBoss-global.GravityAngle))*1.5;           
              }
              Ground        = false;    
@@ -57,7 +57,7 @@
 
     // Set the Knuckles handle:
     if(instance_exists(obj_npc_sth3_knuckles)){
-    
+           
        Knux[1] = scr_character_collision_bottom_object(x, y, Angle, spr_mask_big, obj_npc_sth3_knuckles);          
        Knux[2] =   scr_character_collision_left_object(x, y, Angle, spr_mask_big, obj_npc_sth3_knuckles);
        Knux[3] =  scr_character_collision_right_object(x, y, Angle, spr_mask_big, obj_npc_sth3_knuckles);          

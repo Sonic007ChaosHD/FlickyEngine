@@ -120,6 +120,7 @@ if(Activated &amp;&amp; !Finished){
             <kind>1</kind>
             <string>/// Activate.
     if(Activated = false &amp;&amp; Finished = false){
+
        if(global.CheckpointX != x &amp;&amp; global.CheckpointY != y){
           Activated = true;
           PlaySound(snd_object_checkpoint, global.SFXVolume, 1, 1)
@@ -129,7 +130,7 @@ if(Activated &amp;&amp; !Finished){
           
           // Bonus Stage:
              if(global.Rings &gt;= 25){
-                instance_create(x, y-75, obj_bonus_spark_generator)
+                instance_create(x, y-75, obj_bonus_spark)
              }
              
        }else{

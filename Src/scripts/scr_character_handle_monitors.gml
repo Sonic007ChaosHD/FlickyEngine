@@ -55,7 +55,7 @@
     // Check if we collide with it after rolling:
        if(argument0 == "Side"){       
           Monitor = instance_nearest(x, y, obj_monitor)
-          if(Monitor != noone && (Action = ActionRolling || ((AmyHammerAttack == 1 && AnimationFrame > 5) || (AmyHammerAttack > 1 )) || Shield = ShieldFlames && ShieldAttack || HomingUsed == true) && (scr_character_collision_left_object(x, y, Angle, spr_mask_big, Monitor) || scr_character_collision_right_object(x, y, Angle, spr_mask_big, Monitor)  )){
+          if(Monitor != noone && (Action = ActionRolling || ((AmyHammerAttack == 1 && AnimationFrame > 5) || (AmyHammerAttack > 1 )) || Shield = ShieldFlames && ShieldAttack || HomingUsed == true || Action = ActionGlide || Action = ActionSlide) && (scr_character_collision_left_object(x, y, Angle, spr_mask_big, Monitor) || scr_character_collision_right_object(x, y, Angle, spr_mask_big, Monitor)  )){
              // Destroy the Monitor:
                 Monitor.DestroyParent = id;
                 with(Monitor) { instance_destroy(); }          

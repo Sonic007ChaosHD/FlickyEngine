@@ -6,17 +6,22 @@
    if(Action == ActionFly){
     
       // Set the Flight timer:
-         FlightTimer = min(FlightTimer +1, FlightDuration);
+         FlightTimer = min(FlightTimer+1, FlightDuration);
          if(FlightTimer == FlightDuration){
             Action        = ActionFlydrop;
+            if(YSpeed == 0 || YSpeed < 0){
+               YSpeed = 0.03125;
+            }
             YAcceleration = 0.03125;
          }
 
       // Fly up:
-         if(KeyAction_Pressed && YSpeed > -1){
-            YAcceleration = -0.125;
-         }else if(YSpeed < -1){
-            YAcceleration = 0.03125;
+         if(Action != ActionFlydrop){
+            if(KeyAction_Pressed && YSpeed > -1){
+               YAcceleration = -0.125;
+            }else if(YSpeed < -1){
+               YAcceleration = 0.03125;
+            }
          }
          
       // Fix getting stuck on terrain:
@@ -34,7 +39,6 @@
          }
       
    }
-   
      
    // Sounds:
       if(Action = ActionFly && !Underwater){

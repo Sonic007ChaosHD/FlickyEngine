@@ -30,7 +30,7 @@
                with(obj_camera){
                     Camera_ShakeScreen   = true;
                     Camera_ShakeDuration = 30;
-                    Camera_ShakeForce    = 3;
+                    Camera_ShakeForce    = 5;
                     Camera_ShakeSound    = snd_object_crumble;
                }             
             }

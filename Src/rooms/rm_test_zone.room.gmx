@@ -3,7 +3,7 @@
   <caption></caption>
   <width>20000</width>
   <height>4000</height>
-  <vsnap>8</vsnap>
+  <vsnap>4</vsnap>
   <hsnap>8</hsnap>
   <isometric>0</isometric>
   <speed>60</speed>
@@ -11,7 +11,7 @@
   <colour>12632256</colour>
   <showcolour>-1</showcolour>
   <code>// Set Zone Informations:
-   global.ZoneName = "TEST ZONE";
+   global.ZoneName = "TEST";
    global.ZoneAct  = 1;
 
 // Set the Water Height:
@@ -196,7 +196,6 @@
     <instance objName="obj_zne_test_1" x="3904" y="1856" name="inst_1AF8FEF1" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_zne_test_1" x="3776" y="1920" name="inst_FF761F27" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_zne_test_1" x="3904" y="1920" name="inst_1845A0A9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_monitor_life" x="3888" y="1712" name="inst_D4B81174" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_ring" x="3456" y="1360" name="inst_FAEB47DF" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_ring" x="3456" y="1328" name="inst_87107574" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_ring" x="3456" y="1296" name="inst_F5456A8F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
@@ -643,16 +642,13 @@
     <instance objName="obj_casino_bumper" x="6896" y="1840" name="inst_1E2384AE" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_casino_bumper" x="6912" y="2896" name="inst_5902DEA2" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_casino_bumper" x="6912" y="2864" name="inst_34AFDDE2" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_casino_bumper" x="6912" y="2832" name="inst_70FC2637" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_casino_bumper" x="6592" y="2720" name="inst_9AA6B764" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_casino_bumper" x="6624" y="2896" name="inst_6F7B27FA" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_casino_bumper" x="6624" y="2864" name="inst_8A921221" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_casino_bumper" x="6624" y="2832" name="inst_4169872E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_casino_bumper" x="6096" y="2960" name="inst_318A597E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_casino_bumper" x="6192" y="2960" name="inst_0C299BDF" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_casino_bumper" x="6096" y="3184" name="inst_329EBC11" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_casino_bumper" x="6192" y="3184" name="inst_5AE97793" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_casino_bumper" x="6144" y="3072" name="inst_0D81D1E9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_ring" x="8112" y="3200" name="inst_0B250733" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_ring" x="8112" y="3168" name="inst_4D312C93" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_ring" x="8112" y="3136" name="inst_37DA6BD4" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
@@ -747,12 +743,10 @@
     <instance objName="obj_ring" x="3488" y="1536" name="inst_5DE7CC42" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_ring" x="3488" y="1504" name="inst_7DF7DBF6" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_monitor_life" x="4848" y="1168" name="inst_8A42CCF8" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_zne_test_collapse" x="3776" y="1488" name="inst_E1BA49DF" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_zne_test_collapse" x="3840" y="1488" name="inst_22876D2F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_spring_diagonal_right" x="576" y="592" name="inst_37E4C3B0" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_spring_diagonal_left" x="384" y="592" name="inst_0D2956D2" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_starpost" x="6336" y="2944" name="inst_ADA0BC64" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_spring_up" x="3856" y="1712" name="inst_CE9DB319" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_spring_up" x="3888" y="1712" name="inst_CE9DB319" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_zne_test_1" x="3008" y="1072" name="inst_308CBD7A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_zne_test_14" x="2880" y="1072" name="inst_8D94CC63" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_zne_test_1" x="3008" y="1200" name="inst_345043FF" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
@@ -770,7 +764,6 @@
     <instance objName="obj_ring" x="3072" y="992" name="inst_2A3E1A66" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_ring" x="3040" y="992" name="inst_2488C9E9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_ring" x="3040" y="960" name="inst_357E1988" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="objGHZBG" x="32" y="16" name="inst_719D978F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_monitor_flame_shield" x="480" y="592" name="inst_39144184" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_monitor_speedshoe" x="3424" y="1472" name="inst_0B8C09FF" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_zne_test_1_pla" x="8000" y="2864" name="inst_F9F713DF" locked="0" code="" scaleX="0.25" scaleY="0.25" colour="4286578816" rotation="0"/>
@@ -792,13 +785,6 @@
     <instance objName="obj_zne_test_10" x="4672" y="1232" name="inst_0A79B3A9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_spring_left" x="4496" y="1472" name="inst_1CCC997A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_zne_test_1" x="4544" y="1504" name="inst_7B22124B" locked="0" code="" scaleX="1" scaleY="0.25" colour="16777215" rotation="0"/>
-    <instance objName="obj_chaos_emeralds" x="3648" y="1640" name="inst_BC3E3A54" locked="0" code="EmeraldID = 1;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_chaos_emeralds" x="3680" y="1656" name="inst_85959A67" locked="0" code="EmeraldID = 2;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_chaos_emeralds" x="3680" y="1688" name="inst_4F087D74" locked="0" code="EmeraldID = 3;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_chaos_emeralds" x="3648" y="1704" name="inst_BA63397D" locked="0" code="EmeraldID = 4;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_chaos_emeralds" x="3616" y="1688" name="inst_F9EBA2FA" locked="0" code="EmeraldID = 5;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_chaos_emeralds" x="3616" y="1656" name="inst_58D1AA03" locked="0" code="EmeraldID = 6;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_chaos_emeralds" x="3648" y="1672" name="inst_0C161B93" locked="0" code="EmeraldID = 7;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_marble_swing" x="2352" y="1288" name="inst_471C8F5C" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_marble_swing" x="2536" y="1232" name="inst_ABE0F646" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_marble_swing" x="2736" y="1184" name="inst_2E1E18B4" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
@@ -848,8 +834,20 @@
     <instance objName="obj_zne_test_1" x="10336" y="1840" name="inst_123B86DA" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_zne_test_1" x="10336" y="1584" name="inst_0B97B6B7" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_zne_test_1" x="10336" y="1456" name="inst_A444B001" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_sign_post" x="9784" y="1968" name="inst_E1381620" locked="0" code="SpecialFlag = 0;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="par_character" x="136" y="680" name="inst_75CC16A0" locked="0" code="global.Character_1 = id;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_sign_post" x="9784" y="1968" name="inst_E1381620" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_zne_test_collapse" x="7360" y="2448" name="inst_672C1519" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_zne_test_collapse" x="7424" y="2448" name="inst_AF6F2BCA" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_casino_bumper" x="6592" y="2784" name="inst_48D90983" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_bubble_generator" x="7944" y="2824" name="inst_61E98FA1" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="objGHZBG" x="16" y="32" name="inst_1728C50C" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_chaos_emeralds" x="3624" y="1688" name="inst_954863BE" locked="0" code="EmeraldID = 5;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_chaos_emeralds" x="3624" y="1656" name="inst_879945DC" locked="0" code="EmeraldID = 6;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_chaos_emeralds" x="3656" y="1640" name="inst_6E4EE0A6" locked="0" code="EmeraldID = 1;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_chaos_emeralds" x="3656" y="1672" name="inst_A9829D83" locked="0" code="EmeraldID = 7;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_chaos_emeralds" x="3656" y="1704" name="inst_476A555B" locked="0" code="EmeraldID = 4;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_chaos_emeralds" x="3688" y="1688" name="inst_8D81DFEF" locked="0" code="EmeraldID = 3;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_chaos_emeralds" x="3688" y="1656" name="inst_6A4438D5" locked="0" code="EmeraldID = 2;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="par_character" x="168" y="680" name="inst_176F8E3A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="bg_test_zone_palmtree" x="208" y="528" w="71" h="127" xo="0" yo="0" id="10000001" name="inst_C987FE6A" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>

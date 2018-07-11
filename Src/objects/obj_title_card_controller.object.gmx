@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-999996</depth>
+  <depth>-999998</depth>
   <persistent>0</persistent>
   <parentName>par_controller</parentName>
   <maskName>&lt;undefined&gt;</maskName>

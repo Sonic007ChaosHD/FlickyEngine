@@ -1,6 +1,6 @@
 ///scr_character_action_shield()
 // Handles each shield ability!
-
+   
    // Only run if we're not invincible:
       if(Invincibility < 1.5){
    
@@ -13,19 +13,16 @@
       }
       
    // Destroy the Fire or Electricity shield in water.
-      if(PhysicMode == "Underwater"){
-         if(Shield == ShieldFlames or Shield = ShieldElectricity){
-            if(Shield = ShieldElectricity && !instance_exists(obj_effect_electro_flash)){
-               instance_create(0, 0, obj_effect_electro_flash);
-            }         
-            Shield = ShieldDefault;
-            with(ShieldChild){
-              instance_destroy();
+      if(global.BonusShield == 0){
+         if(Underwater == true){
+            if(Shield == ShieldFlames or Shield = ShieldElectricity){
+               if(alarm[1] = -1){
+                  alarm[1] = 5;
+               }
             }
          }
       }
       
-
    // Create a Shield:
       if(Shield != ShieldDefault){
       

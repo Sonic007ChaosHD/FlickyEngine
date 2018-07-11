@@ -139,43 +139,43 @@
            
            case 1: { 
                 PlaySound(snd_shield_get_bubble, global.SFXVolume, 1, 0) 
-                if(DestroyParent.ShieldChild != 0){
-                   if(instance_exists(DestroyParent.ShieldChild)){
-                      with(DestroyParent.ShieldChild){
-                           instance_destroy();
+                   if(DestroyParent.ShieldChild != 0){
+                      if(instance_exists(DestroyParent.ShieldChild)){
+                         with(DestroyParent.ShieldChild){
+                              instance_destroy();
+                         }
                       }
-                   }
-                }           
-                DestroyParent.Shield = ShieldBubble;
-                DestroyParent.ShieldUsable = true;            
+                   }           
+                   DestroyParent.Shield = ShieldBubble;
+                   DestroyParent.ShieldUsable = true;        
                 break; 
            }   
            
            case 2: { 
-                PlaySound(snd_shield_get_flame, global.SFXVolume, 1, 0) 
-                if(DestroyParent.ShieldChild != 0){
-                   if(instance_exists(DestroyParent.ShieldChild)){
-                      with(DestroyParent.ShieldChild){
-                           instance_destroy();
+                PlaySound(snd_shield_get_flame, global.SFXVolume, 1, 0)              
+                   if(DestroyParent.ShieldChild != 0){
+                      if(instance_exists(DestroyParent.ShieldChild)){
+                         with(DestroyParent.ShieldChild){
+                              instance_destroy();
+                         }
                       }
-                   }
-                }             
-                DestroyParent.Shield = ShieldFlames;
-                DestroyParent.ShieldUsable = true;                                    
+                   }             
+                   DestroyParent.Shield = ShieldFlames;
+                   DestroyParent.ShieldUsable = true;                                   
                 break; 
            }
            
            case 3: { 
                 PlaySound(snd_shield_get_electricity, global.SFXVolume, 1, 0) 
-                if(DestroyParent.ShieldChild != 0){
-                   if(instance_exists(DestroyParent.ShieldChild)){
-                      with(DestroyParent.ShieldChild){
-                           instance_destroy();
+                   if(DestroyParent.ShieldChild != 0){
+                      if(instance_exists(DestroyParent.ShieldChild)){
+                          with(DestroyParent.ShieldChild){
+                               instance_destroy();
+                         }
                       }
-                   }
-                }              
-                DestroyParent.Shield = ShieldElectricity;
-                DestroyParent.ShieldUsable = true;                   
+                   }              
+                   DestroyParent.Shield = ShieldElectricity;
+                   DestroyParent.ShieldUsable = true;                  
                 break; 
            }           
            
@@ -186,10 +186,10 @@
            }   
            
            case 5: {
-                with(DestroyParent){
-                    Invincibility = 1.5;
-                    InvTimer      = 900;                                       
-                }                       
+                   with(DestroyParent){
+                       Invincibility = 1.5;
+                       InvTimer      = 900;                                       
+                   }                     
                 break;                
            }              
            

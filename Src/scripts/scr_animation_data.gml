@@ -21,6 +21,11 @@
   }   
   
   /*** Knuckles Animation: ***/    
+  if(CharacterID == CharacterKnuckles){
+    
+     scr_animation_data_knuckles();
+     
+  }
   
   /*** Amy Animation: ***/      
   if(CharacterID = CharacterAmy && CharacterState = CharacterNormal){

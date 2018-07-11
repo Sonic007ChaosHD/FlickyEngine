@@ -58,13 +58,13 @@
       global.Cheats       =  1; // Do we allow cheats?
       
    // Rendering Variables:
-      global.Character_1  = 0;   // Who's the main character?
-      global.Character_2  = 0;   // Who's the ai player?
-      global.ScreenSize   = 1;   // Sets the Screen size.
-      global.ScreenWidth  = 320; // The Screen's width.
-      global.ScreenHeight = 224; // The Screen's height.     
-      global.Shaders      = 1;   // Whether or not we can use shaders.
-      global.AngleMode    = 360; // The Angle rotation mode the character uses. 360 and 8 can be used. (A value above/below 8/360 will render a error.)
+      global.Character_1  = noone; // Who's the main character?
+      global.Character_2  = noone; // Who's the ai player?
+      global.ScreenSize   = 1;     // Sets the Screen size.
+      global.ScreenWidth  = 320;   // The Screen's width.
+      global.ScreenHeight = 224;   // The Screen's height.     
+      global.Shaders      = 1;     // Whether or not we can use shaders.
+      global.AngleMode    = 360;   // The Angle rotation mode the character uses. 360 and 8 can be used. (A value above/below 8/360 will render a error.)
       
    // Sound Variables:
       global.BGMVolume    = 1;    // Sets/Gets the volume of the background music.
@@ -77,7 +77,6 @@
       global.BGMLoopStart = -1;   // Start of the Background music loop.
       global.BGMLoopEnd   = -1;   // End of the Background music loop. 
       global.BGMLoopDelay = 0.00; // Loop Delay. You might need to change this.
-
       
    // Fonts:
       global.Font_Card    = font_add_sprite(spr_font_title_card, ord("A"), true , 0);   
@@ -94,8 +93,7 @@
       if(!shader_is_compiled(shd_pal_swapper)){
           global.Shaders = 0;
       }  
-          
-                            
+                                      
    // Modify the Screen size:
       switch(global.ScreenSize){
              case 1:{ window_set_size(global.ScreenWidth,   global.ScreenHeight);   window_set_fullscreen(0); obj_global_manager.alarm[0] = 1; break }

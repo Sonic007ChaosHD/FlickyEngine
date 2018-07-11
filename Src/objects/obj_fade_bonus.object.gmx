@@ -57,15 +57,12 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Go to the next room.
-    if(room_next(room) != -1){
-       global.PreviousRoom = room;
-       global.BonusStage   = true;    
-       global.Ring100Check_Deactivate = true;
-       room_goto_bonus();
-   }else{
-      game_end();
-   }
+            <string>/// Go to the bonus stage.
+    global.PreviousRoom = room;
+    global.BonusStage   = true;    
+    global.Ring100Check_Deactivate = true;
+    room_goto_bonus();
+
 </string>
           </argument>
         </arguments>

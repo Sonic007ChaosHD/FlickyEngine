@@ -30,7 +30,7 @@
       if(!Ground){
       
           // Add Acceleration:
-          YSpeed += YAcceleration;
+             YSpeed += YAcceleration;
            
           // Check if for some reason we landed:     
              if(YSpeed >= 0 && scr_character_collision_bottom(x, y, Angle, spr_mask_big) == true){
@@ -51,7 +51,10 @@
                 // Check if we're in the air but collided with the ceiling:
                    if(YSpeed < 0 && scr_character_collision_top(x, y, Angle, spr_mask_big) == true){
                       ShieldUsable = true;
-                      YSpeed       = 0;                    
+                      YSpeed       = 0;
+                      if(Action = ActionNormal && XSpeed = 0 && YSpeed = 0){
+                         Action = ActionRolling;
+                      }       
                    }              
       }
       

@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>/// Variables.
 
-    Knuckles_HP            =  1;     // How many hits it takes to defeat Knuckles.
+    Knuckles_HP            =  8;     // How many hits it takes to defeat Knuckles.
     Knuckles_InvTime       = 60;     // How long knuckles can't be hit.
     Knuckles_State         = 'Idle'; // State of Knuckles (Idle &gt; Punch &gt; Spindash &gt; Jump &gt; Glide &gt; Hurt)
     Knuckles_SpindashTimer =  6;     // How long the spindash lasts.
@@ -40,11 +40,7 @@
     alarm[0]               = 200;
     _Pitch                 =  0;
     image_speed = 0;
-    
-    // Loop Boss Theme.
-       if(CheckSound(bgm_knuckles_fight) == false){
-          LoopSound(bgm_knuckles_fight, global.SFXVolume, 1)
-       }
+
 </string>
           </argument>
         </arguments>
@@ -395,21 +391,22 @@
     if(Knuckles_HP != 0){
        if(rectangle_in_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom, view_xview[0], view_yview[0], view_xview[0] + view_wview[0], view_yview[0] + view_hview[0])){
           with(obj_camera){
-               Camera_BindX  = 1;
-               Camera_Target = instance_nearest(x, y, obj_boss_camera);
-               Camera_Type   = "FOLLOW";
+               Cam_Subject    = instance_nearest(x, y, obj_boss_camera);
+               Cam_LeftLimit  = Cam_Subject.x-view_wview/2;
+               Cam_RightLimit = Cam_Subject.x+view_wview/2;
           }
+    
+          // Loop Boss Theme.
+             if(CheckSound(bgm_knuckles_fight) == false){
+                LoopSound(bgm_knuckles_fight, global.SFXVolume, 1)
+             }                 
        }
     }else{
-         // with(obj_camera){
-         //      Camera_BindX  = 0;
-         //      Camera_Target = par_character;
-         // } 
-         if(instance_exists(obj_sign_post) == false){
-            SPOST = instance_create(obj_boss_camera.x, obj_boss_camera.y-160, obj_sign_post);
-            SPOST.Drop = true;
-            SPOST.SpecialFlag = true;
-         }   
+          with(obj_camera){
+               Cam_Subject    = par_character;
+               Cam_LeftLimit  = 0;
+               Cam_RightLimit = room_width;
+          }
     }
 </string>
           </argument>

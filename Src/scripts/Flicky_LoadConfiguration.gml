@@ -7,8 +7,10 @@
                global.ScreenWidth  = ini_read_real("Flicky Main",   "ScreenWidth", global.ScreenWidth);
                global.ScreenHeight = ini_read_real("Flicky Main",  "ScreenHeight", global.ScreenHeight);
                global.Shaders      = ini_read_real("Flicky Main", "ScreenShaders", 1);
+               global.MaxBGMV      = ini_read_real("Flicky Main",   "VolumeMusic", 1); 
                global.BGMVolume    = ini_read_real("Flicky Main",   "VolumeMusic", 1); 
-               global.SFXVolume    = ini_read_real("Flicky Main",   "VolumeSound", 1);
+               global.MaxSFXV      = ini_read_real("Flicky Main",   "VolumeSound", 1);                   
+               global.SFXVolume    = ini_read_real("Flicky Main",   "VolumeSound", 1);          
    
             // Keyboard Settings:
                global.Key_UP       = ini_read_real("Flicky Keyboard",      "Up", vk_up); 

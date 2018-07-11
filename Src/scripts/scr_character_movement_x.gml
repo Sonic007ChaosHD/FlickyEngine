@@ -6,6 +6,7 @@
          exit;
          
    // Decelerate on slopes:
+      if(Action != ActionSlide){
       if(Action = ActionRolling && Ground){
          // The Character is rolling up a slope:
             if((RelativeAngle < 180 && XSpeed > 0) || (RelativeAngle > 180 && XSpeed < 0)){
@@ -20,9 +21,10 @@
             XSpeed -= sin(degtorad(RelativeAngle)) * 0.125;
          }
       }
+      }
    
    // Only continue if we're in one of the following states:
-      if(Action == ActionNormal || Action = ActionSkid || (Action = ActionJump && JumpLock == false) || Action = ActionFly || Action = ActionFlydrop || Action = ActionSpring){
+      if((Action == ActionNormal || Action = ActionSkid || (Action = ActionJump && JumpLock == false) || Action = ActionFly || Action = ActionFlydrop || Action = ActionSpring || Action = ActionGlidedrop) && (Action != ActionGlide && Action != ActionClimb && Action != ActionSlide)){
       
          // Handle Accel/Deceleration.
             if(Ground && InputAlarm <= 0){
@@ -55,7 +57,7 @@
                // Air Acceleration:
                   if(KeyRight){
                      // When you're flying with Miles:
-                        if(Action == ActionFly || Action == ActionFlydrop){
+                        if(Action == ActionFly || Action == ActionFlydrop || Action = ActionGlidedrop){
                            if(XSpeed < 0){
                               XSpeed += _Accel;
                            }else if(XSpeed < XSpeed_Top){
@@ -68,7 +70,7 @@
                
                   if(KeyLeft){
                      // When you're flying with Miles:
-                        if(Action == ActionFly || Action == ActionFlydrop){
+                        if(Action == ActionFly || Action == ActionFlydrop || Action = ActionGlidedrop){
                            if(XSpeed > 0){
                               XSpeed -= _Accel;
                            }else if(XSpeed > -XSpeed_Top){

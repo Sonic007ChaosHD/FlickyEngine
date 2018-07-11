@@ -2,7 +2,7 @@
 // Script to perform Jumping.
 
    // Check how long we are in the air.
-      if(Action != ActionFly || Action != ActionFlydrop){
+      if(Action != ActionFly || Action != ActionFlydrop && Action != ActionGlide && Action != ActionClimb && (Action = ActionSlide && AnimationFrame < 2)){
       
       if(!Ground){
           AirTimer += 1;
@@ -16,9 +16,13 @@
 
       // Set a check variable we need for the next step. Otherwise we'd perform a full jump underwater even if we release the jump button.
          var JSCheck;
-             if(CharacterID == CharacterSonic or CharacterID == CharacterTails or CharacterID = CharacterAmy){
+             if(CharacterID == CharacterSonic or CharacterID == CharacterTails or CharacterID = CharacterKnuckles or CharacterID = CharacterAmy ){
                 if(PhysicMode == "Normal")     { JSCheck = -4 }
-                if(PhysicMode == "Underwater") { JSCheck = -3 }                
+                if(CharacterID != CharacterKnuckles){
+                   if(PhysicMode == "Underwater") { JSCheck = -3 }     
+                }else{
+                   if(PhysicMode == "Underwater") { JSCheck = -2 }    
+                }          
              }
                    
       // If we slightly tap the Jump button, limit the Jumping strength.

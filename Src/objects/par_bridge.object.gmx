@@ -54,8 +54,8 @@
             <kind>1</kind>
             <string>/// Reposition Logs.
    
-    if (ParentBridge != noone){
-        y = ParentBridge.y + ds_list_find_value(ParentBridge.BridgeTensionsInterpolated, LogId)
+    if(ParentBridge != noone){
+       y = ParentBridge.y + ds_list_find_value(ParentBridge.BridgeTensionsInterpolated, LogId);
     }
 
 </string>

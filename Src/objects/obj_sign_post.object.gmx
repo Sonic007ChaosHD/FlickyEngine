@@ -71,6 +71,8 @@
     
       if(rectangle_in_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom, view_xview[0], view_yview[0], view_xview[0] + view_wview[0], view_yview[0] + view_hview[0])){
          obj_camera.Cam_Subject = Camera;
+         obj_camera.Cam_LeftLimit  = view_xview; 
+         obj_camera.Cam_RightLimit = x+view_wview/2;          
       }       
       
     // Spin:
@@ -99,6 +101,7 @@
                       image_index  = par_character.CharacterID*4;
                       with(par_character){
                            GoalState = 1;
+                           
                       }                      
                       if(instance_exists(obj_scoring_results) == false){
                          Tally = instance_create(x, y, obj_scoring_results);

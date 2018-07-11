@@ -12,11 +12,15 @@
           }                    
           AngleToBumper = degtorad(round(scr_character_wrap_angle(point_direction(x, y, BumperHandle.x, BumperHandle.y)-90)/22.5)*24);        
           if(Underwater == false){
-             XSpeed        = sin(scr_character_wrap_angle(AngleToBumper-global.GravityAngle))*8;
-             YSpeed        = cos(scr_character_wrap_angle(AngleToBumper-global.GravityAngle))*8;  
+             if(Action != ActionGlide){
+                XSpeed = sin(scr_character_wrap_angle(AngleToBumper-global.GravityAngle))*8;
+             }
+                YSpeed = cos(scr_character_wrap_angle(AngleToBumper-global.GravityAngle))*8;
           }else{
-             XSpeed        = sin(scr_character_wrap_angle(AngleToBumper-global.GravityAngle))*4;
-             YSpeed        = cos(scr_character_wrap_angle(AngleToBumper-global.GravityAngle))*4;           
+             if(Action != ActionGlide){          
+                XSpeed = sin(scr_character_wrap_angle(AngleToBumper-global.GravityAngle))*4;
+             }
+                YSpeed = cos(scr_character_wrap_angle(AngleToBumper-global.GravityAngle))*4;                  
           }
           Ground        = false;    
           if(Action == ActionFly || Action == ActionFlydrop){

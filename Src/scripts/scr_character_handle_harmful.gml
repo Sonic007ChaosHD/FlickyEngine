@@ -7,7 +7,7 @@
    // Get Hit by a enemy:
       if(Harmful_Enemy != noone){
          if(instance_exists(obj_insta_shield) != 1 && ShieldAttack != 1 && ( (Action != ActionJump && CharacterID != CharacterAmy) || (AmyRollJump != true && CharacterID = CharacterAmy) ) 
-         && Action != ActionRolling && Action != ActionSpindash && Action != ActionHurt && Invincibility == 0 && Action != ActionTransform && AmyHammerAttack == 0){
+         && Action != ActionRolling && Action != ActionSpindash && Action != ActionHurt && Invincibility == 0 && Action != ActionTransform && AmyHammerAttack == 0 && Action != ActionGlide){
             if not (Action == ActionFly && YSpeed < 0){ 
                scr_character_action_hit(Harmful_Enemy, false);
             }
@@ -20,7 +20,7 @@
    // Get Hit or deflect a projectile:
       if(Harmful_Main != noone){
          if(Shield == ShieldDefault){
-            if(instance_exists(obj_insta_shield) != 1 && Action != ActionHurt && Invincibility == 0 && Action != ActionTransform && Action != ActionFly){
+            if(instance_exists(obj_insta_shield) != 1 && Action != ActionHurt && Invincibility == 0 && Action != ActionTransform && Action != ActionFly && Action != ActionGlide){
                scr_character_action_hit(Harmful_Main, false);
             }
          }else{
@@ -34,7 +34,7 @@
       }      
       
    // Deflect projectiles while flying:
-      if(Action == ActionFly){
+      if(Action == ActionFly || Action = ActionGlide){
          if(Harmful_Main != noone){
             AngleToChar         = degtorad(round(scr_character_wrap_angle(point_direction(x, y, id.x, id.y)-90)/22.5)*24);
             Harmful_Main.hspeed = sin(scr_character_wrap_angle(AngleToChar))*4;

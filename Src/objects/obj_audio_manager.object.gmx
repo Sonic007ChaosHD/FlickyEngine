@@ -37,7 +37,6 @@
     alarm[0]    =     5; 
         
  // Zone Music:
-    Ruin_Theme   = (bgm_flicky_ruins);
     Test_Theme   = (bgm_test_zone);  
  
  // Bonus Stages:
@@ -50,6 +49,7 @@
  // Jingles:
     Jingle_ActClear = (snd_scoring_theme);         // Theme that plays after you cleared a act.
     Jingle_Drowning = (bgm_drowning);              // Theme that plays when you're about to drown.
+    Jingle_GameOver = (bgm_game_over);             // Theme that play when we game over.
     
  // Credits:
     Credits_Theme = (bgm_credits); 
@@ -379,6 +379,12 @@
     if(instance_exists(obj_scoring_results) == true){
        StopSound(ZoneBGM);
     }
+    
+ // Stop when game over;
+    if(instance_exists(obj_game_over) == true){
+       StopSound(ZoneBGM);
+       StopSound(Jingle_Drowning);
+    }
      
  // Stop when the drowning theme appear:
     if(CheckSound(Jingle_Drowning) == true){
@@ -412,9 +418,10 @@
             <kind>1</kind>
             <string>/// Stop all sounds.
     
+    audio_stop_all();
     DeadFade = false;
     BossFade = false;
-    audio_stop_all();
+   
 </string>
           </argument>
         </arguments>

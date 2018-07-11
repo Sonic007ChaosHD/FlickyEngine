@@ -3,7 +3,7 @@
    
     // Check if we can Transform:
        if(Action != ActionTransform && Action = ActionJump && CharacterState == CharacterNormal && Shield = ShieldDefault && Invincibility == 0 && AllowTransformation == 1 && Action != ActionFly && Action != ActionFlydrop){
-          if(global.Rings >= 50 && KeyAction_Pressed){
+          if((global.Emeralds == 7 || global.Emeralds = 14) && global.Rings >= 50 && KeyAction_Pressed){
              Action = ActionTransform;
              Invincibility =  2;
              InvTimer      = -3;
@@ -25,7 +25,11 @@
              if(TransformTimer != 0){
                 TransformTimer--
              }else{
-                CharacterState = CharacterHyper;
+                if(global.Emeralds == 7){
+                   CharacterState = CharacterSuper;
+                }else if(global.Emeralds == 14){
+                         CharacterState = CharacterHyper;
+                }
                 Action         = ActionJump;
              }
           }
@@ -40,19 +44,27 @@
           }else{
             // Make sure to not run the alarm event:
                alarm[0] = -1;
+            // Palette fade:
+               if((CharacterID = CharacterSonic) || (CharacterID == CharacterTails) || (CharacterID == CharacterKnuckles && CharacterState == CharacterHyper)){
+                  TransformEnded  = 1;    
+                  if(CharacterID != CharacterSonic){
+                     PalettePosition = 1;       
+                  }else{
+                     PalettePosition = 0;
+                  }
+               }                  
             // Reset the Characters state:
                CharacterState = CharacterNormal;                
             // Change the animation to "BLANK" to make sure that the current animation is being reloaded.
                Animation      = "BLANK";
             // Reset the Transform Timer:
-               TransformTimer = 15;
+               if(CharacterID != CharacterKnuckles){
+                  TransformTimer = 15;
+               }else{
+                  TransformTimer = 3;
+               }
             // Again, change the animation to "BLANK" to make sure that the current animation is being reloaded properly.
-               Animation      = "BLANK AGAIN";    
-            // If we're Sonic, use a little fade palette:
-               if(CharacterID = CharacterSonic){
-                  TransformEnded  = 1;    
-                  PalettePosition = 0;       
-               }           
+               Animation      = "BLANK AGAIN";            
           }
        }
 

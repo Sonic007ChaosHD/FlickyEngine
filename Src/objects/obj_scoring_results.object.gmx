@@ -33,16 +33,7 @@
  // Bonuses:
     BonusRings = (global.Rings * 100);
     BonusTotal = (global.Score);
-    /*
-    BonusTime  = (9999 - floor( global.GameTime/60000 ) * 100);
-    
-    if(BonusTime &lt; 0){
-       BonusTime = 0;
-    }
-    */
-    
-    
-    ////
+
     Seconds = floor(global.GameTime/1000);
     
     if(Seconds &lt;= 29){
@@ -129,6 +120,7 @@
           <argument>
             <kind>1</kind>
             <string>/// Destroy.
+    obj_camera.Cam_RightLimit = room_width; 
     instance_destroy();
 </string>
           </argument>
@@ -176,8 +168,7 @@
           Act2Disappear = true;          
           global.ZoneAct++          
           TCard = instance_create(0, 0, obj_title_card_controller)
-          TCard.SpecialFlag        = true;
-          obj_camera.Cam_LeftLimit = view_xview; 
+          TCard.SpecialFlag        = true;          
        }
     }
 
@@ -579,7 +570,7 @@
             <string>/// Draw Results.
 
  // "Character" Got:
-    draw_sprite(spr_results_name, 3, view_xview+42+ResultGFX_Position[0], view_yview+56);
+    draw_sprite(spr_results_name, par_character.CharacterID-1, view_xview+42+ResultGFX_Position[0], view_yview+56);
 
  // Through:
     draw_sprite(spr_results_through, 0, view_xview+99+ResultGFX_Position[1], view_yview+76);

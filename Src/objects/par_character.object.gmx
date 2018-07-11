@@ -28,14 +28,14 @@
             <string>/// Create and define most common character values.
 
    // Set the Chracter ID:
-      CharacterID    = CharacterSonic;  // Who we're playing as.
-      CharacterState = CharacterNormal; // State of our Character, either Normal (Default), Super or Hyper.
-      CharacterType  = IsPlayable;      // Is Playable or AI?
+      CharacterID    = global.Character_1; // Who we're playing as.
+      CharacterState = CharacterNormal;    // State of our Character, either Normal (Default), Super or Hyper.
+      CharacterType  = IsPlayable;         // Is Playable or AI?
       
    // Horizontal Speed Values:
       XSpeed          = 0;        // The current horizontal speed.
       XSpeed_Top      = 6;        // Characters top horizontal speed when on flat ground.
-      XSpeed_Max      = 16;       // Fastest the Character can mvoe horizontally.
+      XSpeed_Max      = 16;       // Fastest the Character can move horizontally.
       GSpeed          = 0;        // Temp. Variable to store X or Y Speed.       
       XAcceleration   = 0.046875; // Horizontal acceleration and friction when on ground.
       XDeceleration   = 0.5;      // Horizontal deceleration when opposite input is held.
@@ -199,10 +199,26 @@
       AmyHammerJump      = 0;    // Used when doing a hammer jump.
       AmyDashDirection   = 0;    // Used when doing a hammer dash.
    
+   // (Knuckles only) - Gliding and Climbing.
+      GlideTopSpeed      = 24;   // Fastest Knuckles can move horizontally while gliding.
+      GlideGravity       = .125; // The gravity while gliding.
+      GlideCrouchTimer   = 25;   // How long knuckles stays in his crouched state.
+      GlideTurn_S        = 0;    // Special variable for turning knuckles.
+      GlideTurn_A        = 0;    // Special variable for turning knuckles.
+      GlideTurn_D        = 0;    // Special variable for turnuing knuckles.
+      ClimbOX            = 0;    // Position returns the x position when grabbing onto a wall. If the X value is lower/higher, stop climbing.
+      ClimbSpeed         = 1;    // How fast Knuckles can climb a wall.
+      ClimbFrameTimer    = 6;    // When 0, advance the frame of knuckles climb animation.
+      IsLedgeGrabbing    = 0;    // Checks if we're ledge grabbing.
+                        
    // Transforming
       AllowTransformation = 1;    // Checks if we can transform.
       TransformEnded      = 0;    // Checks if a transformation has ended. 
-      TransformTimer      = 15;   // How long it takes to return to a normal stage.
+      if(CharacterID != CharacterKnuckles){
+         TransformTimer      = 15;   // How long it takes to return to a normal stage.
+      }else{
+         TransformTimer      = 3;   // How long it takes to return to a normal stage.         
+      }
          
    // Death:
       DeathTimer          = "NO"; // Dying timer.
@@ -307,8 +323,8 @@
              global.Rings     += global.BonusRings;
              global.BonusRings = 0;
           }
-          if(global.BonusShield != 0){
-             Shield              = global.BonusShield;
+          if(global.BonusShield != 0){             
+             Shield = global.BonusShield;
              global.BonusShield  = 0;
           }  
              global.Ring100Check_Deactivate = false;         
@@ -321,6 +337,36 @@
        }
     }
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Destroy shields underwater.
+    if(Shield = ShieldElectricity &amp;&amp; !instance_exists(obj_effect_electro_flash)){
+       instance_create(0, 0, obj_effect_electro_flash);
+    }         
+    Shield = ShieldDefault;
+    with(ShieldChild){
+         instance_destroy();
+    }
 </string>
           </argument>
         </arguments>
@@ -476,18 +522,135 @@
    // Apply the correct animation:
       scr_animation_apply();   
       scr_animation_apply_tail();
+ 
+// In some cases we have to modify the animation speed, and we do exactly that here:
+
+   // Walking/Jogging Animation:
+      if(Animation == "WALK" &amp;&amp; Ground){
+        if(CharacterID == CharacterSonic){
+           AnimationSpeed = min(0.30, max(0.05+abs(XSpeed)/25));
+        }
+        if(CharacterID == CharacterTails){
+           AnimationSpeed = min(0.25, max(0.10+abs(XSpeed)/25));
+           TailSpeed      = min(0.20, max(0.10+abs(XSpeed)/25));
+      }
+        if(CharacterID == CharacterKnuckles){
+           AnimationSpeed = min(0.25, max(0.05+abs(XSpeed)/25));
+        }      
+        if(CharacterID == CharacterAmy){
+           AnimationSpeed = min(0.20, max(0.05+abs(XSpeed)/25));
+        } 
+     }
+
+   // Running Animation:
+      if(Ground &amp;&amp; Animation == "RUN"){
+         if(CharacterID == CharacterSonic &amp;&amp; CharacterState != CharacterNormal){
+            AnimationSpeed = 0.20;
+         }else{
+            AnimationSpeed = 0.20+abs(XSpeed)/25;
+         }
+         if(CharacterID == CharacterTails){
+            AnimationSpeed = 0.20+abs(XSpeed)/25;
+            TailSpeed      = 0.25+abs(XSpeed)/25;
+         }
+         if(CharacterID == CharacterKnuckles){
+            AnimationSpeed = 0.20+abs(XSpeed)/25;
+         }         
+         if(CharacterID == CharacterAmy){
+            if(Action != ActionSpindash){
+               AnimationSpeed = 0.10+abs(XSpeed)/20;
+            }else{
+               AnimationSpeed = (SpindashAccumulator)*.030;
+            }
+         }
+      }  
+
+   // Rolling Animation:  
+      if(Action = ActionRolling){
+        if(CharacterID != CharacterTails){
+           if(Ground == true){
+              AnimationSpeed = 0.25+abs(XSpeed)/12;
+              RenderingSpeed = AnimationSpeed;
+           }else{
+              AnimationSpeed = RenderingSpeed;
+          }
+        }else{
+            AnimationSpeed = 0.25;
+            TailSpeed      = 0.25;
+        }
+      }
+  
+   // Jumping Animation:
+      if(Action = ActionJump &amp;&amp; CharacterID != CharacterAmy){
+         if(CharacterID != CharacterAmy){
+            if(CharacterID != CharacterTails){
+               if(DropDashFlag != 2){
+                  // We set the rendering speed in the jump script.
+                     AnimationSpeed = RenderingSpeed;
+               }
+            }else{
+               AnimationSpeed = 0.25;
+               TailSpeed      = 0.25;
+            }
+         }
+      }  
+  
+   // Amy's Jumping/Rolling Animation: 
+      if(CharacterID == CharacterAmy){
+         if(Action == ActionJump &amp;&amp; AmyRollJump == false || Animation == "JUMP"){
+            if(YSpeed &gt; 0 &amp;&amp; AnimationFrame &lt; 2){
+               AnimationFrame += 0.25;
+            }else if(YSpeed &gt; 0 &amp;&amp; AnimationFrame &gt;= 2){
+                     AnimationFrame = 2;
+            }
+            if(YSpeed &lt;= 0){
+               AnimationFrame = 0;
+            }
+         }else if(Action == ActionJump &amp;&amp; AmyRollJump == true){
+                  AnimationSpeed = RenderingSpeed;
+         }
+      }  
+  
+   // Amy's Hammer Spin Animation:  
+      if(CharacterID == CharacterAmy){
+         if(AmyHammerAttack == 2){
+            AnimationSpeed = min(0.30, max(0.10+abs(XSpeed)/25));
+         }
+      }
+  
+   // Limit Jump/Roll Animation:
+      if(Action == ActionJump || Action == ActionRolling){
+         if(RenderingSpeed &gt; 1.5){
+            RenderingSpeed = 1.5;
+         }
+         if(AnimationSpeed &gt; 1.5){
+            AnimationSpeed = 1.5
+         }
+      }
+  
+   // If we hit a wall, reset the animation speed while jumping.
+      if(!Ground &amp;&amp; YSpeed &gt;= 0 &amp;&amp; (scr_character_collision_right(x, y, 0, spr_mask_big) &amp;&amp; KeyRight || scr_character_collision_left(x, y, 0, spr_mask_big) &amp;&amp; KeyLeft )){
+         if(Action = ActionJump || Action = ActionRolling){
+            RenderingSpeed = 0.25;
+            AnimationSpeed = 0.25;
+         }
+      }
       
+           
    // In some cases, we have to modify the animation speed, we do exactly that, here:
-   
+/*   
       // Modify the Walking/Jogging animation:
       if(Animation == "WALK" &amp;&amp; Ground){
-         if(CharacterID != CharacterAmy){
+         if(CharacterID == CharacterSonic){
             AnimationSpeed = min(0.30, max(0.05+abs(XSpeed)/25));
-                 TailSpeed = min(0.30, max(0.05+abs(XSpeed)/25));  
-         }else{
-            AnimationSpeed = min(0.20, max(0.05+abs(XSpeed)/25));
-            TailSpeed      = min(0.20, max(0.05+abs(XSpeed)/25));            
-         }    
+         }
+         if(CharacterID == CharacterAmy){
+            AnimationSpeed = min(0.20, max(0.05+abs(XSpeed)/25));        
+         }
+         if(CharacterID == CharacterTails){
+            AnimationSpeed = 0
+            TailSpeed      = min(0.025, max(0.05+abs(XSpeed)/25));            
+         }        
       }
    
       // Modify the Running animation:
@@ -604,17 +767,20 @@
    
    // Only run this if we're using the 360 rotation.
       if(global.AngleMode == 360){
-         if(Ground &amp;&amp; (AnimationDirection == 1 &amp;&amp; Angle &gt;= 45 &amp;&amp; Angle &lt;= 300) or (AnimationDirection == -1 &amp;&amp; Angle &gt;= 45 &amp;&amp; Angle &lt;= 310) &amp;&amp; !scr_character_collision_bottom_object(x,y, Angle, spr_mask_main, par_collision_solid_no_angle) &amp;&amp; !scr_character_collision_bottom_object(x, y, Angle, spr_mask_main, par_collision_platform_no_angle)){            
-            AnimationAngle = RelativeAngle; 
-            TailAngle      = Angle;
+         if(!scr_character_collision_bottom_object(x,y, Angle, spr_mask_main, par_collision_solid_no_angle) &amp;&amp; !scr_character_collision_bottom_object(x, y, Angle, spr_mask_main, par_collision_platform_no_angle)){
+            if(Ground &amp;&amp; (AnimationDirection == 1 &amp;&amp; Angle &gt;= 45 &amp;&amp; Angle &lt;= 300) or (AnimationDirection == -1 &amp;&amp; Angle &gt;= 45 &amp;&amp; Angle &lt;= 310)){            
+               AnimationAngle = RelativeAngle; 
+               TailAngle      = Angle;
+            }else{
+               AnimationAngle = scr_character_rotate_towards(0, AnimationAngle, 6);
+               TailAngle      = scr_character_rotate_towards(0, TailAngle, 6);  
+            }
          }else{
-            AnimationAngle = scr_character_rotate_towards(0, AnimationAngle, 6);
-            TailAngle      = scr_character_rotate_towards(0, TailAngle, 45);  
+               AnimationAngle = 0;
+               TailAngle      = 0;         
          }
        }
-       
-       
-
+          
    // Otherwise, only use 8 directions for the rotation:
       if(global.AngleMode == 8){ 
          if(Ground &amp;&amp; !scr_character_collision_bottom_object(x,y, Angle, spr_mask_main, par_collision_solid_no_angle) &amp;&amp; !scr_character_collision_bottom_object(x, y, Angle, spr_mask_main, par_collision_platform_no_angle)){    
@@ -744,9 +910,6 @@
             <string>///Get the input keys.
 // If you want to modify any of this. Do so in scr_game_init()
 
-    // Only Run this IF we allow movement and we're the player.:
-       //if(global.Character_1 = id){
-       
           if(LockControl == 0){
         
              // Keys:
@@ -810,99 +973,7 @@
                 }
           }
        
-      // }
-       
-    // CPU Movement:
-/*       if(global.Character_2 = id){
-       
-          MainCharacter = global.Character_1;
-       
-        if((x &lt; MainCharacter.x-5 ||(MainCharacter.y &lt; y-50 &amp;&amp; MainCharacter.Ground == true &amp;&amp; MainCharacter.XSpeed &gt; 0))
-            &amp;&amp; (MainCharacter.y &gt;= y-50 || MainCharacter.Ground == false || MainCharacter.XSpeed &gt;= 0)){
-            KeyRight = true;
-            KeyLeft  = false;
-        }else{
-            KeyRight = false;
-            if(XSpeed == 0 &amp;&amp; YSpeed == 0 &amp;&amp; Action = ActionNormal){
-               AnimationDirection = 1;
-            }            
-        }
-        if((x &gt; MainCharacter.x+5 ||(MainCharacter.y &lt; y-50 &amp;&amp; MainCharacter.Ground == true &amp;&amp; MainCharacter.XSpeed &lt; 0))
-            &amp;&amp; (MainCharacter.y &gt;= y-50 || MainCharacter.Ground == false || MainCharacter.XSpeed &lt;= 0)){
-            KeyRight = false;
-            KeyLeft  = true;
-        }else{
-            KeyLeft  = false;
-            if(XSpeed == 0 &amp;&amp; YSpeed == 0 &amp;&amp; Action = ActionNormal){
-               AnimationDirection = -1;
-            }
-        }
-        
-          // Jump:
-             if(Ground == true &amp;&amp; (MainCharacter.y &lt; y-50 &amp;&amp; MainCharacter.Ground == false)){
-                if(Action != ActionJump){
-                   scr_character_action_jump();
-                }
-             }else{
-                KeyAction_Pressed = false;                
-             }      
 
-                    
-          // Move to the Left:
-             //if(x &gt; MainPlayer.x+15 || MainPlayer.Ground == true){
-             //   KeyLeft = true;
-             //}else{
-             //   KeyLeft = false;
-             //}             
-             
-          
-         /*    
-          // Move to the right:
-             if((x &lt; MainPlayer.x-10  || (MainPlayer.y &lt; y-50 &amp;&amp; MainPlayer.Ground &amp;&amp; MainPlayer.XSpeed &gt; 0))
-             &amp;&amp; (MainPlayer.y &gt;= y-50 || MainPlayer.Ground == false || MainPlayer.XSpeed &gt;= 0)){             
-                 KeyRight = true;
-             }else{
-                 KeyRight = true;
-             }
-             
-          // Move to the left:
-             if((x &gt; MainPlayer.x+10  || (MainPlayer.y &lt; y-50 &amp;&amp; MainPlayer.Ground &amp;&amp; MainPlayer.XSpeed &lt; 0))
-             &amp;&amp; (MainPlayer.y &gt;= y-50 || MainPlayer.Ground == false || MainPlayer.XSpeed &lt;= 0)){             
-                 KeyLeft = true;
-             }else{
-                 KeyLeft = false;
-             }     
-                          
-          // Jump:
-             if(Ground == true &amp;&amp; (MainPlayer.y &lt; y-50 &amp;&amp; MainPlayer.Ground == false)){
-                KeyAction_Pressed = true;
-             }else{
-                KeyAction_Pressed = false;                
-             }      
-             
-             if(Action = ActionJump){
-                KeyAction = true
-             }*/
-                   
-          // Jump when pushing a object but the main character is not.   
-          /*   if(Ground == true &amp;&amp; XSpeed == 0 &amp;&amp; Action = ActionPush &amp;&amp; (MainPlayer.y &lt;= y-10 || MainPlayer.y &gt;= y+10) &amp;&amp; Pushing_Timer &gt;= Pushing_Timer_Max){
-                KeyAction_Pressed = true;
-             } */      
-       
-//       }       
-       
-       
-       /*
-               if((x &lt; MainCharacter.x-10 ||(MainCharacter.y &lt; y-50 &amp;&amp; MainCharacter.ground == true &amp;&amp; MainCharacter.speed_x &gt; 0))
-            &amp;&amp; (MainCharacter.y &gt;= y-50 || MainCharacter.ground == false || MainCharacter.speed_x &gt;= 0))
-            key_right = true;
-        else
-            key_right = false;
-        if((x &gt; MainCharacter.x+10 ||(MainCharacter.y &lt; y-50 &amp;&amp; MainCharacter.ground == true &amp;&amp; MainCharacter.speed_x &lt; 0))
-            &amp;&amp; (MainCharacter.y &gt;= y-50 || MainCharacter.ground == false || MainCharacter.speed_x &lt;= 0))
-            key_left = true;
-        else
-            key_left = false;
 </string>
           </argument>
         </arguments>
@@ -944,7 +1015,7 @@
     }
 
  // Sonic and Tails Physics:
-    if((CharacterID == CharacterSonic || CharacterID == CharacterTails) &amp;&amp; CharacterState = CharacterNormal){
+    if((CharacterID == CharacterSonic || CharacterID == CharacterTails || CharacterID == CharacterKnuckles) &amp;&amp; CharacterState = CharacterNormal){
     
        if(PhysicMode == "Normal"){
        
@@ -974,19 +1045,26 @@
              
            
           // Vertical Values:          
-             YSpeed_Max     = 16; 
-             
-             if(Action != ActionFly &amp;&amp; Action != ActionFlydrop){
-                if(Action = ActionHurt){
-                   YAcceleration = 0.1875;
-                }else{
-                   YAcceleration = YAccel_Common;
+             YSpeed_Max     = 16;      
+             if(Action != ActionGlide &amp;&amp; Action != ActionClimb){
+                if(Action != ActionFly &amp;&amp; Action != ActionFlydrop){
+                   if(Action = ActionHurt){
+                      YAcceleration = 0.1875;
+                   }else{
+                      YAcceleration = YAccel_Common;
+                   }
                 }
+             }else{
+               YAcceleration = 0;
              }
              ConversionFact = 0.8;
              
           // Jumping Values:
-             JumpStrength   = -6.5;
+             if(CharacterID != CharacterKnuckles){
+                JumpStrength = -6.5;
+             }else{
+                JumpStrength = -6;
+             }
              JumpRelease    = -4;
              
           // Rolling Values:   
@@ -1021,18 +1099,28 @@
              
           // Vertical Values:          
              YSpeed_Max     = 16; 
-             if(Action != ActionFly &amp;&amp; Action != ActionFlydrop){             
-                if(Action = ActionHurt){
-                   YAcceleration = 0.1875*0.5;
-                }else{
-                   YAcceleration = 0.0625;
-                }     
-             }       
+             if(Action != ActionGlide &amp;&amp; Action != ActionClimb){
+                if(Action != ActionFly &amp;&amp; Action != ActionFlydrop){             
+                   if(Action = ActionHurt){
+                      YAcceleration = 0.1875*0.5;
+                   }else{
+                      YAcceleration = 0.0625;
+                   }     
+                }       
+             }else{
+               YAcceleration = 0;
+             }
              ConversionFact = 0.8;
              
           // Jumping Values:
-             JumpStrength   = -3.5;
+             if(CharacterID != CharacterKnuckles){
+                JumpStrength = -3.5;
+             }else{
+                JumpStrength = -3;
+             }
              JumpRelease    = -2;
+             
+             
              
           // Rolling Values:   
              RollDec                   = 0.3;       
@@ -1048,7 +1136,7 @@
        }      
         
     }
-    if((CharacterID == CharacterSonic || CharacterID == CharacterTails) &amp;&amp; (CharacterState = CharacterSuper or CharacterState = CharacterHyper)){
+    if((CharacterID == CharacterSonic || CharacterID == CharacterTails || CharacterID == CharacterKnuckles) &amp;&amp; (CharacterState = CharacterSuper or CharacterState = CharacterHyper)){
     
        if(PhysicMode == "Normal"){
        
@@ -1062,15 +1150,29 @@
              
           // Vertical Values:          
              YSpeed_Max     = 16; 
-             if(Action = ActionHurt){
-                YAcceleration = 0.1875;
+             if(Action != ActionGlide &amp;&amp; Action != ActionClimb){             
+                if(Action != ActionFly &amp;&amp; Action != ActionFlydrop){
+                   if(Action = ActionHurt){
+                      YAcceleration = 0.1875;
+                   }else{
+                      YAcceleration = YAccel_Common;
+                   }
+                }
              }else{
-                YAcceleration = YAccel_Common;
+               YAcceleration = 0;
              }
              ConversionFact = 0.8;
              
           // Jumping Values:
-             JumpStrength   = -8;
+             if(CharacterID == CharacterSonic){
+                JumpStrength = -8;
+             }
+             if(CharacterID == CharacterTails){
+                JumpStrength = -6.5;
+             }             
+             if(CharacterID == CharacterKnuckles){
+                JumpStrength = -6
+             }
              JumpRelease    = -4;
              
           // Rolling Values:   
@@ -1098,15 +1200,26 @@
              
           // Vertical Values:          
              YSpeed_Max     = 16; 
-             if(Action = ActionHurt){
-                YAcceleration = 0.1875*0.5;
+             if(Action != ActionGlide &amp;&amp; Action != ActionClimb){                
+                if(Action != ActionFly &amp;&amp; Action != ActionFlydrop){
+                   if(Action = ActionHurt){
+                      YAcceleration = 0.1870*0.5;
+                   }else{
+                      YAcceleration = 0.046875;
+                   }
+                }
              }else{
-                YAcceleration = 0.046875;
-             }             
+               YAcceleration = 0;
+             }                       
              ConversionFact = 0.8;
              
           // Jumping Values:
-             JumpStrength   = -3.5;
+             if(CharacterID == CharacterSonic || CharacterID == CharacterTails){
+                JumpStrength = -3.5;
+             }            
+             if(CharacterID == CharacterKnuckles){
+                JumpStrength = -3
+             }          
              JumpRelease    = -2;
              
           // Rolling Values:   
@@ -1309,6 +1422,10 @@
                    if(instance_exists(obj_fade_restart) == false){
                       instance_create(0, 0, obj_fade_restart);
                    }
+                }else{
+                   if(instance_exists(obj_game_over) == false){
+                      instance_create(0, 0, obj_game_over);
+                   }                
                 }
              }else{
                    if(instance_exists(obj_fade_from_bonus) == false){
@@ -1685,15 +1802,21 @@ if (Allow_YMovement) {
 
   // Goal State:
      scr_character_action_goal();
-
-  // Shields (Has to be triggered before the jump script.)
-     scr_character_action_shield();
-            
+                
   // Transforming (Has to be triggered before the jump script.)
      if(CharacterID != CharacterAmy){
-        scr_character_action_transform();
+        if(CharacterID != CharacterTails){
+           scr_character_action_transform();
+        }else if(CharacterID == CharacterTails){
+                 if(global.Emeralds == 14){
+                    scr_character_action_transform(); 
+                 }
+        }
      }
-       
+          
+  // Shields (Has to be triggered before the jump script.)
+     scr_character_action_shield();
+
   // Insta Shield (Has to be triggered before the jump script.)
      if(CharacterID == CharacterSonic){
         scr_character_action_insta_shield()
@@ -1713,13 +1836,20 @@ if (Allow_YMovement) {
      if(CharacterID == CharacterTails){
         scr_character_action_fly();
      }
-       
+      
+  // Knuckles gliding and climbing ability (Has to be triggered before the jump script.)
+     if(CharacterID == CharacterKnuckles){ 
+        scr_character_action_glide();
+        scr_character_action_climb();
+        scr_character_action_slide();
+     }
        
   // Amy Hammer attacks 
      if(CharacterID == CharacterAmy){
         scr_character_action_hammer();
      }     
-      
+
+                 
    // Collapsing tiles have to be handled differently to prevent that the Character gets stuck or gets pushed away.
    // This is why the following code exists here. Anywhere else, we'll just get stuck and won't be able to Jump.
     if(place_meeting(x, y + YSpeed, par_collision_collapse_tiles)){
@@ -1965,6 +2095,26 @@ if (Allow_YMovement) {
        }
     }
     
+ // Back to normal Tails Palette:
+    if(CharacterID = CharacterTails &amp;&amp; CharacterState = CharacterNormal &amp;&amp; TransformEnded == 1){
+       if(PalettePosition &gt;= 6){
+          TransformEnded   = 0;
+          PalettePosition  = 0;
+       }else{
+          PalettePosition += 0.25;
+       }
+    }    
+    
+ // Back to normal Knuckles Palette:
+    if(CharacterID = CharacterKnuckles &amp;&amp; CharacterState = CharacterNormal &amp;&amp; TransformEnded == 1){
+       if(PalettePosition &gt;= 5){
+          TransformEnded   = 0;
+          PalettePosition  = 0;
+       }else{
+          PalettePosition += 0.25;
+       }
+    }  
+        
  // Super Sonic Palette:
     if(CharacterID = CharacterSonic &amp;&amp; CharacterState = CharacterSuper){
        if(PalettePosition &gt; 2){
@@ -1981,6 +2131,21 @@ if (Allow_YMovement) {
        PalettePosition += 0.10;
     }
     
+ // Super Tails Palette:
+    if(CharacterID = CharacterTails &amp;&amp; CharacterState != CharacterNormal){
+       if(PalettePosition &gt; 9){
+          PalettePosition = 0;
+       }
+       PalettePosition += 0.15;
+    }    
+    
+ // Hyper Knuckles Palette:
+    if(CharacterID = CharacterKnuckles &amp;&amp; CharacterState != CharacterNormal){
+       if(PalettePosition &gt; 11){
+          PalettePosition = 0;
+       }
+       PalettePosition += 0.20;
+    }        
     
 </string>
           </argument>
@@ -2041,142 +2206,144 @@ if (Allow_YMovement) {
           <argument>
             <kind>1</kind>
             <string>/// Underwater handling.
-
-     // Exit if we're dead.
-        if(Action != ActionDie &amp;&amp; GoalState != 1 &amp;&amp; !instance_exists(obj_scoring_results)){
-
-        
-     // Only run if we're underwater:
-        if(Underwater == true){
-        
-           // Exit out of this if we have a Bubble shield.
-              if(Shield = ShieldBubble &amp;&amp; CharacterState != CharacterHyper){
-                 DrownTimer  = 1800;
-                 if(DrownCounter != -1){
-                    if(instance_exists(DrownCounter)){
+ 
+ // Only run this if we're not in a bonus stage, died or won a stage.
+    if(Action != ActionDie &amp;&amp; GoalState != 1 &amp;&amp; !instance_exists(obj_scoring_results) &amp;&amp; !instance_exists(obj_game_over)){
+    
+       // Underwater:
+          if(Underwater == true){
+          
+             // Stop this code block if we have a Bubble Shield or we're hyper:
+                if(Shield == ShieldBubble &amp;&amp; CharacterState != CharacterHyper){
+                   DrownTimer = 1800;
+                   if(DrownCounter != -1){
+                      if(instance_exists(DrownCounter)){
+                         instance_destroy(DrownCounter);
+                      }
+                   }
+                   exit;
+                }
+                
+             // Reduce the drowning timer:
+                if(DrownTimer != 0 &amp;&amp; CharacterState != CharacterHyper){
+                   DrownTimer--
+                }
+          
+             // Start the drowning theme:
+                if(DrownTimer == 650){
+                   if(CheckSound(obj_audio_manager.Jingle_Drowning ) == false){
+                      PlaySound(obj_audio_manager.Jingle_Drowning, global.SFXVolume, 1, 1);
+                   }
+                   if(instance_exists(obj_water_countdown) == false){
+                      DrownCounter = instance_create(x, y-32, obj_water_countdown);
+                      DrownCounter.Parent = id;
+                   }
+                }
+                
+             // Kill the Character.
+                if(DrownTimer == 0){
+                   DrownTimer = 1800;
+                   Action     = ActionDie;
+                   HasDrowned = true;
+                   if(CheckSound(obj_audio_manager.Jingle_Drowning)){
+                      StopSound(obj_audio_manager.Jingle_Drowning);
+                   }
+                }
+             
+             // Bubble Action.
+                if(Action = ActionBreath &amp;&amp; !Ground){
+                   if(BubbleTimer &lt; 1){
+                      XSpeed = 0;
+                      YSpeed = 0;
+                   }
+                    if(KeyLeft or KeyRight){
+                       XSpeed += AnimationDirection*.025
+                    }
+                   if(BubbleTimer &lt; 20){
+                      BubbleTimer++
+                   }else{
+                      BubbleTimer = 0;
+                      Animation   = "WALK";
+                      Action      = ActionNormal;
+                   }
+                   DrownTimer = 1800;
+                   if(DrownCounter != -1){
+                      if(instance_exists(DrownCounter)){
+                         instance_destroy(DrownCounter);
+                      }
+                   }
+                   if(CheckSound(obj_audio_manager.Jingle_Drowning) == true){ 
+                      if(Invincibility &lt; 1.5){
+                         LoopSound(obj_audio_manager.ZoneBGM, global.BGMVolume, 1);   
+                         global.BGMVolume = global.MaxBGMV;
+                      }
+                      StopSound(obj_audio_manager.Jingle_Drowning);
+                   }
+                }else if(Action = ActionBreath &amp;&amp; Ground){
+                         Action       = ActionNormal;
+                         BubbleTimer  = 0;
+                }
+                
+             // No Bubble Action.
+                if(Action != ActionBreath){
+                   BubbleTimer = 0;
+                } 
+                
+             // Alarm Sounds:
+              if(DrownTimer mod 400 == 0){
+                 if(CheckSound(obj_audio_manager.Jingle_Drowning) == false){
+                     PlaySound(snd_object_alarm_count, global.SFXVolume, 1, 1);
+                 }
+              }    
+                       
+             // Air bubbles:
+                if(DrownTimer mod 78 == 0 &amp;&amp; DrownTimer &gt; 600){
+                   Bubble = instance_create(x+irandom_range(-7, 8), y-6, obj_air_bubble);
+                   Bubble.BubbleIndex = choose(0, 1, 2, 1, 3);
+                }
+                                            
+          }
+          
+          // Last Checks above water:
+             if(Underwater == false &amp;&amp; DrownTimer != 1800){
+                DrownTimer = 1800;
+                DrownTimer = 1800;
+                if(DrownCounter != -1){
+                   if(instance_exists(DrownCounter)){
                       instance_destroy(DrownCounter);
-                    }
-                 }
-                 exit;
-              }
-        
-           // Reduce the Drown timer.
-              if(DrownTimer != 0 &amp;&amp; CharacterState != CharacterHyper){
-                 DrownTimer--;
-              }
-              
-           // Start the Drowning theme:
-              if(DrownTimer == 650 &amp;&amp; CheckSound(obj_audio_manager.Jingle_Drowning) == false){
-                 PlaySound(obj_audio_manager.Jingle_Drowning, global.SFXVolume, 1, 1);
-                 DrownCounter = instance_create(x, y-32, obj_water_countdown);
-                 DrownCounter.Parent = id;
-              }
-              
-           // Kill the Character.
-              if(DrownTimer == 0){
-                 DrownTimer  = 1800;
-                 Action      = ActionDie;
-                 HasDrowned  = true;
-                 StopSound(obj_audio_manager.Jingle_Drowning);
-              }
-                    
-           // Bubble Action.
-              if(Action = ActionBreath &amp;&amp; !Ground){
-                 if(BubbleTimer &lt; 1){
-                    XSpeed = 0;
-                    YSpeed = 0;
-                 }
-                 if(KeyLeft or KeyRight){
-                    XSpeed += AnimationDirection*.025
-                 }
-                 if(BubbleTimer &lt; 20){
-                    BubbleTimer++
-                 }else{
-                    BubbleTimer = 0;
-                    Animation   = "WALK";
-                    Action      = ActionNormal;
-                 }
-                 DrownTimer  = 1800;
-                 if(DrownCounter != -1){
-                    if(instance_exists(DrownCounter)){
-                       instance_destroy(DrownCounter);
-                    }
-                 }
-                 if(instance_exists(obj_audio_manager)){               
-                    var Jingle;
-                        Jingle = obj_audio_manager.Jingle_Drowning;
-                    var ZnBGM;
-                        ZnBGM  = obj_audio_manager.ZoneBGM;
-                    if(CheckSound(Jingle) == true){
-                       if(Invincibility &lt; 1.5){
-                          LoopSound(ZnBGM, global.BGMVolume, 1);   
-                          global.BGMVolume = global.MaxBGMV;
-                       }                      
-                       StopSound(Jingle);                 
-                    } 
-                 }                                                   
-              }else if(Action = ActionBreath &amp;&amp; Ground){
-                 Action       = ActionNormal;
-                 BubbleTimer  = 0;
-              }
-
-           // No Bubble action:
-              if(Action != ActionBreath){
-                 BubbleTimer = 0
-              }   
-              
-           // Alarm Sounds:
-              if(DrownTimer mod 400 == 0 &amp;&amp; CheckSound(obj_audio_manager.Jingle_Drowning) == false){
-                 PlaySound(snd_object_alarm_count, global.SFXVolume, 1, 1);
-              }
-              
-           // Air bubbles:
-              if(DrownTimer mod 78 == 0 &amp;&amp; DrownTimer &gt; 600){
-                  Bubble = instance_create(x+irandom_range(-7, 8), y-6, obj_air_bubble);
-                  Bubble.BubbleIndex = choose(0, 1, 2, 1, 3);
-              }
+                   }
+                }
+                if(CheckSound(obj_audio_manager.Jingle_Drowning) == true){ 
+                   if(Invincibility &lt; 1.5){
+                      LoopSound(ZnBGM, global.BGMVolume, 1);   
+                      global.BGMVolume = global.MaxBGMV;
+                   }
+                   StopSound(obj_audio_manager.Jingle_Drowning);
+                }
+             }
+       
+    }
            
-        }
-
-     // Last checks above water:
-        if(Underwater == false &amp;&amp; DrownTimer != 1800){
-           DrownTimer  = 1800;
-           if(DrownCounter != -1){
-              if(instance_exists(DrownCounter)){
-                 instance_destroy(DrownCounter);
-              }
-           }
-           var Jingle;
-               Jingle = obj_audio_manager.Jingle_Drowning;           
-               StopSound(Jingle);           
-        }  
-
-        }
-        
-     // Drowning Bubbles.
-        if(Action = ActionDie &amp;&amp; HasDrowned){
-           if(BreathTimer != 0){
-              BreathTimer -= 0.5;
-              if(random(4) &gt;= 2){
-                 Bubble = instance_create(x+irandom_range(-7, 8), y-6, obj_air_bubble);
-                 Bubble.BubbleIndex = choose(0, 1, 2, 1, 3);                 
-              }
-           }
-        }
-                  
-     // Prevent music from not restarting:
-        if(GoalState != 1 &amp;&amp; !instance_exists(obj_scoring_results)){
-           var Jingle;
-               Jingle = obj_audio_manager.Jingle_Drowning;   
-           var ZnBGM;
-               ZnBGM  = obj_audio_manager.ZoneBGM;                          
-           if(CheckSound(Jingle) == false &amp;&amp; CheckSound(ZnBGM) == false){
-              if((Action = ActionBreath or Underwater == false) &amp;&amp; Action != ActionDie &amp;&amp; DrownTimer &gt; 0 &amp;&amp; Invincibility &lt; 1.5){
-                 LoopSound(ZnBGM, global.BGMVolume, 1);
-                 global.BGMVolume = global.MaxBGMV;
-              }
-           }
-        }
+          // Drowning Bubbles.
+             if(Action = ActionDie &amp;&amp; HasDrowned){
+                if(BreathTimer != 0){
+                   BreathTimer -= 0.5;
+                   if(random(4) &gt;= 2){
+                      Bubble = instance_create(x+irandom_range(-7, 8), y-6, obj_air_bubble);
+                      Bubble.BubbleIndex = choose(0, 1, 2, 1, 3);                 
+                   }
+                }
+             }
+             
+          // Prevent music from not restarting.
+             if(GoalState != 1 &amp;&amp; !instance_exists(obj_scoring_results) &amp;&amp; !instance_exists(obj_game_over)){
+                if(CheckSound(obj_audio_manager.Jingle_Drowning) == false &amp;&amp; CheckSound(obj_audio_manager.ZoneBGM) == false){
+                   if((Action = ActionBreath or Underwater == false) &amp;&amp; Action != ActionDie &amp;&amp; DrownTimer &gt; 0 &amp;&amp; Invincibility &lt; 1.5){
+                      LoopSound(obj_audio_manager.ZoneBGM, global.BGMVolume, 1);
+                      global.BGMVolume = global.MaxBGMV;
+                   }
+                }
+             }     
 
 
 </string>
@@ -2205,6 +2372,7 @@ if (Allow_YMovement) {
       
    // Palette: (Only if we allow Shaders)
       if(global.Shaders != 0){
+         // Sonic:
          if(CharacterID = CharacterSonic &amp;&amp; CharacterState = CharacterSuper){
             pal_swap_set(spr_sonic_super_palette, floor(PalettePosition), false);
          }
@@ -2213,7 +2381,21 @@ if (Allow_YMovement) {
          }    
          if(CharacterID = CharacterSonic &amp;&amp; CharacterState = CharacterNormal &amp;&amp; TransformEnded == 1){
             pal_swap_set(spr_sonic_to_normal_palette, floor(PalettePosition), false);
-         }                           
+         }        
+         // Tails:
+         if(CharacterID == CharacterTails &amp;&amp; CharacterState != CharacterNormal){
+            pal_swap_set(spr_tails_super_palette, floor(PalettePosition), false);
+         }  
+         if(CharacterID = CharacterTails &amp;&amp; CharacterState = CharacterNormal &amp;&amp; TransformEnded == 1){
+            pal_swap_set(spr_tails_to_normal_palette, floor(PalettePosition), false);
+         }                      
+         // Knuckles
+         if(CharacterID == CharacterKnuckles &amp;&amp; CharacterState != CharacterNormal){
+            pal_swap_set(spr_knuckles_hyper_palette, floor(PalettePosition), false);
+         }  
+         if(CharacterID = CharacterKnuckles &amp;&amp; CharacterState = CharacterNormal &amp;&amp; TransformEnded == 1){
+            pal_swap_set(spr_knuckles_to_normal_palette, floor(PalettePosition), false);
+         }                                   
       }
       
    // Draw the Character:
@@ -2243,8 +2425,6 @@ if (Allow_YMovement) {
          draw_sprite_ext(spr_spindash_dust, current_time div 40, floor(x-AnimationDirection*7), floor(y+13), AnimationDirection, 1, 0, c_white, 1);         
       }
 
-      draw_set_font(-1)
-      draw_text(x, y, FloorMode)
 </string>
           </argument>
         </arguments>

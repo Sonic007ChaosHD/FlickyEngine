@@ -19,7 +19,7 @@
         AnimationStart       = 0;
         AnimationEnd         = 3;
         AnimationLoop        = 0;
-        AnimationSpeed       = 0.05;
+        AnimationSpeed       = 0.2;
         AnimationRepeat      = 0;
         AnimationRepeatTimes = 0;
         AnimationLinkedTo    = "IDLE";       
@@ -31,7 +31,7 @@
         AnimationStart       = 4;
         AnimationEnd         = 7;
         AnimationLoop        = 6;
-        AnimationSpeed       = 0.05;
+        AnimationSpeed       = 0.15;
         AnimationRepeat      = 1;
         AnimationRepeatTimes = -1;
         AnimationLinkedTo    = "NONE";       
@@ -67,7 +67,7 @@
         AnimationStart       = 0;
         AnimationEnd         = 7;
         AnimationLoop        = 0;
-        AnimationSpeed       = 0.25;
+        AnimationSpeed       = 0.10;
         AnimationRepeat      = 1;
         AnimationRepeatTimes = -1;
         AnimationLinkedTo    = "NONE";       
@@ -115,7 +115,7 @@
         AnimationStart       = 0;
         AnimationEnd         = 2;
         AnimationLoop        = 0;
-        AnimationSpeed       = 0.8;
+        AnimationSpeed       = 0.5;
         AnimationRepeat      = 1;
         AnimationRepeatTimes = -1;
         AnimationLinkedTo    = "NONE";       
@@ -139,7 +139,7 @@
         AnimationStart       = 0;
         AnimationEnd         = 1;
         AnimationLoop        = 1;
-        AnimationSpeed       = 0.50;
+        AnimationSpeed       = 0.15;
         AnimationRepeat      = 0;
         AnimationRepeatTimes = 3;
         AnimationLinkedTo    = "SKIDTURN";
@@ -151,7 +151,7 @@
         AnimationStart       = 0;
         AnimationEnd         = 1;
         AnimationLoop        = 0;
-        AnimationSpeed       = 0.50;
+        AnimationSpeed       = 0.15;
         AnimationRepeat      = 0;
         AnimationRepeatTimes = 1;
         AnimationLinkedTo    = "NONE";
@@ -304,7 +304,7 @@
         AnimationStart       = 0;        
         AnimationEnd         = 2;
         AnimationLoop        = 0;
-        AnimationSpeed       = 0.045;
+        AnimationSpeed       = 0.10;
         AnimationRepeat      = 1;
         AnimationRepeatTimes = -1;    
         AnimationLinkedTo    = "NONE";
@@ -314,7 +314,7 @@
      if(Animation = "TRANSFORM"){
         AnimationSprite      = spr_miles_transform;         
         AnimationStart       = 0;
-        AnimationEnd         = 4;
+        AnimationEnd         = 3;
         AnimationLoop        = 3;
         AnimationSpeed       = 0.18;
         AnimationRepeat      = 1;

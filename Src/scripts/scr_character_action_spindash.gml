@@ -29,6 +29,13 @@
          // Disable Shield usage:
             ShieldUsable = false;
             
+         // Make sure that there's no horizontal force.
+            if(Action = ActionSpindash && Ground){
+               if(XSpeed != 0){
+                  XSpeed  = 0;
+               }
+            }
+            
          // If the character presses (action) again, add power to the spindash accumulator.
             if(KeyAction_Pressed){
             
