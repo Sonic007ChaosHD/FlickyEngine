@@ -9,12 +9,10 @@
          }
          
       // Decelerate:
-         if(Angle >= 0 && Angle <= 45){
-            if(XSpeed > 0){
-               XSpeed = max(XSpeed-0.125, 0)
-            }else if(XSpeed < 0){
-               XSpeed = min(XSpeed+0.125, 0)
-            }
+         if(XSpeed > 0){
+            XSpeed = max(XSpeed-0.125, 0)
+         }else if(XSpeed < 0){
+            XSpeed = min(XSpeed+0.125, 0)
          }
          
       // Dust Effect:
