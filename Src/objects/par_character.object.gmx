@@ -2315,7 +2315,7 @@ if (Allow_YMovement) {
                 }
                 if(CheckSound(obj_audio_manager.Jingle_Drowning) == true){ 
                    if(Invincibility &lt; 1.5){
-                      LoopSound(ZoneBGM, global.BGMVolume, 1);   
+                      LoopSound(obj_audio_manager.ZoneBGM, global.BGMVolume, 1);   
                       global.BGMVolume = global.MaxBGMV;
                    }
                    StopSound(obj_audio_manager.Jingle_Drowning);
