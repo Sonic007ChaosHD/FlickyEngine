@@ -58,17 +58,12 @@
           <argument>
             <kind>1</kind>
             <string>/// Go to the next room.
-   if(room != rm_test_zone){
-   if(room_next(room) != -1){
+
+   if(room_next(room) != rm_bonus_gumball){
       room_goto_next();
    }else{
-      game_end();
+      room_goto(rm_flicky_credits);
    }
-   }else{
-     room_goto(rm_flicky_credits)
-   }
-
-
 
 </string>
           </argument>

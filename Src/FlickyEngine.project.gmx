@@ -4,7 +4,9 @@
     <Config>Configs\Default</Config>
   </Configs>
   <datafiles number="1" name="datafiles"/>
-  <NewExtensions/>
+  <NewExtensions>
+    <extension index="0">extensions\DashCollision</extension>
+  </NewExtensions>
   <sounds name="sound">
     <sounds name="Characters">
       <sound>sound\snd_character_jump</sound>
@@ -540,6 +542,111 @@
         <sprite>sprites\spr_flicky_plane</sprite>
       </sprites>
     </sprites>
+    <sprites name="Collision masks">
+      <sprites name="Terrain">
+        <sprite>sprites\spr_collision_mask_terrain_tile01</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_tile02</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_tile03</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_tile04</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_tile05</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_tile06</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_tile07</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_tile08</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_tile09</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_tile10</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_tile11</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_tile12</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_tile13</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_tile14</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_tile15</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_tile16</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_tile17</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_tile18</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_tile19</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_tile20</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_tile21</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_tile22</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_tile23</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_slope_solid</sprite>
+      </sprites>
+      <sprites name="Terrain (Layer 0)">
+        <sprite>sprites\spr_collision_mask_terrain_layer0_tile01</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer0_tile02</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer0_tile03</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer0_tile04</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer0_tile05</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer0_tile06</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer0_tile07</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer0_tile08</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer0_tile09</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer0_tile10</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer0_tile11</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer0_tile12</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer0_tile13</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer0_tile14</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer0_tile15</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer0_tile16</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer0_tile17</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer0_tile18</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer0_tile19</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer0_tile20</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer0_tile21</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer0_tile22</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer0_tile23</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer0_slope_test</sprite>
+      </sprites>
+      <sprites name="Terrain (Layer 1)">
+        <sprite>sprites\spr_collision_mask_terrain_layer1_tile1</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer1_tile02</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer1_tile03</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer1_tile04</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer1_tile05</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer1_tile06</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer1_tile07</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer1_tile08</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer1_tile09</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer1_tile10</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer1_tile11</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer1_tile12</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer1_tile13</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer1_tile14</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer1_tile15</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer1_tile16</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer1_tile17</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer1_tile18</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer1_tile19</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer1_tile20</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer1_tile21</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer1_tile22</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer1_tile23</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_layer0_slope_test_1</sprite>
+      </sprites>
+      <sprites name="Terrain (Platforms)">
+        <sprite>sprites\spr_collision_mask_terrain_platform_tile01</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_platform_tile02</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_platform_tile03</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_platform_tile04</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_platform_tile05</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_platform_tile06</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_platform_tile07</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_platform_tile08</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_platform_tile09</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_platform_tile10</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_platform_tile11</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_platform_tile12</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_platform_tile13</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_platform_tile14</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_platform_tile15</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_platform_tile16</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_platform_tile17</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_platform_tile18</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_platform_tile19</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_platform_tile20</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_platform_tile21</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_platform_tile22</sprite>
+        <sprite>sprites\spr_collision_mask_terrain_platform_tile23</sprite>
+      </sprites>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <backgrounds name="No Way">
@@ -755,6 +862,14 @@
     <shader type="GLSLES">shaders\shd_pal_swapper.shader</shader>
   </shaders>
   <objects name="objects">
+    <objects name="Flicky Intro/Credits">
+      <objects name="Logo &amp; Setup">
+        <object>objects\obj_flicky_logo</object>
+        <object>objects\obj_flicky_setup</object>
+        <object>objects\obj_flicky_plane</object>
+      </objects>
+      <object>objects\obj_flicky_credits</object>
+    </objects>
     <objects name="Gameplay">
       <objects name="Controllers">
         <object>objects\par_controller</object>
@@ -1048,13 +1163,107 @@
         <object>objects\obj_fade_to_normal</object>
       </objects>
     </objects>
-    <objects name="Flicky Intro/Credits">
-      <objects name="Logo &amp; Setup">
-        <object>objects\obj_flicky_logo</object>
-        <object>objects\obj_flicky_setup</object>
-        <object>objects\obj_flicky_plane</object>
+    <objects name="Collision Masks">
+      <objects name="Terrain">
+        <object>objects\obj_collision_terrain01</object>
+        <object>objects\obj_collision_terrain02</object>
+        <object>objects\obj_collision_terrain03</object>
+        <object>objects\obj_collision_terrain04</object>
+        <object>objects\obj_collision_terrain05</object>
+        <object>objects\obj_collision_terrain06</object>
+        <object>objects\obj_collision_terrain07</object>
+        <object>objects\obj_collision_terrain08</object>
+        <object>objects\obj_collision_terrain09</object>
+        <object>objects\obj_collision_terrain10</object>
+        <object>objects\obj_collision_terrain11</object>
+        <object>objects\obj_collision_terrain12</object>
+        <object>objects\obj_collision_terrain13</object>
+        <object>objects\obj_collision_terrain14</object>
+        <object>objects\obj_collision_terrain15</object>
+        <object>objects\obj_collision_terrain16</object>
+        <object>objects\obj_collision_terrain17</object>
+        <object>objects\obj_collision_terrain18</object>
+        <object>objects\obj_collision_terrain19</object>
+        <object>objects\obj_collision_terrain20</object>
+        <object>objects\obj_collision_terrain21</object>
+        <object>objects\obj_collision_terrain22</object>
+        <object>objects\obj_collision_terrain23</object>
       </objects>
-      <object>objects\obj_flicky_credits</object>
+      <objects name="Terrain (Layer 0)">
+        <object>objects\obj_collision_terrain_layer_0_01</object>
+        <object>objects\obj_collision_terrain_layer_0_02</object>
+        <object>objects\obj_collision_terrain_layer_0_03</object>
+        <object>objects\obj_collision_terrain_layer_0_04</object>
+        <object>objects\obj_collision_terrain_layer_0_05</object>
+        <object>objects\obj_collision_terrain_layer_0_06</object>
+        <object>objects\obj_collision_terrain_layer_0_07</object>
+        <object>objects\obj_collision_terrain_layer_0_08</object>
+        <object>objects\obj_collision_terrain_layer_0_09</object>
+        <object>objects\obj_collision_terrain_layer_0_10</object>
+        <object>objects\obj_collision_terrain_layer_0_11</object>
+        <object>objects\obj_collision_terrain_layer_0_12</object>
+        <object>objects\obj_collision_terrain_layer_0_13</object>
+        <object>objects\obj_collision_terrain_layer_0_14</object>
+        <object>objects\obj_collision_terrain_layer_0_15</object>
+        <object>objects\obj_collision_terrain_layer_0_16</object>
+        <object>objects\obj_collision_terrain_layer_0_17</object>
+        <object>objects\obj_collision_terrain_layer_0_18</object>
+        <object>objects\obj_collision_terrain_layer_0_19</object>
+        <object>objects\obj_collision_terrain_layer_0_20</object>
+        <object>objects\obj_collision_terrain_layer_0_21</object>
+        <object>objects\obj_collision_terrain_layer_0_22</object>
+        <object>objects\obj_collision_terrain_layer_0_23</object>
+      </objects>
+      <objects name="Terrain (Layer 1)">
+        <object>objects\obj_collision_terrain_layer_1_01</object>
+        <object>objects\obj_collision_terrain_layer_1_02</object>
+        <object>objects\obj_collision_terrain_layer_1_03</object>
+        <object>objects\obj_collision_terrain_layer_1_04</object>
+        <object>objects\obj_collision_terrain_layer_1_05</object>
+        <object>objects\obj_collision_terrain_layer_1_06</object>
+        <object>objects\obj_collision_terrain_layer_1_07</object>
+        <object>objects\obj_collision_terrain_layer_1_08</object>
+        <object>objects\obj_collision_terrain_layer_1_09</object>
+        <object>objects\obj_collision_terrain_layer_1_10</object>
+        <object>objects\obj_collision_terrain_layer_1_11</object>
+        <object>objects\obj_collision_terrain_layer_1_12</object>
+        <object>objects\obj_collision_terrain_layer_1_13</object>
+        <object>objects\obj_collision_terrain_layer_1_14</object>
+        <object>objects\obj_collision_terrain_layer_1_15</object>
+        <object>objects\obj_collision_terrain_layer_1_16</object>
+        <object>objects\obj_collision_terrain_layer_1_17</object>
+        <object>objects\obj_collision_terrain_layer_1_18</object>
+        <object>objects\obj_collision_terrain_layer_1_19</object>
+        <object>objects\obj_collision_terrain_layer_1_20</object>
+        <object>objects\obj_collision_terrain_layer_1_21</object>
+        <object>objects\obj_collision_terrain_layer_1_22</object>
+        <object>objects\obj_collision_terrain_layer_1_23</object>
+      </objects>
+      <objects name="Terrain (Platform)">
+        <object>objects\obj_collision_terrain_platform_01</object>
+        <object>objects\obj_collision_terrain_platform_02</object>
+        <object>objects\obj_collision_terrain_platform_03</object>
+        <object>objects\obj_collision_terrain_platform_04</object>
+        <object>objects\obj_collision_terrain_platform_05</object>
+        <object>objects\obj_collision_terrain_platform_06</object>
+        <object>objects\obj_collision_terrain_platform_07</object>
+        <object>objects\obj_collision_terrain_platform_08</object>
+        <object>objects\obj_collision_terrain_platform_09</object>
+        <object>objects\obj_collision_terrain_platform_10</object>
+        <object>objects\obj_collision_terrain_platform_11</object>
+        <object>objects\obj_collision_terrain_platform_12</object>
+        <object>objects\obj_collision_terrain_platform_13</object>
+        <object>objects\obj_collision_terrain_platform_14</object>
+        <object>objects\obj_collision_terrain_platform_15</object>
+        <object>objects\obj_collision_terrain_platform_16</object>
+        <object>objects\obj_collision_terrain_platform_17</object>
+        <object>objects\obj_collision_terrain_platform_18</object>
+        <object>objects\obj_collision_terrain_platform_19</object>
+        <object>objects\obj_collision_terrain_platform_20</object>
+        <object>objects\obj_collision_terrain_platform_21</object>
+        <object>objects\obj_collision_terrain_platform_22</object>
+        <object>objects\obj_collision_terrain_platform_23</object>
+      </objects>
     </objects>
   </objects>
   <rooms name="rooms">
